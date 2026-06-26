@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+import { menuTabs } from '../../i18n/menuData';
+import MenuItem from '../MenuItem.astro';
+import type { Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t('menu.seo.title')} description={t('menu.seo.desc')} lang={lang}>
+  <div class="page-hero">
+    <p class="eyebrow">{t('menu.eyebrow')}</p>
+    <h1 class="page-hero__title">{t('menu.title')}</h1>
+    <p class="page-hero__sub">{t('menu.subtitle')}</p>
+  </div>
+
+  <section class="section section--cream">
+    <div class="container">
+
+      <!-- Tab navigation -->
+      <div class="menu-tabs-nav" role="tablist">
+        {menuTabs.map((tab, i) => (
+          <button
+            role="tab"
+            class:list={['menu-tab-btn', { active: i === 0 }]}
+            data-panel={`panel-${tab.key}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >
+            {lang === 'el' ? tab.labelEl : tab.labelEn}
+          </button>
+        ))}
+      </div>
+
+      <!-- Tab panels -->
+      {menuTabs.map((tab, tabIdx) => (
+        <div
+          class:list={['menu-panel', { active: tabIdx === 0 }]}
+          id={`panel-${tab.key}`}
+          role="tabpanel"
+        >
+          {tab.sections.map((section) => (
+            <div class="menu-section">
+              <button class="menu-section-header" type="button" aria-expanded="false">
+                <h2 class="menu-category">
+                  {lang === 'el' ? section.titleEl : section.titleEn}
+                </h2>
+                <span class="menu-section-line" aria-hidden="true"></span>
+                <span class="menu-section-chevron" aria-hidden="true"></span>
+              </button>
+
+              <div class="menu-section__body">
+                {section.subsections ? (
+                  section.subsections.map((sub) => (
+                    <div class="menu-subsection">
+                      {(sub.titleEl || sub.titleEn) && (
+                        <h3 class="menu-subsection-title">
+                          {lang === 'el' ? sub.titleEl : sub.titleEn}
+                        </h3>
+                      )}
+                      <div class="menu-grid">
+                        {sub.items.map((item) => <MenuItem item={item} lang={lang} />)}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div class="menu-grid">
+                    {section.items?.map((item) => <MenuItem item={item} lang={lang} />)}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+
+      <!-- Disclaimer -->
+      <div class="menu-disclaimer">
+        <p class="eyebrow" style="margin-bottom:var(--space-3);">{t('menu.note.eyebrow')}</p>
+        <p>{t('menu.disclaimer')}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="section-title">{t('menu.cta.title')}</h2>
+      <p>{t('menu.cta.subtitle')}</p>
+      <a href="tel:+302288022507" class="btn btn--dark">{t('menu.cta.btn')}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // ── Tab switching ──
+  const btns = document.querySelectorAll<HTMLButtonElement>('.menu-tab-btn');
+  const panels = document.querySelectorAll<HTMLElement>('.menu-panel');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const target = document.getElementById(btn.dataset.panel!);
+      target?.classList.add('active');
+      // Collapse any opened accordion when the tab changes (mobile)
+      document.querySelectorAll('.menu-section.open').forEach(s => {
+        s.classList.remove('open');
+        s.querySelector('.menu-section-header')?.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+
+  // ── Accordion (mobile only) ──
+  const mobile = window.matchMedia('(max-width: 768px)');
+  const headers = document.querySelectorAll<HTMLButtonElement>('.menu-section-header');
+
+  headers.forEach(header => {
+    header.addEventListener('click', () => {
+      if (!mobile.matches) return; // desktop: sections always open
+      const section = header.closest('.menu-section');
+      if (!section) return;
+      const isOpen = section.classList.toggle('open');
+      header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+</script>

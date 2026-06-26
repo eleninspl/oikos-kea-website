@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const base = lang === 'en' ? '/en' : '';
+---
+
+<BaseLayout title={t('home.seo.title')} description={t('home.seo.desc')} lang={lang}>
+  <!-- Hero -->
+  <section class="hero">
+    <img
+      src="/images/hero.webp"
+      alt="OIKOS restaurant interior with warm ambient lighting and guests dining"
+      class="hero__bg"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">{t('hero.eyebrow')}</p>
+      <h1 class="hero__title">
+        {t('hero.title1')}<br /><em>{t('hero.title2')}</em>
+      </h1>
+      <p class="hero__subtitle">{t('hero.subtitle')}</p>
+      <div class="hero__actions">
+        <a href={base + '/menu'} class="btn btn--gold">{t('hero.cta1')}</a>
+        <a href={base + '/contact'} class="btn btn--outline-light">{t('hero.cta2')}</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <div class="hero__scroll-line"></div>
+      <span>{t('hero.scroll')}</span>
+    </div>
+  </section>
+
+  <!-- About strip -->
+  <section class="about-strip">
+    <div class="about-strip__image">
+      <img
+        src="/images/about-interior.webp"
+        alt="OIKOS warm stone interior with arch details and intimate lighting"
+        loading="lazy"
+      />
+    </div>
+    <div class="about-strip__content">
+      <p class="eyebrow">{t('home.about.eyebrow')}</p>
+      <div class="divider"></div>
+      <h2 class="section-title">
+        {t('home.about.title1')}<br />{t('home.about.title2')}
+      </h2>
+      <p>{t('home.about.text')}</p>
+      <a href={base + '/about'} class="btn btn--outline">{t('home.about.cta')}</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section>
+    <div class="services">
+      <div class="service-card">
+        <span class="service-card__icon">☀️</span>
+        <h3 class="service-card__title">{t('svc.brunch.title')}</h3>
+        <p class="service-card__desc">{t('svc.brunch.desc')}</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card__icon">🍣</span>
+        <h3 class="service-card__title">{t('svc.sushi.title')}</h3>
+        <p class="service-card__desc">{t('svc.sushi.desc')}</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card__icon">🍸</span>
+        <h3 class="service-card__title">{t('svc.cocktails.title')}</h3>
+        <p class="service-card__desc">{t('svc.cocktails.desc')}</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card__icon">🌿</span>
+        <h3 class="service-card__title">{t('svc.healthy.title')}</h3>
+        <p class="service-card__desc">{t('svc.healthy.desc')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="container--narrow">
+        <p class="eyebrow">{t('reviews.eyebrow')}</p>
+        <div class="divider divider--centered"></div>
+        <h2 class="section-title">
+          {t('reviews.title1')}<br />{t('reviews.title2')}
+        </h2>
+        <a
+          href="https://share.google/3bZUCeosoxPlrULbs"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="google-rating"
+        >
+          <span class="google-rating__score">4.7</span>
+          <span class="google-rating__stars">★★★★★</span>
+          <span class="google-rating__count">330 {t('reviews.google')}</span>
+        </a>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            "All the food we tasted was delicious. With the coffee and shakes, it
+            was amazing… I definitely recommend it."
+          </p>
+          <span class="review-card__author">Stano Bagin · {t('reviews.guide')}</span>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            "Food was delicious ✨ wine was also good. The lemon pie is enormous —
+            share it with three people! I really recommend the salmon with couscous."
+          </p>
+          <span class="review-card__author">Anys Hruba · {t('reviews.guide')}</span>
+        </div>
+        <div class="review-card">
+          <div class="review-card__stars">★★★★★</div>
+          <p class="review-card__text">
+            "The food here is absolutely amazing. We came for breakfast 3 times and
+            for lunch 1 time and everything was perfect. So tasty and the service
+            amazing. Recommend for everyone."
+          </p>
+          <span class="review-card__author">Petros Isaias · {t('reviews.guide')}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section section--cream">
+    <div class="container--narrow" style="margin-bottom: var(--space-12);">
+      <p class="eyebrow">{t('gallery.eyebrow')}</p>
+      <div class="divider divider--centered"></div>
+      <h2 class="section-title">
+        {t('gallery.title1')}<br />{t('gallery.title2')}
+      </h2>
+    </div>
+    <div class="container">
+      <div class="gallery-mosaic">
+        <div class="gallery-mosaic__item">
+          <img src="/images/gallery-1.webp" alt="Beautifully plated dish at OIKOS with fresh ingredients" loading="lazy" />
+        </div>
+        <div class="gallery-mosaic__item">
+          <img src="/images/gallery-2.webp" alt="Craft cocktail with fresh garnish at OIKOS bar" loading="lazy" />
+        </div>
+        <div class="gallery-mosaic__item">
+          <img src="/images/gallery-3.webp" alt="Colourful brunch spread at OIKOS" loading="lazy" />
+        </div>
+        <div class="gallery-mosaic__item">
+          <img src="/images/gallery-4.webp" alt="OIKOS restaurant full of guests in the evening" loading="lazy" />
+        </div>
+        <div class="gallery-mosaic__item">
+          <img src="/images/gallery-5.webp" alt="Fresh sushi platter at OIKOS" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="section-title">{t('cta.title')}</h2>
+      <p>{t('cta.subtitle')}</p>
+      <div style="display:flex; gap:var(--space-4); justify-content:center; flex-wrap:wrap;">
+        <a href="tel:+302288022507" class="btn btn--dark">{t('cta.call')}</a>
+        <a href={base + '/menu'} class="btn btn--outline">{t('cta.menu')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info strip -->
+  <section class="section section--mid section--centered">
+    <div class="container">
+      <div class="info-strip">
+        <div>
+          <p class="eyebrow">{t('info.location.label')}</p>
+          <p class="info-strip__val">{t('info.location.val')}</p>
+          <p class="info-strip__sub">{t('info.location.sub')}</p>
+        </div>
+        <div>
+          <p class="eyebrow">{t('info.hours.label')}</p>
+          <p class="info-strip__val">{t('info.hours.val')}</p>
+          <p class="info-strip__sub">{t('info.hours.sub')}</p>
+        </div>
+        <div>
+          <p class="eyebrow">{t('info.res.label')}</p>
+          <p class="info-strip__val">22880 22507</p>
+          <p class="info-strip__sub">{t('info.res.sub')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,301 @@
+export type Lang = 'el' | 'en';
+
+export const ui = {
+  el: {
+    // NAV
+    'nav.home': 'Αρχική',
+    'nav.menu': 'Μενού',
+    'nav.about': 'Σχετικά',
+    'nav.contact': 'Επικοινωνία',
+    'nav.reserve': 'Κράτηση',
+    'nav.lang': 'EN',
+
+    // HOME SEO
+    'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Κέα, Κυκλάδες',
+    'home.seo.desc': 'Το OIKOS είναι το all day cuisine bar στην Κορρησία, Κέα. Brunch, σούσι, cocktails, smoothies και πολλά άλλα. Ανοιχτοί καθημερινά από το πρωί μέχρι αργά.',
+
+    // HERO
+    'hero.eyebrow': 'Κορρησία · Κέα · Κυκλάδες',
+    'hero.title1': 'Εκεί που η μέρα',
+    'hero.title2': 'ξεδιπλώνεται',
+    'hero.subtitle': 'All day cuisine & bar — brunch, σούσι, cocktails και πολλά άλλα, στην καρδιά της Κέας.',
+    'hero.cta1': 'Δείτε το Μενού',
+    'hero.cta2': 'Βρείτε μας',
+    'hero.scroll': 'Κάτω',
+
+    // ABOUT STRIP (home)
+    'home.about.eyebrow': 'Η ιστορία μας',
+    'home.about.title1': 'Ένα μέρος για να μείνεις',
+    'home.about.title2': 'λίγο παραπάνω',
+    'home.about.text': 'Γεννημένο το 2021, το OIKOS δημιουργήθηκε ως χώρος συνάντησης για ντόπιους και ταξιδιώτες. Πιστεύουμε ότι η καλή κουζίνα, τα τίμια ποτά και η σωστή ατμόσφαιρα κάνουν κάθε ώρα της ημέρας αξέχαστη.',
+    'home.about.cta': 'Η ιστορία μας',
+
+    // SERVICES
+    'svc.brunch.title': 'Brunch',
+    'svc.brunch.desc': 'Αυγά με κάθε τρόπο, granola bowls, avocado toast και φρέσκα pastries — η καλύτερη αρχή για κάθε πρωινό στο νησί.',
+    'svc.sushi.title': 'Σούσι & κυρίως',
+    'svc.sushi.desc': 'Φρέσκα σούσι rolls και signature πιάτα που φέρνουν μια μοντέρνα ματιά στα μεσογειακά υλικά.',
+    'svc.cocktails.title': 'Cocktails',
+    'svc.cocktails.desc': 'House-crafted cocktails, φυσικά κρασιά και cold-pressed smoothies από το μεσημέρι μέχρι αργά.',
+    'svc.healthy.title': 'Υγιεινό & ελαφρύ',
+    'svc.healthy.desc': 'Smoothie bowls, γιαούρτι με μέλι, fitness omelettes — γεύσεις που σε γεμίζουν χωρίς να σε βαραίνουν.',
+
+    // REVIEWS
+    'reviews.eyebrow': 'Τι λένε οι επισκέπτες',
+    'reviews.title1': 'Αγαπημένο από ντόπιους',
+    'reviews.title2': '& ταξιδιώτες',
+    'reviews.google': 'κριτικές στο Google',
+    'reviews.guide': 'Τοπικός Οδηγός',
+
+    // GALLERY
+    'gallery.eyebrow': 'Ατμόσφαιρα',
+    'gallery.title1': 'Ο χώρος μιλά',
+    'gallery.title2': 'μόνος του',
+
+    // HOME CTA
+    'cta.title': 'Έτοιμοι για μια υπέροχη μέρα;',
+    'cta.subtitle': 'Brunch, μεσημεριανό, δείπνο ή ποτά — είμαστε ανοιχτοί όλη μέρα.',
+    'cta.call': 'Καλέστε για κράτηση',
+    'cta.menu': 'Δείτε το μενού',
+
+    // INFO STRIP
+    'info.location.label': 'Τοποθεσία',
+    'info.location.val': 'Κορρησία, Κέα',
+    'info.location.sub': 'Κυκλάδες, Ελλάδα',
+    'info.hours.label': 'Ώρες',
+    'info.hours.val': '09:00 – 02:00',
+    'info.hours.sub': 'Καθημερινά',
+    'info.res.label': 'Κρατήσεις',
+    'info.res.sub': 'Τηλεφωνικά ή χωρίς κράτηση',
+
+    // MENU PAGE
+    'menu.seo.title': 'Μενού — OIKOS Κέα | Brunch, Σούσι, Cocktails & Άλλα',
+    'menu.seo.desc': 'Το μενού του OIKOS — all day brunch, φρέσκο σούσι, craft cocktails, smoothie bowls και επιδόρπια στην Κορρησία, Κέα.',
+    'menu.eyebrow': 'Κέα, Κυκλάδες',
+    'menu.title': 'Το Μενού μας',
+    'menu.subtitle': 'Από το πρωί μέχρι τα μεσάνυχτα — και τα πάντα ενδιάμεσα',
+    'menu.intro': 'Το μενού μας εξελίσσεται με τις εποχές και ό,τι είναι φρέσκο από τους τοπικούς παραγωγούς. Όλα τα πιάτα μαγειρεύονται κατά παραγγελία. Ενημερώστε μας για τυχόν αλλεργίες.',
+    'menu.disclaimer': 'Οι τιμές περιλαμβάνουν ΦΠΑ. Τα πιάτα ενδέχεται να αλλάζουν ανάλογα με την εποχιακή διαθεσιμότητα. Για ομάδες 8+ ατόμων, παρακαλούμε τηλεφωνήστε εκ των προτέρων.',
+    'menu.note.eyebrow': 'Σημείωση',
+    'menu.cta.title': 'Ελάτε να γευτείτε',
+    'menu.cta.subtitle': 'Ανοιχτοί καθημερινά 09:00 – 02:00',
+    'menu.cta.btn': 'Καλέστε μας: 22880 22507',
+    'menu.cat.brunch': 'Brunch',
+    'menu.cat.bowls': 'Γιαούρτι & Bowls',
+    'menu.cat.sushi': 'Σούσι & Κυρίως Πιάτα',
+    'menu.cat.desserts': 'Επιδόρπια',
+    'menu.cat.cocktails': 'Cocktails',
+    'menu.cat.smoothies': 'Smoothies',
+
+    // ABOUT PAGE
+    'about.seo.title': 'Σχετικά — OIKOS Κέα | Η Ιστορία μας',
+    'about.seo.desc': 'Το OIKOS ιδρύθηκε το 2021 στην Κορρησία, Κέα. Μάθετε για τη φιλοσοφία, τον χώρο και τους ανθρώπους πίσω από το all day cuisine bar.',
+    'about.eyebrow': 'Ιδρ. 2021 · Κέα',
+    'about.title': 'Η Ιστορία μας',
+    'about.subtitle': 'Ένας χώρος γεννημένος από αγάπη για καλό φαγητό και ζωή στο νησί',
+    'about.who.eyebrow': 'Ποιοι είμαστε',
+    'about.who.title': 'OIKOS σημαίνει σπίτι',
+    'about.who.text1': 'Στα ελληνικά, oikos σημαίνει σπίτι — και αυτό ακριβώς θελήσαμε να δημιουργήσουμε. Όχι απλά ένα εστιατόριο, αλλά έναν χώρο όπου νιώθεις άνετα από τον πρώτο σου καφέ μέχρι το τελευταίο cocktail.',
+    'about.who.text2': 'Ανοίξαμε το 2021 στο λιμανάκι της Κορρησίας στην Κέα, με μια απλή πεποίθηση: ότι κάθε ώρα της ημέρας αξίζει ένα υπέροχο γεύμα και καλή παρέα.',
+    'about.stat1.label': 'Χρονιά ίδρυσης',
+    'about.stat2.val': '17ω',
+    'about.stat2.label': 'Ανοιχτοί καθημερινά',
+    'about.stat3.val': 'Κέα',
+    'about.stat3.label': 'Το νησί μας',
+    'about.phil.eyebrow': 'Φιλοσοφία μας',
+    'about.phil.title1': 'Ποιότητα από το πρωί',
+    'about.phil.title2': 'μέχρι τα μεσάνυχτα',
+    'about.phil.text1': 'Δεν πιστεύουμε στα μισά μέτρα. Είτε είναι brunch στις 10 το πρωί είτε σούσι τα μεσάνυχτα, κάθε πιάτο παίρνει την ίδια προσοχή. Στηριζόμαστε στα τοπικά προϊόντα όπου μπορούμε και μαγειρεύουμε με πάθος πάντα.',
+    'about.phil.text2': 'Το μενού μας συνδυάζει κουζίνες σκόπιμα — brunch classics, ιαπωνικό σούσι, μεσογειακά κυρίως πιάτα και cocktails που αφηγούνται την ιστορία του Αιγαίου.',
+    'about.space.eyebrow': 'Ο χώρος',
+    'about.space.title': 'Σχεδιασμένος για να μείνεις',
+    'about.space.text': 'Ο χώρος του OIKOS συνδυάζει τη ζεστασιά της κυκλαδίτικης αρχιτεκτονικής με μια σύγχρονη, χαλαρή αισθητική. Τοξωτές πόρτες, ζεστό ξύλο και απαλός φωτισμός σε προσκαλούν να καθίσεις και να ξεχάσεις την ώρα. Διαθέτουμε εσωτερικό χώρο και βεράντα για τα ιδανικά βράδια της Κέας.',
+    'about.cta.title': 'Ελάτε να μας βρείτε',
+    'about.cta.subtitle': 'Κορρησία, Κέα — Ανοιχτοί καθημερινά, 09:00 – 02:00',
+    'about.cta.dir': 'Πού είμαστε',
+    'about.cta.menu': 'Δείτε το μενού',
+
+    // CONTACT PAGE
+    'contact.seo.title': 'Επικοινωνία & Πού μας Βρείτε — OIKOS Κέα',
+    'contact.seo.desc': 'Βρείτε το OIKOS στην Κορρησία, Κέα. Ώρες λειτουργίας, τηλέφωνο, διεύθυνση και χάρτης. Ανοιχτοί καθημερινά 09:00 – 02:00.',
+    'contact.eyebrow': 'Κορρησία · Κέα · Ελλάδα',
+    'contact.title': 'Πού μας Βρείτε',
+    'contact.subtitle': 'Εδώ κάθε μέρα — ελάτε όπως είστε',
+    'contact.address.label': 'Διεύθυνση',
+    'contact.address.val': 'Κορρησία, Κέα',
+    'contact.address.sub': 'Κυκλάδες, Ελλάδα 84002',
+    'contact.phone.label': 'Τηλέφωνο',
+    'contact.phone.sub': 'Καλέστε για κράτηση',
+    'contact.email.label': 'Email',
+    'contact.ig.label': 'Instagram',
+    'contact.hours.label': 'Ώρες Λειτουργίας',
+    'contact.hours.mon': 'Δευτέρα',
+    'contact.hours.tue': 'Τρίτη',
+    'contact.hours.wed': 'Τετάρτη',
+    'contact.hours.thu': 'Πέμπτη',
+    'contact.hours.fri': 'Παρασκευή',
+    'contact.hours.sat': 'Σάββατο',
+    'contact.hours.sun': 'Κυριακή',
+    'contact.here.label': 'Πώς να φτάσετε',
+    'contact.here.text': 'Το OIKOS βρίσκεται στην Κορρησία (Λιβάδι), το κεντρικό λιμάνι της Κέας. Από Αθήνα, πάρτε το ferry από τη Λαυρεωτική (περίπου 1 ώρα). Είμαστε λίγα βήματα από το λιμάνι — θα μας βρείτε εύκολα.',
+    'contact.cta.title': 'Τα λέμε σύντομα',
+    'contact.cta.subtitle': 'Χωρίς κράτηση; Ελάτε ανεξάρτητα.',
+    'contact.cta.btn': 'Καλέστε: 22880 22507',
+
+    // FOOTER
+    'footer.desc': 'All day cuisine & bar στην καρδιά της Κορρησίας, Κέας. Από brunch το πρωί μέχρι cocktails αργά τη νύχτα — ιδρ. 2021.',
+    'footer.nav': 'Πλοήγηση',
+    'footer.find': 'Βρείτε μας',
+    'footer.copyright': 'OIKOS Κέα. Όλα τα δικαιώματα διατηρούνται.',
+  },
+
+  en: {
+    // NAV
+    'nav.home': 'Home',
+    'nav.menu': 'Menu',
+    'nav.about': 'About',
+    'nav.contact': 'Contact',
+    'nav.reserve': 'Reserve a Table',
+    'nav.lang': 'ΕΛ',
+
+    // HOME SEO
+    'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Kéa, Cyclades',
+    'home.seo.desc': 'OIKOS is an all day cuisine bar in Korrisia, Kéa. Brunch, sushi, cocktails, smoothies and more. Open daily from morning to late night.',
+
+    // HERO
+    'hero.eyebrow': 'Korrisia · Kéa · Cyclades',
+    'hero.title1': 'Where the day',
+    'hero.title2': 'unfolds',
+    'hero.subtitle': 'All day cuisine & bar — brunch, sushi, cocktails and more, steps from the sea in Kéa.',
+    'hero.cta1': 'Explore Menu',
+    'hero.cta2': 'Find us',
+    'hero.scroll': 'Scroll',
+
+    // ABOUT STRIP (home)
+    'home.about.eyebrow': 'Our story',
+    'home.about.title1': 'A place to stay',
+    'home.about.title2': 'a little longer',
+    'home.about.text': 'Born in 2021, OIKOS was created as a gathering place for islanders and travellers alike. We believe that good food, honest drinks, and the right atmosphere make every hour of the day worth savouring.',
+    'home.about.cta': 'Our story',
+
+    // SERVICES
+    'svc.brunch.title': 'Brunch',
+    'svc.brunch.desc': 'Eggs every way, granola bowls, smashed avocado, and fresh pastries — the best start to any island morning.',
+    'svc.sushi.title': 'Sushi & mains',
+    'svc.sushi.desc': 'Fresh sushi rolls and signature mains that bring a modern edge to Mediterranean ingredients.',
+    'svc.cocktails.title': 'Cocktails',
+    'svc.cocktails.desc': 'House-crafted cocktails, natural wines, and cold-pressed smoothies served from noon until late.',
+    'svc.healthy.title': 'Healthy & light',
+    'svc.healthy.desc': "Smoothie bowls, yogurt parfaits, fitness omelettes — fuel that doesn't feel like a compromise.",
+
+    // REVIEWS
+    'reviews.eyebrow': 'What guests say',
+    'reviews.title1': 'Loved by islanders',
+    'reviews.title2': '& travellers',
+    'reviews.google': 'reviews on Google',
+    'reviews.guide': 'Local Guide',
+
+    // GALLERY
+    'gallery.eyebrow': 'Atmosphere',
+    'gallery.title1': 'The space speaks',
+    'gallery.title2': 'for itself',
+
+    // HOME CTA
+    'cta.title': 'Ready for a great day?',
+    'cta.subtitle': "Brunch, lunch, dinner, or drinks — we're open all day.",
+    'cta.call': 'Call to reserve',
+    'cta.menu': 'View menu',
+
+    // INFO STRIP
+    'info.location.label': 'Location',
+    'info.location.val': 'Korrisia, Kéa',
+    'info.location.sub': 'Cyclades, Greece',
+    'info.hours.label': 'Hours',
+    'info.hours.val': '09:00 – 02:00',
+    'info.hours.sub': 'Every day',
+    'info.res.label': 'Reservations',
+    'info.res.sub': 'Call or walk in',
+
+    // MENU PAGE
+    'menu.seo.title': 'Menu — OIKOS Kéa | Brunch, Sushi, Cocktails & More',
+    'menu.seo.desc': 'Explore the OIKOS menu — all day brunch, fresh sushi, craft cocktails, smoothie bowls, and desserts in Korrisia, Kéa.',
+    'menu.eyebrow': 'Kéa, Cyclades',
+    'menu.title': 'Our Menu',
+    'menu.subtitle': 'From morning to midnight — everything in between',
+    'menu.intro': "Our menu evolves with the seasons and what's fresh from local producers. All dishes are made to order. Please let us know of any allergies.",
+    'menu.disclaimer': 'Prices include VAT. Menu items may vary based on seasonal availability. For groups of 8 or more, please call ahead so we can accommodate you best.',
+    'menu.note.eyebrow': 'Note',
+    'menu.cta.title': 'Come taste for yourself',
+    'menu.cta.subtitle': 'Open every day from 09:00 to 02:00',
+    'menu.cta.btn': 'Call us: 22880 22507',
+    'menu.cat.brunch': 'Brunch',
+    'menu.cat.bowls': 'Yogurt & Bowls',
+    'menu.cat.sushi': 'Sushi & Mains',
+    'menu.cat.desserts': 'Desserts',
+    'menu.cat.cocktails': 'Cocktails',
+    'menu.cat.smoothies': 'Smoothies',
+
+    // ABOUT PAGE
+    'about.seo.title': 'About — OIKOS Kéa | Our Story & Philosophy',
+    'about.seo.desc': 'OIKOS was born in 2021 in Korrisia, Kéa. Learn about our philosophy, the space, and the people behind the all day cuisine bar.',
+    'about.eyebrow': 'Est. 2021 · Kéa',
+    'about.title': 'Our Story',
+    'about.subtitle': 'A place born from the love of good food and island life',
+    'about.who.eyebrow': 'Who we are',
+    'about.who.title': 'OIKOS means home',
+    'about.who.text1': "In Greek, oikos means home — and that's exactly what we set out to create. Not just a restaurant, but a space where you feel at ease from your very first coffee to your last cocktail.",
+    'about.who.text2': 'We opened in 2021 in the harbour village of Korrisia on the island of Kéa, with a simple belief: that every hour of the day deserves a great meal and good company.',
+    'about.stat1.label': 'Year we opened',
+    'about.stat2.val': '17h',
+    'about.stat2.label': 'Open daily',
+    'about.stat3.val': 'Kéa',
+    'about.stat3.label': 'Our home island',
+    'about.phil.eyebrow': 'Our philosophy',
+    'about.phil.title1': 'Quality from morning',
+    'about.phil.title2': 'to midnight',
+    'about.phil.text1': "We don't believe in half measures. Whether it's a brunch omelette at 10am or a sushi platter at midnight, every dish gets the same attention. We source locally where we can, and cook with intention always.",
+    'about.phil.text2': 'Our menu spans cultures intentionally — brunch classics, Japanese-inspired sushi, Mediterranean mains, and cocktails that tell the story of the Aegean.',
+    'about.space.eyebrow': 'The space',
+    'about.space.title': 'Designed to linger',
+    'about.space.text': "The OIKOS space blends the warmth of Cycladic stone architecture with a contemporary, unpretentious sensibility. Arched doorways, warm wood, and soft lighting invite you to sit down and forget the time. We have indoor seating and a terrace for when the Kéa evenings are at their best.",
+    'about.cta.title': 'Come and see us',
+    'about.cta.subtitle': 'Korrisia, Kéa — open every day, 09:00 to 02:00',
+    'about.cta.dir': 'Get directions',
+    'about.cta.menu': 'See the menu',
+
+    // CONTACT PAGE
+    'contact.seo.title': 'Contact & Find Us — OIKOS Kéa',
+    'contact.seo.desc': "Find OIKOS in Korrisia, Kéa. Opening hours, phone number, address and map. We're open every day from 09:00 to 02:00.",
+    'contact.eyebrow': 'Korrisia · Kéa · Greece',
+    'contact.title': 'Find Us',
+    'contact.subtitle': "We're here every day — come as you are",
+    'contact.address.label': 'Address',
+    'contact.address.val': 'Korrisia, Kéa',
+    'contact.address.sub': 'Kikladhes, Greece 84002',
+    'contact.phone.label': 'Phone',
+    'contact.phone.sub': 'Call to reserve a table',
+    'contact.email.label': 'Email',
+    'contact.ig.label': 'Instagram',
+    'contact.hours.label': 'Opening Hours',
+    'contact.hours.mon': 'Monday',
+    'contact.hours.tue': 'Tuesday',
+    'contact.hours.wed': 'Wednesday',
+    'contact.hours.thu': 'Thursday',
+    'contact.hours.fri': 'Friday',
+    'contact.hours.sat': 'Saturday',
+    'contact.hours.sun': 'Sunday',
+    'contact.here.label': 'Getting here',
+    'contact.here.text': 'OIKOS is located in Korrisia (Livadi), the main port village of Kéa. From Athens, take the ferry from Lavrio (approx. 1 hour). We are a short walk from the port — you can\'t miss us.',
+    'contact.cta.title': 'See you soon',
+    'contact.cta.subtitle': 'No booking? Walk-ins always welcome.',
+    'contact.cta.btn': 'Call: 22880 22507',
+
+    // FOOTER
+    'footer.desc': 'All day cuisine & bar in the heart of Korrisia, Kéa. From morning brunch to late-night cocktails — est. 2021.',
+    'footer.nav': 'Navigate',
+    'footer.find': 'Find us',
+    'footer.copyright': 'OIKOS Kéa. All rights reserved.',
+  },
+} as const;
+
+export type UIKeys = keyof typeof ui['el'];

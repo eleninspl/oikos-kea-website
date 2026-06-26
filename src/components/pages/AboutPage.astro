@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const base = lang === 'en' ? '/en' : '';
+---
+
+<BaseLayout title={t('about.seo.title')} description={t('about.seo.desc')} lang={lang}>
+  <div class="page-hero">
+    <p class="eyebrow">{t('about.eyebrow')}</p>
+    <h1 class="page-hero__title">{t('about.title')}</h1>
+    <p class="page-hero__sub">{t('about.subtitle')}</p>
+  </div>
+
+  <!-- Who we are -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="about-content">
+        <div>
+          <p class="eyebrow">{t('about.who.eyebrow')}</p>
+          <div class="divider"></div>
+          <h2 class="section-title" style="margin-bottom:var(--space-6);">
+            <em>{t('about.who.title')}</em>
+          </h2>
+          <p style="font-size:var(--text-lg); font-weight:300; line-height:1.85; color:var(--text-muted); margin-bottom:var(--space-6);">
+            {t('about.who.text1')}
+          </p>
+          <p style="font-size:var(--text-lg); font-weight:300; line-height:1.85; color:var(--text-muted);">
+            {t('about.who.text2')}
+          </p>
+        </div>
+        <div style="overflow:hidden; border-radius:var(--radius-md);">
+          <img
+            src="/images/about-story.webp"
+            alt="The OIKOS team preparing dishes in the kitchen"
+            style="width:100%; height:500px; object-fit:cover;"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section section--dark section--centered">
+    <div class="container">
+      <div class="about-stat-row">
+        <div>
+          <span class="about-stat__number">2021</span>
+          <div class="about-stat__label">{t('about.stat1.label')}</div>
+        </div>
+        <div>
+          <span class="about-stat__number">{t('about.stat2.val')}</span>
+          <div class="about-stat__label">{t('about.stat2.label')}</div>
+        </div>
+        <div>
+          <span class="about-stat__number">{t('about.stat3.val')}</span>
+          <div class="about-stat__label">{t('about.stat3.label')}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="section section--cream-alt">
+    <div class="container">
+      <div class="about-content about-content--reverse">
+        <div style="overflow:hidden; border-radius:var(--radius-md);">
+          <img
+            src="/images/about-food.webp"
+            alt="Fresh ingredients and carefully plated food at OIKOS"
+            style="width:100%; height:500px; object-fit:cover;"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <p class="eyebrow">{t('about.phil.eyebrow')}</p>
+          <div class="divider"></div>
+          <h2 class="section-title" style="margin-bottom:var(--space-6);">
+            {t('about.phil.title1')}<br />{t('about.phil.title2')}
+          </h2>
+          <p style="font-size:var(--text-lg); font-weight:300; line-height:1.85; color:var(--text-muted); margin-bottom:var(--space-6);">
+            {t('about.phil.text1')}
+          </p>
+          <p style="font-size:var(--text-lg); font-weight:300; line-height:1.85; color:var(--text-muted);">
+            {t('about.phil.text2')}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The space -->
+  <section class="section section--cream">
+    <div class="container--narrow">
+      <p class="eyebrow">{t('about.space.eyebrow')}</p>
+      <div class="divider divider--centered"></div>
+      <h2 class="section-title" style="margin-bottom:var(--space-6);">{t('about.space.title')}</h2>
+      <p style="font-size:var(--text-lg); font-weight:300; line-height:1.85; color:var(--text-muted);">
+        {t('about.space.text')}
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="section-title">{t('about.cta.title')}</h2>
+      <p>{t('about.cta.subtitle')}</p>
+      <div style="display:flex; gap:var(--space-4); justify-content:center; flex-wrap:wrap;">
+        <a href={base + '/contact'} class="btn btn--dark">{t('about.cta.dir')}</a>
+        <a href={base + '/menu'} class="btn btn--outline">{t('about.cta.menu')}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
