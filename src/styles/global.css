@@ -583,6 +583,7 @@ h1, h2, h3, h4 {
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background-color: rgba(24, 19, 15, 0.1);
+  margin-top: var(--space-16);
 }
 
 .service-card {
