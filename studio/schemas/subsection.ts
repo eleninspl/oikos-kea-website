@@ -6,9 +6,14 @@ export const subsection = defineType({
   title: 'Υποκατηγορία',
   type: 'object',
   preview: {
-    select: { title: 'titleEl', subtitle: 'sectionPrice' },
-    prepare({ title, subtitle }) {
-      return { title: title ?? '(χωρίς τίτλο)', subtitle }
+    select: { title: 'titleEl', price: 'sectionPrice', hidden: 'hidden', items: 'items' },
+    prepare({ title, price, hidden, items }) {
+      const count = (items as any[])?.length ?? 0
+      const subtitle = [price, `${count} προϊόντα`].filter(Boolean).join('   ·   ')
+      return {
+        title: (title ?? '(χωρίς τίτλο)') + (hidden ? '  (κρυφή)' : ''),
+        subtitle,
+      }
     },
   },
   fields: [

@@ -7,9 +7,13 @@ export const menu = defineType({
   title: 'Καρτέλα (Menu)',
   type: 'document',
   preview: {
-    select: { title: 'labelEl', subtitle: 'key.current', hidden: 'hidden' },
-    prepare({ title, subtitle, hidden }) {
-      return { title: hidden ? `${title}  (κρυφή)` : title, subtitle }
+    select: { title: 'labelEl', en: 'labelEn', order: 'order', hidden: 'hidden' },
+    prepare({ title, en, order, hidden }) {
+      const parts = [order != null ? `Σειρά ${order}` : null, en && en !== title ? en : null]
+      return {
+        title: hidden ? `${title}  (κρυφή)` : title,
+        subtitle: parts.filter(Boolean).join('   ·   '),
+      }
     },
   },
   orderings: [

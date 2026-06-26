@@ -7,12 +7,20 @@ export const category = defineType({
   title: 'Κατηγορία',
   type: 'document',
   preview: {
-    select: { title: 'titleEl', hidden: 'hidden', m0: 'menus.0.labelEl', m1: 'menus.1.labelEl' },
-    prepare({ title, hidden, m0, m1 }) {
+    select: {
+      title: 'titleEl', hidden: 'hidden',
+      m0: 'menus.0.labelEl', m1: 'menus.1.labelEl',
+      items: 'items', subs: 'subsections',
+    },
+    prepare({ title, hidden, m0, m1, items, subs }) {
+      const count =
+        (items?.length ?? 0) +
+        ((subs as any[]) ?? []).reduce((a, s) => a + (s?.items?.length ?? 0), 0)
       const where = [m0, m1].filter(Boolean).join(', ')
+      const subtitle = [where, `${count} προϊόντα`].filter(Boolean).join('   ·   ')
       return {
         title: hidden ? `${title}  (κρυφή)` : title,
-        subtitle: where,
+        subtitle,
       }
     },
   },
