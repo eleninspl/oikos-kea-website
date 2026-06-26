@@ -12,13 +12,9 @@ const base = lang === 'en' ? '/en' : '';
 <BaseLayout title={t('home.seo.title')} description={t('home.seo.desc')} lang={lang}>
   <!-- Hero -->
   <section class="hero">
-    <img
-      src="/images/hero.webp"
-      alt="OIKOS restaurant interior with warm ambient lighting and guests dining"
-      class="hero__bg"
-      loading="eager"
-      fetchpriority="high"
-    />
+    <video class="hero__bg" autoplay muted loop playsinline>
+      <source src="/videos/dishes.mp4" type="video/mp4" />
+    </video>
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <p class="hero__eyebrow">{t('hero.eyebrow')}</p>
@@ -41,8 +37,8 @@ const base = lang === 'en' ? '/en' : '';
   <section class="about-strip">
     <div class="about-strip__image">
       <img
-        src="/images/about-interior.webp"
-        alt="OIKOS warm stone interior with arch details and intimate lighting"
+        src="/images/logo.jpg"
+        alt="The OIKOS sign on a marble wall with guests in the foreground"
         loading="lazy"
       />
     </div>
@@ -61,24 +57,46 @@ const base = lang === 'en' ? '/en' : '';
   <section>
     <div class="services">
       <div class="service-card">
-        <span class="service-card__icon">☀️</span>
-        <h3 class="service-card__title">{t('svc.brunch.title')}</h3>
-        <p class="service-card__desc">{t('svc.brunch.desc')}</p>
+        <div class="service-card__media">
+          <video autoplay muted loop playsinline>
+            <source src="/videos/brunch.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">{t('svc.brunch.title')}</h3>
+          <p class="service-card__desc">{t('svc.brunch.desc')}</p>
+        </div>
       </div>
       <div class="service-card">
-        <span class="service-card__icon">🍣</span>
-        <h3 class="service-card__title">{t('svc.sushi.title')}</h3>
-        <p class="service-card__desc">{t('svc.sushi.desc')}</p>
+        <div class="service-card__media">
+          <img src="/images/sushi.jpg" alt="Freshly prepared sushi rolls at OIKOS" loading="lazy" />
+        </div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">{t('svc.sushi.title')}</h3>
+          <p class="service-card__desc">{t('svc.sushi.desc')}</p>
+        </div>
       </div>
       <div class="service-card">
-        <span class="service-card__icon">🍸</span>
-        <h3 class="service-card__title">{t('svc.cocktails.title')}</h3>
-        <p class="service-card__desc">{t('svc.cocktails.desc')}</p>
+        <div class="service-card__media">
+          <video autoplay muted loop playsinline>
+            <source src="/videos/drinkvid.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">{t('svc.cocktails.title')}</h3>
+          <p class="service-card__desc">{t('svc.cocktails.desc')}</p>
+        </div>
       </div>
       <div class="service-card">
-        <span class="service-card__icon">🌿</span>
-        <h3 class="service-card__title">{t('svc.healthy.title')}</h3>
-        <p class="service-card__desc">{t('svc.healthy.desc')}</p>
+        <div class="service-card__media">
+          <video autoplay muted loop playsinline>
+            <source src="/videos/fitnessomelette.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="service-card__body">
+          <h3 class="service-card__title">{t('svc.healthy.title')}</h3>
+          <p class="service-card__desc">{t('svc.healthy.desc')}</p>
+        </div>
       </div>
     </div>
   </section>
@@ -146,19 +164,19 @@ const base = lang === 'en' ? '/en' : '';
     <div class="container">
       <div class="gallery-mosaic">
         <div class="gallery-mosaic__item">
-          <img src="/images/gallery-1.webp" alt="Beautifully plated dish at OIKOS with fresh ingredients" loading="lazy" />
+          <img src="/images/luchdish.jpg" alt="Crab with saffron risotto on an OIKOS plate" loading="lazy" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/gallery-2.webp" alt="Craft cocktail with fresh garnish at OIKOS bar" loading="lazy" />
+          <img src="/images/drink.jpg" alt="Craft cocktail with bitters at the OIKOS bar" loading="lazy" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/gallery-3.webp" alt="Colourful brunch spread at OIKOS" loading="lazy" />
+          <img src="/images/dessert.jpg" alt="Chocolate dessert with pistachio on an OIKOS plate" loading="lazy" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/gallery-4.webp" alt="OIKOS restaurant full of guests in the evening" loading="lazy" />
+          <img src="/images/dessertvid.jpg" alt="Acai bowl with berries next to an OIKOS napkin" loading="lazy" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/gallery-5.webp" alt="Fresh sushi platter at OIKOS" loading="lazy" />
+          <img src="/images/sushi.jpg" alt="Sushi rolls on the OIKOS branded placemat" loading="lazy" />
         </div>
       </div>
     </div>
