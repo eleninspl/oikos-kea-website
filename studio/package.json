@@ -1,0 +1,22 @@
+{
+  "name": "oikos-kea-studio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-is": "^19.2.7",
+    "sanity": "^3.64.0",
+    "styled-components": "^6.4.3"
+  },
+  "devDependencies": {
+    "@sanity/vision": "^3.64.0",
+    "tsx": "^4.22.4",
+    "typescript": "^5.0.0"
+  }
+}
