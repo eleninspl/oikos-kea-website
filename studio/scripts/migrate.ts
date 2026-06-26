@@ -8,7 +8,7 @@
  * εμφανίζεται). Οι κατηγορίες κρασιών παίρνουν tabs:['allday','cuisine'] ώστε να
  * εμφανίζονται και στα δύο — χωρίς ξεχωριστό wineList document.
  */
-import { menuTabs, wineListSections } from '../../src/i18n/menuData'
+import { menuTabs } from '../../src/i18n/menuData'
 import type { Item, Subsection, Section } from '../../src/i18n/menuData'
 
 let counter = 0
@@ -83,7 +83,6 @@ function toCategory(section: Section, menuKeys: string[], order: number, idPrefi
 
 // ── build documents ──────────────────────────────────────────────────────────
 const docs: any[] = []
-const wineSet = new Set<Section>(wineListSections)
 
 // 0) menu (καρτέλες) documents
 menuTabs.forEach((tab, i) => {
@@ -98,17 +97,11 @@ menuTabs.forEach((tab, i) => {
   })
 })
 
-// 1) μη-κρασιά: μία κατηγορία ανά section, menus = [η καρτέλα του]
+// 1) κατηγορίες: μία ανά section, menus = [η καρτέλα της]
 menuTabs.forEach((tab) => {
-  const own = tab.sections.filter((s) => !wineSet.has(s))
-  own.forEach((section, i) => {
+  tab.sections.forEach((section, i) => {
     docs.push(toCategory(section, [tab.key], i, `cat.${tab.key}`))
   })
-})
-
-// 2) κρασιά: κοινές κατηγορίες, menus = ['allday','cuisine'], order 100+ (πάντα τελευταίες)
-wineListSections.forEach((section, i) => {
-  docs.push(toCategory(section, ['allday', 'cuisine'], 100 + i, 'cat.wine'))
 })
 
 for (const doc of docs) process.stdout.write(JSON.stringify(doc) + '\n')

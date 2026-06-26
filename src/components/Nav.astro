@@ -52,3 +52,43 @@ const isActive = (page: string) => {
   <a href="tel:+302288022507" class="btn btn--outline" style="margin-top: 1rem;">{t('nav.reserve')}</a>
   <a href={alternateUrl} class="nav__lang" style="margin-top: var(--space-4);" aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>{t('nav.lang')}</a>
 </div>
+
+<script>
+  // ── Διατήρηση θέσης scroll & ενεργής καρτέλας μενού κατά την αλλαγή γλώσσας ──
+  // Η αλλαγή γλώσσας οδηγεί σε άλλο URL (full page load) που μηδενίζει το scroll.
+  // Αποθηκεύουμε τη θέση πριν φύγουμε και την επαναφέρουμε στη νέα σελίδα.
+  const KEY = 'oikosLangSwitch';
+
+  document.querySelectorAll<HTMLAnchorElement>('.nav__lang').forEach((link) => {
+    link.addEventListener('click', () => {
+      const active = document.querySelector('.menu-tab-btn.active');
+      sessionStorage.setItem(KEY, JSON.stringify({
+        y: window.scrollY,
+        panel: active?.getAttribute('data-panel') ?? null,
+      }));
+    });
+  });
+
+  const raw = sessionStorage.getItem(KEY);
+  if (raw) {
+    sessionStorage.removeItem(KEY);
+    try {
+      const { y, panel } = JSON.parse(raw) as { y: number; panel: string | null };
+      if (panel) {
+        const btn = document.querySelector(`.menu-tab-btn[data-panel="${panel}"]`);
+        const target = document.getElementById(panel);
+        if (btn && target) {
+          document.querySelectorAll('.menu-tab-btn').forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          document.querySelectorAll('.menu-panel').forEach((p) => p.classList.remove('active'));
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          target.classList.add('active');
+        }
+      }
+      requestAnimationFrame(() => window.scrollTo(0, y));
+    } catch {}
+  }
+</script>

@@ -253,7 +253,6 @@ const allDayTab: MenuTab = {
         },
       ],
     },
-    ...wineListSections,
   ],
 };
 
@@ -407,8 +406,15 @@ const cuisineTab: MenuTab = {
         bd('Λεμονόπιτα', 'Lemon Pie', '€9', 'Κράμπλ, κρέμα λεμόνι, μαρέγκα', 'Crumble, lemon cream, meringue'),
       ],
     },
-    ...wineListSections,
   ],
 };
 
-export const menuTabs: MenuTab[] = [allDayTab, cocktailsTab, sushiTab, cuisineTab];
+// ─── Tab 5: Wines (πλέον ξεχωριστή καρτέλα) ───────────────────────────────────
+const winesTab: MenuTab = {
+  key: 'wines',
+  labelEl: 'Κρασιά',
+  labelEn: 'Wines',
+  sections: wineListSections,
+};
+
+export const menuTabs: MenuTab[] = [allDayTab, cocktailsTab, sushiTab, cuisineTab, winesTab];
