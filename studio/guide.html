@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    color: #2c2420; font-size: 11pt; line-height: 1.6;
+  }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+
+  /* Cover */
+  .cover {
+    background: #18130f; color: #f4ece0;
+    padding: 46px 40px; border-radius: 14px; margin-bottom: 34px;
+    text-align: center;
+  }
+  .cover .brand {
+    font-family: Georgia, serif; font-weight: 800;
+    font-size: 40pt; letter-spacing: 0.14em; color: #c9a96e;
+  }
+  .cover .sub {
+    margin-top: 10px; font-size: 13pt; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #b8ad9c;
+  }
+  .cover .tag { margin-top: 22px; font-size: 11pt; color: #8a8175; }
+
+  h2 {
+    font-family: Georgia, serif; color: #18130f;
+    font-size: 16pt; margin: 26px 0 10px;
+    padding-bottom: 6px; border-bottom: 2px solid #c9a96e;
+  }
+  h2 .num {
+    display: inline-block; width: 30px; height: 30px; line-height: 30px;
+    text-align: center; background: #c9a96e; color: #18130f;
+    border-radius: 50%; font-size: 12pt; margin-right: 10px; vertical-align: middle;
+  }
+  p { margin: 7px 0; }
+  ol, ul { margin: 8px 0 8px 22px; }
+  li { margin: 5px 0; }
+  strong { color: #18130f; }
+  code {
+    background: #f4ece0; color: #8a5a1e; padding: 1px 6px;
+    border-radius: 4px; font-family: "SF Mono", Menlo, monospace; font-size: 9.5pt;
+  }
+  .note {
+    background: #faf6ee; border-left: 4px solid #c9a96e;
+    padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: 10.5pt;
+  }
+  .faq-q { font-weight: 700; color: #18130f; margin-top: 12px; }
+  .faq-a { color: #5c5248; }
+  footer {
+    margin-top: 34px; padding-top: 14px; border-top: 1px solid #ddd2c2;
+    text-align: center; color: #8a8175; font-size: 9.5pt; letter-spacing: 0.05em;
+  }
+  .avoid-break { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+  <div class="cover">
+    <div class="brand">OIKOS</div>
+    <div class="sub">Οδηγός Διαχείρισης Μενού</div>
+    <div class="tag">Korrisia, Kéa · Cyclades</div>
+  </div>
+
+  <p>Καλώς ήρθες στο διαχειριστικό του μενού σου. Από εδώ αλλάζεις ό,τι εμφανίζεται
+  στην ιστοσελίδα — τιμές, ονόματα, νέα πιάτα — <strong>χωρίς να χρειάζεσαι τεχνικό</strong>.</p>
+
+  <div class="avoid-break">
+  <h2><span class="num">1</span>Πώς μπαίνω</h2>
+  <ol>
+    <li>Άνοιξε τον browser στη διεύθυνση <strong>https://oikos-kea.sanity.studio</strong></li>
+    <li>Κάνε login με το email σου (θα έχεις λάβει πρόσκληση).</li>
+    <li>Αριστερά θα δεις: <strong>Οδηγίες, Λίστα Κρασιών, All Day, Cocktails, Sushi, Κουζίνα</strong>.</li>
+  </ol>
+  </div>
+
+  <div class="avoid-break">
+  <h2><span class="num">2</span>Αλλαγή τιμής ή ονόματος</h2>
+  <ol>
+    <li>Διάλεξε την κατηγορία (π.χ. <strong>☕ All Day</strong>).</li>
+    <li>Πάτησε πάνω στο προϊόν.</li>
+    <li>Άλλαξε το πεδίο — π.χ. <strong>Τιμή</strong> ή <strong>Όνομα (ΕΛ)</strong>.</li>
+    <li>Πάτησε <strong>«Publish»</strong>.</li>
+  </ol>
+  <div class="note">⏱ Το site ενημερώνεται μόνο του μέσα σε ~1 λεπτό.</div>
+  </div>
+
+  <div class="avoid-break">
+  <h2><span class="num">3</span>Κρύψιμο προϊόντος (χωρίς διαγραφή)</h2>
+  <p>Τελείωσε ένα πιάτο; Δεν χρειάζεται να το σβήσεις.</p>
+  <ol>
+    <li>Άνοιξε το προϊόν.</li>
+    <li>Ενεργοποίησε τον διακόπτη <strong>«Κρυφό»</strong>.</li>
+    <li><strong>Publish</strong>.</li>
+  </ol>
+  <p>Εξαφανίζεται από το site αλλά μένει αποθηκευμένο — το ξαναβάζεις όποτε θες.</p>
+  </div>
+
+  <div class="avoid-break">
+  <h2><span class="num">4</span>Προσθήκη νέου προϊόντος</h2>
+  <ol>
+    <li>Μπες στην κατηγορία.</li>
+    <li>Στο πεδίο <strong>«Προϊόντα»</strong> πάτησε <strong>«Add item»</strong>.</li>
+    <li>Συμπλήρωσε <strong>Όνομα (ΕΛ)</strong>, <strong>Name (EN)</strong> και <strong>Τιμή</strong> (π.χ. <code>€8,50</code>).</li>
+    <li><strong>Publish</strong>.</li>
+  </ol>
+  </div>
+
+  <div class="avoid-break">
+  <h2><span class="num">5</span>Αλλαγή σειράς</h2>
+  <p>Πιάσε το προϊόν από τις <strong>τρεις τελείες (⋮)</strong> και σύρε το πάνω/κάτω
+  (drag &amp; drop). Το ίδιο ισχύει για ολόκληρες κατηγορίες.</p>
+  </div>
+
+  <div class="avoid-break">
+  <h2><span class="num">6</span>Λίστα Κρασιών</h2>
+  <p>Η <strong>🍷 Λίστα Κρασιών</strong> είναι κοινή: τη γράφεις <strong>μία φορά</strong>
+  και εμφανίζεται αυτόματα <strong>και</strong> στο All Day <strong>και</strong> στην Κουζίνα.</p>
+  <ul>
+    <li><strong>Τιμή</strong> = τιμή μπουκαλιού</li>
+    <li><strong>Τιμή Ποτηριού</strong> = τιμή ποτηριού (αν υπάρχει)</li>
+  </ul>
+  </div>
+
+  <div class="avoid-break">
+  <h2><span class="num">7</span>Tags (σήμανση)</h2>
+  <p>Σε κάθε προϊόν μπορείς να βάλεις σήμανση: 🌿 Vegetarian, 🌱 Vegan, 🌶️ Spicy,
+  ✨ New, ⭐ Popular, 🌾 Gluten-Free. Δίνουν επαγγελματική εικόνα και βοηθούν τον πελάτη.</p>
+  </div>
+
+  <div class="avoid-break">
+  <h2><span class="num">8</span>Αν κάνω λάθος;</h2>
+  <p>Καμία ανησυχία. Κάθε προϊόν έχει <strong>ιστορικό αλλαγών</strong> (εικονίδιο ⏱ πάνω δεξιά).
+  Μπορείς πάντα να επιστρέψεις σε προηγούμενη έκδοση.</p>
+  </div>
+
+  <div class="avoid-break">
+  <h2>Συχνές ερωτήσεις</h2>
+  <p class="faq-q">Έκανα αλλαγή αλλά δεν φαίνεται στο site.</p>
+  <p class="faq-a">Πάτησες <strong>«Publish»</strong>; Χωρίς Publish οι αλλαγές μένουν πρόχειρες. Μετά, περίμενε ~1 λεπτό.</p>
+  <p class="faq-q">Μπορώ να αλλάξω και τα αγγλικά;</p>
+  <p class="faq-a">Ναι — κάθε πεδίο έχει εκδοχή (ΕΛ) και (EN). Συμπλήρωσε και τα δύο.</p>
+  <p class="faq-q">Διέγραψα κάτι κατά λάθος.</p>
+  <p class="faq-a">Από το ιστορικό (⏱) επαναφέρεις την προηγούμενη έκδοση.</p>
+  </div>
+
+  <footer>OIKOS · Korrisia, Kéa, Cyclades — Διαχείριση Μενού</footer>
+
+</body>
+</html>

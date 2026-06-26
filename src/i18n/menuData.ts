@@ -1,3 +1,13 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Menu domain model + seed data.
+//
+// Source of truth at runtime is Sanity (see src/lib/sanity.ts). This file serves
+// two intentional purposes and is NOT dead code:
+//   1. Shared TypeScript types for both the site and the studio migration scripts.
+//   2. Seed/fallback data — re-imported by studio/scripts/migrate.ts and used as a
+//      build-time fallback if Sanity is unreachable.
+// ─────────────────────────────────────────────────────────────────────────────
+
 export type Item = {
   nameEl: string;
   nameEn: string;
@@ -6,19 +16,20 @@ export type Item = {
   infoEl?: string;   // wine: variety + winery line
   infoEn?: string;
   price: string;     // bottle / simple price
+  priceAlt?: string; // second price (e.g. Nigiri, when price is Sashimi)
   glass?: string;    // glass price (wines only)
 };
 
 export type Subsection = {
   titleEl?: string;
   titleEn?: string;
+  sectionPrice?: string; // shared price shown next to subsection title
   items: Item[];
 };
 
 export type Section = {
   titleEl: string;
   titleEn: string;
-  emoji: string;
   items?: Item[];
   subsections?: Subsection[];
 };
@@ -27,7 +38,6 @@ export type MenuTab = {
   key: string;
   labelEl: string;
   labelEn: string;
-  emoji: string;
   sections: Section[];
 };
 
@@ -40,11 +50,10 @@ const w  = (name: string, price: string, infoEl: string, infoEn: string, glass?:
 const wb = (el: string, en: string, price: string, infoEl: string, infoEn: string, glass?: string): Item => ({ nameEl: el, nameEn: en, price, infoEl, infoEn, glass });
 
 // ─── Wine list (shared between All Day & Cuisine) ─────────────────────────────
-const wineListSections: Section[] = [
+export const wineListSections: Section[] = [
   {
     titleEl: 'Αφρώδη Κρασιά',
     titleEn: 'Sparkling Wines',
-    emoji: '🥂',
     items: [
       w('Truffle Hunter', '€24', 'Ημίγλυκος, 100% Μοσχάτο, Bosio Winery — Πιεμόντε', 'Semi sweet, 100% Moschato, Bosio Winery — Piemonte'),
       w('Infinitum Prosecco', '€26', 'Ξηρός, Glera — Chardonnay, Βένετο', 'Dry, Glera — Chardonnay, Veneto'),
@@ -56,7 +65,6 @@ const wineListSections: Section[] = [
   {
     titleEl: 'Επιδόρπια Κρασιά',
     titleEn: 'Dessert Wines',
-    emoji: '🍯',
     items: [
       w('Vin Doux', '€24', 'Φυσικώς γλυκύς, 100% Μοσχάτο Σάμου, ΕΟΣ Σάμου', 'Naturally sweet, 100% Moschato of Samos, Samos Wines', '€7'),
       w('Vinsanto', '€45', 'Φυσικώς γλυκύς, Ασύρτικο — Αηδάνι, Κτήμα Santo Wines — Σαντορίνη', 'Naturally sweet, Asirtiko — Aidani, Santo Wines Estate — Santorini'),
@@ -65,7 +73,6 @@ const wineListSections: Section[] = [
   {
     titleEl: 'Λευκά Κρασιά',
     titleEn: 'White Wines',
-    emoji: '🤍',
     items: [
       w('The Blender', '€18', 'Ξηρός, Ασύρτικο — Μαλαγουζιά, Κτήμα Ακριώτου — Αιγιάλεια', 'Dry, Asirtiko — Malagouzia, Akriotou Microwinery — Aigialia', '€6'),
       wb('Μέγα Σπήλαιο Cuvée', 'Mega Spileo Cuvée', '€24', 'Ξηρός, Μαλαγουζιά — Ασύρτικο — Chardonnay, Κτήμα Μέγα Σπήλαιο — Καλάβρυτα', 'Dry, Malagouzia — Asirtiko — Chardonnay, Mega Spileo Estate — Kalavrita'),
@@ -80,7 +87,6 @@ const wineListSections: Section[] = [
   {
     titleEl: 'Ροζέ Κρασιά',
     titleEn: 'Rosé Wines',
-    emoji: '🌸',
     items: [
       w('The Blender', '€18', 'Ημίξηρος, Ασύρτικο — Μοσχοφίλερο, Κτήμα Ακριώτου — Αιγιάλεια', 'Semi dry, Asirtiko — Moschofilero, Akriotou Microwinery — Aigialia', '€6'),
       wb('Αμυγδαλιές', 'Amigdalies', '€22', 'Ξηρός, 100% Syrah, Κτήμα Άβαντις — Εύβοια', 'Dry, 100% Syrah, Avantis Estate — Evoia', '€7'),
@@ -93,7 +99,6 @@ const wineListSections: Section[] = [
   {
     titleEl: 'Ερυθρά Κρασιά',
     titleEn: 'Red Wines',
-    emoji: '❤️',
     items: [
       w('The Blender', '€18', 'Ξηρός, Merlot — Μαύρο Καλαβρυτινό, Κτήμα Ακριώτου — Αιγιάλεια', 'Dry, Merlot — Mavro Kalavritino, Akriotou Microwinery — Aigialia', '€6'),
       wb('Αγιωργίτικο της Γαίας', 'Agiorgitiko of Gaia', '€24', 'Ξηρός, 100% Αγιωργίτικο, Κτήμα Γαία — Νεμέα', 'Dry, 100% Agiorgitiko, Gaia Estate — Nemea', '€7'),
@@ -105,7 +110,6 @@ const wineListSections: Section[] = [
   {
     titleEl: 'Πλατό Τυριών & Αλλαντικών',
     titleEn: 'Plate of Cold Cuts & Cheese',
-    emoji: '🧀',
     items: [
       bn('Πλατό Τυριών Αλλαντικών', 'Plate of Cold Cuts & Cheese', '€22'),
     ],
@@ -117,12 +121,10 @@ const allDayTab: MenuTab = {
   key: 'allday',
   labelEl: 'All Day',
   labelEn: 'All Day',
-  emoji: '☕',
   sections: [
     {
       titleEl: 'Καφέδες',
       titleEn: 'Coffee',
-      emoji: '☕',
       items: [
         n('Espresso', '€3,50'),
         n('Espresso Doppio', '€3,80'),
@@ -142,7 +144,6 @@ const allDayTab: MenuTab = {
     {
       titleEl: 'Ροφήματα',
       titleEn: 'Beverages',
-      emoji: '🍫',
       subsections: [
         {
           items: [
@@ -157,9 +158,9 @@ const allDayTab: MenuTab = {
           titleEl: 'Τσάϊ Κρύο',
           titleEn: 'Iced Tea',
           items: [
-            d('YAMAS Πράσινο Τσάϊ Λεμόνι', 'YAMAS Green Tea Lemon & Honey', '€5,00', 'Πράσινο τσάϊ, εκχύλισμα μελιού, λεμόνι', 'Green tea, honey extract, lemon'),
-            d('YAMAS Πράσινο Τσάϊ Μάνγκο', 'YAMAS Green Tea Mango & Honey', '€5,00', 'Πράσινο τσάϊ, εκχύλισμα μελιού, μάνγκο', 'Green tea, honey extract, mango'),
-            d('YAMAS Matcha Yuzu', 'YAMAS Matcha Yuzu & Honey', '€5,00', 'Matcha, yuzu, μέλι', 'Matcha, yuzu, honey'),
+            bd('YAMAS Πράσινο Τσάϊ Λεμόνι', 'YAMAS Green Tea Lemon & Honey', '€5,00', 'Πράσινο τσάϊ, εκχύλισμα μελιού, λεμόνι', 'Green tea, honey extract, lemon'),
+            bd('YAMAS Πράσινο Τσάϊ Μάνγκο', 'YAMAS Green Tea Mango & Honey', '€5,00', 'Πράσινο τσάϊ, εκχύλισμα μελιού, μάνγκο', 'Green tea, honey extract, mango'),
+            bd('YAMAS Matcha Yuzu', 'YAMAS Matcha Yuzu & Honey', '€5,00', 'Matcha, yuzu, μέλι', 'Matcha, yuzu, honey'),
           ],
         },
       ],
@@ -167,7 +168,6 @@ const allDayTab: MenuTab = {
     {
       titleEl: 'Φρέσκοι Χυμοί',
       titleEn: 'Fresh Juice',
-      emoji: '🍊',
       items: [
         d('Baby Orange', '€4,50', 'Φρέσκος χυμός πορτοκάλι', 'Fresh orange juice'),
         d('Tropical Mint', '€5,00', 'Ανανάς, μάνγκο, μήλο, μέντα', 'Pineapple, mango, apple, mint'),
@@ -179,7 +179,6 @@ const allDayTab: MenuTab = {
     {
       titleEl: 'Milkshake & Smoothies',
       titleEn: 'Milkshake & Smoothies',
-      emoji: '🍦',
       subsections: [
         {
           titleEl: 'Milkshake — €6,50',
@@ -205,7 +204,6 @@ const allDayTab: MenuTab = {
     {
       titleEl: 'Αναψυκτικά',
       titleEn: 'Soft Drinks',
-      emoji: '🥤',
       items: [
         n('Coca Cola / Zero', '€3,80'),
         n('Sprite', '€3,50'),
@@ -224,7 +222,6 @@ const allDayTab: MenuTab = {
     {
       titleEl: 'Ποτά & Μπύρες',
       titleEn: 'Drinks & Beers',
-      emoji: '🍺',
       subsections: [
         {
           titleEl: 'Ποτά',
@@ -265,12 +262,10 @@ const cocktailsTab: MenuTab = {
   key: 'cocktails',
   labelEl: 'Cocktails',
   labelEn: 'Cocktails',
-  emoji: '🍸',
   sections: [
     {
       titleEl: 'Signature Cocktails',
       titleEn: 'Signature Cocktails',
-      emoji: '✨',
       items: [
         d('Strawberry Sour', '€13', 'Bond gin, φράουλα, σύκο βαλσάμικο, vegan foam, Vermouth di Torino', 'Bond gin, strawberry, balsamic fig, vegan foam, Vermouth di Torino'),
         d('Pink Mellon', '€12', "Hendrick's Flora Adora, πεπόνι, αγγούρι, pimento paper", "Hendrick's Flora Adora, melon, cucumber, pimento paper"),
@@ -283,7 +278,6 @@ const cocktailsTab: MenuTab = {
     {
       titleEl: 'Χωρίς Αλκοόλ (0%)',
       titleEn: 'Non-Alcoholic (0%)',
-      emoji: '🚫',
       items: [
         d('0% Garibaldi', '€10', '0% bitter, orange oleo, fake foam', '0% bitter, orange oleo, fake foam'),
         d('0% Paloma', '€10', '0% Gin, lime, agave, grapefruit soda', '0% Gin, lime, agave, grapefruit soda'),
@@ -292,7 +286,6 @@ const cocktailsTab: MenuTab = {
     {
       titleEl: 'Spritz',
       titleEn: 'Spritz',
-      emoji: '🫧',
       items: [
         d('Summer Skin', '€10', 'Mastic Tears, Aperol, ροδάκινο, Fever Tree Pink Grapefruit Soda, Gancia Prosecco', "Mastic Tears, Aperol, peach, Fever Tree Pink Grapefruit Soda, Gancia Prosecco"),
         d('Aegean Spritz', '€10', "Otto's, amaro, μανταρίνι, lime, orange bitter soda", "Otto's, amaro, mandarin, lime, orange bitter soda"),
@@ -302,7 +295,6 @@ const cocktailsTab: MenuTab = {
     {
       titleEl: 'Gin & Tonic',
       titleEn: 'Gin & Tonic',
-      emoji: '🍃',
       items: [
         d('Gin & Tonic I', '€13', 'Silent Pool, Fever Tree Indian Tonic, ginger pickle', 'Silent Pool, Fever Tree Indian Tonic, ginger slice pickle'),
         d('Gin & Tonic II', '€13', 'Grace, Fever Tree Mediterranean Tonic, peach pickle', 'Grace, Fever Tree Mediterranean Tonic, peach pickle'),
@@ -312,7 +304,6 @@ const cocktailsTab: MenuTab = {
     {
       titleEl: 'Κλασικά',
       titleEn: 'Classics',
-      emoji: '🥃',
       items: [
         d('Dry Martini', '€14', 'Blend gin, blend white vermouth, ντοματίνι τουρσί', 'Blend gin, blend white vermouth, pickle tomato'),
         d('Negroni', '€13', 'Blend gin, blend red vermouth, Campari', 'Blend gin, blend red vermouth, Campari'),
@@ -328,12 +319,10 @@ const sushiTab: MenuTab = {
   key: 'sushi',
   labelEl: 'Sushi',
   labelEn: 'Sushi',
-  emoji: '🥢',
   sections: [
     {
       titleEl: 'Ορεκτικά & Σαλάτες',
       titleEn: 'Starters & Salads',
-      emoji: '🥗',
       items: [
         d('Edamame Classic', '€7', 'Ανθός αλατιού, lime', 'Sea salt, lime'),
         d('Edamame Spicy', '€8', 'Chili garlic, lime', 'Chili garlic, lime'),
@@ -343,7 +332,6 @@ const sushiTab: MenuTab = {
     {
       titleEl: 'Sashimi (3 τεμ.) & Nigiri (2 τεμ.)',
       titleEn: 'Sashimi (3 pcs) & Nigiri (2 pcs)',
-      emoji: '🍣',
       items: [
         bd('Σολομός (Sake)', 'Salmon (Sake)', 'Sashimi €7 · Nigiri €8', 'Nigiri topping: κρέμα αβοκάντο, αυγά σολομού', 'Nigiri topping: avocado cream, salmon roe'),
         bd('Τόνος (Maguro)', 'Tuna (Maguro)', 'Sashimi €8 · Nigiri €8', 'Nigiri topping: kizami wasabi', 'Nigiri topping: kizami wasabi'),
@@ -353,7 +341,6 @@ const sushiTab: MenuTab = {
     {
       titleEl: 'Donburi',
       titleEn: 'Donburi',
-      emoji: '🥣',
       items: [
         d('Chirashi', '€16', 'Ρύζι, πίκλα ginger, τόνος, σολομός, hamachi, λαβράκι, shiso, αγγούρι, αβοκάντο, αυγά σολομού, chirashi dressing', 'Rice, pickled ginger, tuna, salmon, hamachi, sea bass, shiso, cucumber, avocado, salmon roe, chirashi dressing'),
       ],
@@ -361,7 +348,6 @@ const sushiTab: MenuTab = {
     {
       titleEl: 'Sushi Rolls',
       titleEn: 'Sushi Rolls',
-      emoji: '🌀',
       items: [
         bd('Fried Sake (5 τεμ.)', 'Fried Sake (5 pcs)', '€16', 'Μέσα: σολομός, σπαράγγι, takuan, αρωματική κρέμα — Πάνω: μαγιονέζα chili yuzu, ταρτάρ σολομού, πέρλες yuzu, unagi sauce', 'Inside: salmon, asparagus, takuan, aromatic cream — Top: chili yuzu mayo, salmon tartare, yuzu pearls, unagi sauce'),
         bd('Kani (6 τεμ.)', 'Kani (6 pcs)', '€16', 'Μέσα: μπλε καβούρι, πίκλα αγγούρι, αβοκάντο — Πάνω: orange tobiko, μαύρο σκόρδο, μαγιονέζα yuzu kosho, καμένο κουνουπίδι, σκόνη lime', 'Inside: blue crab, pickled cucumber, avocado — Top: orange tobiko, black garlic, yuzu kosho mayo, burnt cauliflower, lime powder'),
@@ -380,12 +366,10 @@ const cuisineTab: MenuTab = {
   key: 'cuisine',
   labelEl: 'Κουζίνα',
   labelEn: 'Cuisine',
-  emoji: '🍽️',
   sections: [
     {
       titleEl: 'Ορεκτικά',
       titleEn: 'Appetizers',
-      emoji: '🥄',
       items: [
         bn('Ψωμί & Ντιπ ημέρας', 'Bread & Dip of the day', '€1,50'),
         bd('Σεβίτσε Λαβράκι', 'Sea Bass Ceviche', '€16', 'Ζύμωση εσπεριδοειδών, lime, τσίλι πιπεριά, τζελ λεμόνι', 'Fermented citrus, lime, chili pepper, lemon gel'),
@@ -396,7 +380,6 @@ const cuisineTab: MenuTab = {
     {
       titleEl: 'Σαλάτες',
       titleEn: 'Salads',
-      emoji: '🥗',
       items: [
         bd('Του Καίσαρα', "Caesar's", '€13', 'Αφράτο μαρούλι, τραγανό κοτόπουλο, μπέικον, κρουτόν, καλαμπόκι, παρμεζάνα', 'Fluffy lettuce, crispy chicken, bacon, croutons, corn, parmesan'),
         d('Burrata', '€13', 'Ντοματίνια, πέστο βασιλικού, τριμμένη ντομάτα, βασιλικός, κουκουνάρι, προσούτο', 'Cherry tomatoes, basil pesto, grated tomato, basil, pine nut, prosciutto'),
@@ -406,7 +389,6 @@ const cuisineTab: MenuTab = {
     {
       titleEl: 'Κυρίως Πιάτα',
       titleEn: 'Main Courses',
-      emoji: '🍝',
       items: [
         bd('Ριγκατόνι Κοτόπουλο', 'Chicken Rigatoni', '€16,50', 'Γκουαντσιάλε, πολύχρωμες πιπεριές, μανιτάρια, κρέμα παρμεζάνας, ξύσμα λεμόνι', 'Guanciale, colorful peppers, mushrooms, parmesan cream, lemon zest'),
         bd('Κριθαρότο Μανιταριών', 'Orzo with Mushrooms', '€15,50', 'Βασιλομανίταρα, σιτάκε, τρούφα, παλαιωμένη παρμεζάνα', 'King mushrooms, shiitake, truffle, aged parmesan'),
@@ -419,7 +401,6 @@ const cuisineTab: MenuTab = {
     {
       titleEl: 'Γλυκά',
       titleEn: 'Desserts',
-      emoji: '🍮',
       items: [
         bd('Προφιτερόλ', 'Profiterole', '€9', 'Κρέμα ζαχαροπλαστικής, μους σοκολάτας γάλακτος, σάλτσα σοκολάτας, φουντούκι', 'Pâtisserie cream, milk chocolate mousse, chocolate sauce, hazelnut'),
         bd('Τιραμισού', 'Tiramisu', '€9', 'Κρέμα τυριών, σαμπαγιόν καφέ, σαβαγιάρ', 'Cream cheese, coffee sabayon, savoiardi'),

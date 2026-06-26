@@ -20,5 +20,6 @@ const glassLabel = lang === 'el' ? 'Ποτ.' : 'Glass';
   <div class="menu-item__price-wrap">
     {item.glass && <span class="menu-item__price-glass">{glassLabel} {item.glass}</span>}
     <span class="menu-item__price">{item.price}</span>
+    {item.priceAlt && <span class="menu-item__price">{item.priceAlt}</span>}
   </div>
 </div>

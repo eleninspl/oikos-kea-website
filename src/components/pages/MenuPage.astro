@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations, getLabel } from '../../i18n/utils';
-import { menuTabs } from '../../i18n/menuData';
+import { getMenu } from '../../lib/sanity';
 import MenuItem from '../MenuItem.astro';
 import type { Lang } from '../../i18n/utils';
 
@@ -9,6 +9,8 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const gl = (el: string, en: string) => getLabel(lang, el, en);
+
+const menuTabs = await getMenu();
 ---
 
 <BaseLayout title={t('menu.seo.title')} description={t('menu.seo.desc')} lang={lang}>
@@ -59,6 +61,9 @@ const gl = (el: string, en: string) => getLabel(lang, el, en);
                       {(sub.titleEl || sub.titleEn) && (
                         <h3 class="menu-subsection-title">
                           {gl(sub.titleEl ?? '', sub.titleEn ?? '')}
+                          {sub.sectionPrice && (
+                            <span class="menu-subsection-price"> — {sub.sectionPrice}</span>
+                          )}
                         </h3>
                       )}
                       <div class="menu-grid">
