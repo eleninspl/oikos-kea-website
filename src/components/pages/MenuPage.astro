@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, getLabel } from '../../i18n/utils';
 import { menuTabs } from '../../i18n/menuData';
 import MenuItem from '../MenuItem.astro';
 import type { Lang } from '../../i18n/utils';
@@ -8,6 +8,7 @@ import type { Lang } from '../../i18n/utils';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const gl = (el: string, en: string) => getLabel(lang, el, en);
 ---
 
 <BaseLayout title={t('menu.seo.title')} description={t('menu.seo.desc')} lang={lang}>
@@ -29,7 +30,7 @@ const t = useTranslations(lang);
             data-panel={`panel-${tab.key}`}
             aria-selected={i === 0 ? 'true' : 'false'}
           >
-            {lang === 'el' ? tab.labelEl : tab.labelEn}
+            {gl(tab.labelEl, tab.labelEn)}
           </button>
         ))}
       </div>
@@ -45,7 +46,7 @@ const t = useTranslations(lang);
             <div class="menu-section">
               <button class="menu-section-header" type="button" aria-expanded="false">
                 <h2 class="menu-category">
-                  {lang === 'el' ? section.titleEl : section.titleEn}
+                  {gl(section.titleEl, section.titleEn)}
                 </h2>
                 <span class="menu-section-line" aria-hidden="true"></span>
                 <span class="menu-section-chevron" aria-hidden="true"></span>
@@ -57,7 +58,7 @@ const t = useTranslations(lang);
                     <div class="menu-subsection">
                       {(sub.titleEl || sub.titleEn) && (
                         <h3 class="menu-subsection-title">
-                          {lang === 'el' ? sub.titleEl : sub.titleEn}
+                          {gl(sub.titleEl ?? '', sub.titleEn ?? '')}
                         </h3>
                       )}
                       <div class="menu-grid">
@@ -104,7 +105,9 @@ const t = useTranslations(lang);
       panels.forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
-      const target = document.getElementById(btn.dataset.panel!);
+      const panelId = btn.dataset.panel;
+      if (!panelId) return;
+      const target = document.getElementById(panelId);
       target?.classList.add('active');
       // Collapse any opened accordion when the tab changes (mobile)
       document.querySelectorAll('.menu-section.open').forEach(s => {

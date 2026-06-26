@@ -939,6 +939,14 @@ h1, h2, h3, h4 {
   .menu-section.open .menu-section__body { display: block; }
 }
 
+/* ─── Shared typography helpers ─── */
+.body-text {
+  font-size: var(--text-lg);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+
 /* ─── About page ─── */
 .about-content {
   display: grid;

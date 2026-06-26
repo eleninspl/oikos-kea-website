@@ -50,5 +50,5 @@ const isActive = (page: string) => {
   <a href={base + '/about'} class="nav__link">{t('nav.about')}</a>
   <a href={base + '/contact'} class="nav__link">{t('nav.contact')}</a>
   <a href="tel:+302288022507" class="btn btn--outline" style="margin-top: 1rem;">{t('nav.reserve')}</a>
-  <a href={alternateUrl} class="nav__lang" style="margin-top: var(--space-4);">{t('nav.lang')}</a>
+  <a href={alternateUrl} class="nav__lang" style="margin-top: var(--space-4);" aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>{t('nav.lang')}</a>
 </div>
