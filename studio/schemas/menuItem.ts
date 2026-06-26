@@ -14,7 +14,13 @@ export const menuItem = defineType({
   title: 'Προϊόν',
   type: 'object',
   preview: {
-    select: { title: 'nameEl', subtitle: 'price' },
+    select: { title: 'nameEl', subtitle: 'price', hidden: 'hidden' },
+    prepare({ title, subtitle, hidden }) {
+      return {
+        title: hidden ? `${title}  (κρυφό)` : title,
+        subtitle,
+      }
+    },
   },
   fields: [
     // ─── Names ────────────────────────────────────────────────────────────────

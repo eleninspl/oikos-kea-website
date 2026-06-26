@@ -4,7 +4,7 @@
  */
 import { readFileSync } from 'node:fs'
 import { assembleMenu } from '../../src/lib/sanity'
-import { menuTabs, wineListSections } from '../../src/i18n/menuData'
+import { menuTabs } from '../../src/i18n/menuData'
 
 const docs = readFileSync(new URL('../menu.ndjson', import.meta.url), 'utf8')
   .trim().split('\n').map((l) => JSON.parse(l))
@@ -43,24 +43,24 @@ const check = (label: string, cond: boolean, extra = '') => {
 }
 
 console.log('\n── Structure ──')
-check('4 tabs', assembled.length === 4, `got ${assembled.length}`)
-check('tab keys order', assembled.map((t) => t.key).join(',') === 'allday,cocktails,sushi,cuisine',
+check('5 tabs', assembled.length === 5, `got ${assembled.length}`)
+check('tab keys order', assembled.map((t) => t.key).join(',') === 'allday,cocktails,sushi,cuisine,wines',
   assembled.map((t) => t.key).join(','))
 
-console.log('\n── Wine εμφανίζεται σε allday & cuisine ──')
+console.log('\n── Κάθε καρτέλα έχει τις δικές της κατηγορίες (κρασιά ξεχωριστά) ──')
 const byKey = Object.fromEntries(assembled.map((t) => [t.key, t]))
-const wineCount = wineListSections.length
 for (const tab of menuTabs) {
-  const own = tab.sections.filter((s) => !wineListSections.includes(s)).length
-  const expected = ['allday', 'cuisine'].includes(tab.key) ? own + wineCount : own
+  const expected = tab.sections.length
   check(`${tab.key}: ${expected} κατηγορίες`, byKey[tab.key].sections.length === expected,
     `got ${byKey[tab.key].sections.length}`)
 }
 
-console.log('\n── Wine πάντα τελευταία ──')
-const lastAllday = byKey['allday'].sections.at(-1)
-check('τελευταία κατηγορία allday είναι κρασί/τυρί',
-  /κρασ|Τυρ/i.test(lastAllday?.titleEl ?? ''), lastAllday?.titleEl)
+console.log('\n── Κρασιά: ξεχωριστή καρτέλα, ΟΧΙ σε allday/cuisine ──')
+check('υπάρχει καρτέλα wines', !!byKey['wines'])
+const noWineInAllday = !byKey['allday'].sections.some((s) => /Κρασ/i.test(s.titleEl))
+check('καμία κατηγορία κρασιού στο allday', noWineInAllday)
+check('καμία κατηγορία κρασιού στο cuisine',
+  !byKey['cuisine'].sections.some((s) => /Κρασ/i.test(s.titleEl)))
 
 console.log('\n── Special case 1β: Sashimi/Nigiri priceAlt ──')
 const sushi = byKey['sushi'].sections.flatMap((s) => s.items ?? [])
@@ -74,13 +74,10 @@ const milk = allSubs.find((s) => s.titleEn === 'Milkshake')
 check('Milkshake title καθαρό', milk?.titleEl === 'Milkshake', milk?.titleEl)
 check('Milkshake sectionPrice=€6,50', (milk as any)?.sectionPrice === '€6,50', (milk as any)?.sectionPrice)
 
-console.log('\n── Item totals ──')
+console.log('\n── Item totals (χωρίς πλέον διπλομέτρηση κρασιών) ──')
 const renderCount = assembled.flatMap((t) => t.sections).reduce((n, s) =>
   n + (s.items?.length ?? 0) + (s.subsections ?? []).reduce((m, x) => m + x.items.length, 0), 0)
-const wineItems = categories.filter((c) => c.menuKeys.includes('allday') && c.menuKeys.includes('cuisine'))
-  .reduce((n, s) => n + (s.items?.length ?? 0) + (s.subsections ?? []).reduce((m: number, x: any) => m + x.items.length, 0), 0)
-check('rendered item count', renderCount === 130 + wineItems,
-  `render=${renderCount} expected=${130 + wineItems}`)
+check('rendered item count = 130 (κάθε item μία φορά)', renderCount === 130, `render=${renderCount}`)
 
 console.log(`\n${fail === 0 ? '✅ ALL PASS' : '❌ FAILURES'}: ${pass} passed, ${fail} failed\n`)
 process.exit(fail === 0 ? 0 : 1)
