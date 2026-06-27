@@ -78,7 +78,7 @@ const tabImageFallback: Record<string, string> = {
                 </div>
 
               <div class="menu-section__body">
-                {section.subsections ? (
+                {section.subsections?.length ? (
                   section.subsections.map((sub) => (
                     <div class="menu-subsection">
                       {(sub.titleEl || sub.titleEn) && (
@@ -166,8 +166,11 @@ const tabImageFallback: Record<string, string> = {
   });
 
   back?.addEventListener('click', () => {
-    if (location.hash) history.back();
-    else showGrid();
+    // Αφαίρεσε το hash χωρίς να φύγεις από το site. Σκέτο history.back() θα
+    // έβγαζε εκτός σελίδας όταν η σελίδα φορτώθηκε απευθείας σε #κατηγορία
+    // (κοινόχρηστος σύνδεσμος ή αλλαγή γλώσσας που μεταφέρει το hash).
+    if (location.hash) history.pushState('', '', location.pathname + location.search);
+    showGrid();
   });
 
   sync();

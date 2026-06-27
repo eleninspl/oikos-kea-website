@@ -15,7 +15,7 @@ type Rendered = { label?: string; text: string };
 let priceParts: Rendered[] = [];
 if (item.prices && item.prices.length) {
   priceParts = item.prices.map((p) => ({
-    label: (lang === 'el' ? p.labelEl : p.labelEn) || p.labelEl || undefined,
+    label: (lang === 'el' ? p.labelEl : p.labelEn) || p.labelEl || p.labelEn || undefined,
     text: formatPrice(p.amount),
   }));
 } else if (item.price || item.glass || item.priceAlt) {

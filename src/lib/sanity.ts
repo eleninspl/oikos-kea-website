@@ -74,7 +74,12 @@ export function assembleMenu(data: RawData): MenuTab[] {
 export async function getMenu(): Promise<MenuTab[]> {
   try {
     const data = await sanity.fetch<RawData>(MENU_QUERY)
-    if (data?.menus?.length && data?.categories?.length) return assembleMenu(data)
+    if (data?.menus?.length && data?.categories?.length) {
+      // Αν όλες οι καρτέλες φιλτραριστούν (π.χ. menuKey που δεν ταιριάζει),
+      // το assembleMenu γυρίζει []· τότε πέφτουμε στα seed αντί για άδειο μενού.
+      const assembled = assembleMenu(data)
+      if (assembled.length) return assembled
+    }
     console.warn('[sanity] κενό μενού — fallback στα seed δεδομένα')
   } catch (err) {
     console.warn('[sanity] αποτυχία fetch — fallback στα seed δεδομένα:', (err as Error).message)
