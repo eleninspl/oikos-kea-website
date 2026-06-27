@@ -34,7 +34,7 @@ const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
 
 <div class:list={['menu-item', { 'menu-item--unavailable': unavailable }]}>
   {item.image && (
-    <img class="menu-item__img" src={item.image} alt={name} loading="lazy" width="64" height="64" />
+    <img class="menu-item__img" src={item.image} alt="" loading="lazy" width="64" height="64" />
   )}
   <div class="menu-item__body">
     <div class="menu-item__name">

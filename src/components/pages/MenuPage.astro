@@ -34,13 +34,13 @@ const tabImageFallback: Record<string, string> = {
 
       <div class="menu-tabs" id="menu-tabs" data-view="grid">
         <!-- Πλέγμα μεγάλων κουμπιών (μία καρτέλα ανά κουμπί) -->
-        <div class="menu-nav" role="tablist">
+        <div class="menu-nav">
           {menuTabs.map((tab) => (
             <button
-              role="tab"
+              type="button"
               class="menu-tab-btn"
               data-panel={`panel-${tab.key}`}
-              aria-selected="false"
+              aria-controls={`panel-${tab.key}`}
             >
               <img
                 class="menu-tab-img"
@@ -63,17 +63,17 @@ const tabImageFallback: Record<string, string> = {
 
         <!-- Οθόνες περιεχομένου -->
         {menuTabs.map((tab) => (
-          <div class="menu-panel" id={`panel-${tab.key}`} role="tabpanel">
-            <h2 class="menu-panel-title">{gl(tab.labelEl, tab.labelEn)}</h2>
+          <div class="menu-panel" id={`panel-${tab.key}`}>
+            <h2 class="menu-panel-title" tabindex="-1">{gl(tab.labelEl, tab.labelEn)}</h2>
             {(tab.noteEl || tab.noteEn) && (
               <p class="menu-panel-note">{gl(tab.noteEl ?? '', tab.noteEn ?? '')}</p>
             )}
             {tab.sections.map((section) => (
               <div class="menu-section">
                 <div class="menu-section-header">
-                  <h2 class="menu-category">
+                  <h3 class="menu-category">
                     {gl(section.titleEl, section.titleEn)}
-                  </h2>
+                  </h3>
                   <span class="menu-section-line" aria-hidden="true"></span>
                 </div>
 
@@ -82,12 +82,12 @@ const tabImageFallback: Record<string, string> = {
                   section.subsections.map((sub) => (
                     <div class="menu-subsection">
                       {(sub.titleEl || sub.titleEn) && (
-                        <h3 class="menu-subsection-title">
+                        <h4 class="menu-subsection-title">
                           {gl(sub.titleEl ?? '', sub.titleEn ?? '')}
                           {sub.sectionPrice && (
                             <span class="menu-subsection-price"> — {sub.sectionPrice}</span>
                           )}
-                        </h3>
+                        </h4>
                       )}
                       <div class="menu-grid">
                         {sub.items.map((item) => <MenuItem item={item} lang={lang} />)}
@@ -138,7 +138,6 @@ const tabImageFallback: Record<string, string> = {
   function showGrid() {
     root.dataset.view = 'grid';
     panels.forEach(p => p.classList.remove('active'));
-    btns.forEach(b => b.setAttribute('aria-selected', 'false'));
   }
 
   function showDetail(key: string | null | undefined): boolean {
@@ -147,15 +146,22 @@ const tabImageFallback: Record<string, string> = {
     if (!panel) return false;
     panels.forEach(p => p.classList.remove('active'));
     panel.classList.add('active');
-    btns.forEach(b => b.setAttribute('aria-selected', b.dataset.panel === `panel-${key}` ? 'true' : 'false'));
     root.dataset.view = 'detail';
     return true;
   }
 
   function sync() {
     const key = location.hash.slice(1);
-    if (showDetail(key)) scrollMenuTop();
-    else showGrid();
+    if (showDetail(key)) {
+      scrollMenuTop();
+      // Μετέφερε το focus στον τίτλο της καρτέλας ώστε χρήστες πληκτρολογίου/
+      // screen reader να «προσγειώνονται» στο νέο περιεχόμενο (preventScroll:
+      // αφήνουμε το scrollMenuTop να ελέγχει τη θέση λόγω του fixed nav).
+      const heading = document.getElementById(`panel-${key}`)?.querySelector<HTMLElement>('.menu-panel-title');
+      heading?.focus({ preventScroll: true });
+    } else {
+      showGrid();
+    }
   }
 
   btns.forEach(btn => {

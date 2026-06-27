@@ -121,8 +121,8 @@ const jsonLD = {
 
     <script>
       const nav = document.querySelector('.nav');
-      const burger = document.querySelector('.nav__burger');
-      const mobileMenu = document.querySelector('.nav__mobile');
+      const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
+      const mobileMenu = document.querySelector<HTMLElement>('.nav__mobile');
 
       let scrolled = false;
       window.addEventListener(
@@ -137,16 +137,29 @@ const jsonLD = {
         { passive: true }
       );
 
+      function setMenu(open: boolean) {
+        mobileMenu?.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+        burger?.setAttribute('aria-expanded', String(open));
+      }
+
       burger?.addEventListener('click', () => {
-        const isOpen = mobileMenu?.classList.toggle('open');
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+        const open = !mobileMenu?.classList.contains('open');
+        setMenu(open);
+        // Σε άνοιγμα, μετέφερε το focus στον πρώτο σύνδεσμο του overlay.
+        if (open) mobileMenu?.querySelector<HTMLElement>('a')?.focus();
       });
 
       mobileMenu?.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('open');
-          document.body.style.overflow = '';
-        });
+        link.addEventListener('click', () => setMenu(false));
+      });
+
+      // Escape κλείνει το μενού και επιστρέφει το focus στο burger.
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
+          setMenu(false);
+          burger?.focus();
+        }
       });
     </script>
   </body>

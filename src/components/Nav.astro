@@ -22,7 +22,7 @@ const isActive = (page: string) => {
 <nav class="nav">
   <div class="nav__inner">
     <a href={base + '/'} class="nav__logo" aria-label="OIKOS Kea — Αρχική">
-      <img src="/images/brand/logo-wordmark.png" alt="OIKOS Kea" width="450" height="106" />
+      <img src="/images/brand/logo-wordmark.png" alt="" width="450" height="106" />
     </a>
 
     <ul class="nav__links">
@@ -38,7 +38,7 @@ const isActive = (page: string) => {
       </li>
     </ul>
 
-    <button class="nav__burger" aria-label="Open menu">
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
       <span></span>
       <span></span>
       <span></span>
@@ -46,7 +46,7 @@ const isActive = (page: string) => {
   </div>
 </nav>
 
-<div class="nav__mobile">
+<div class="nav__mobile" id="nav-mobile">
   <a href={base + '/'} class="nav__link">{t('nav.home')}</a>
   <a href={base + '/menu'} class="nav__link">{t('nav.menu')}</a>
   <a href={base + '/about'} class="nav__link">{t('nav.about')}</a>
