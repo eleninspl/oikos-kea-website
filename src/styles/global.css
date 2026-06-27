@@ -1258,7 +1258,7 @@ h1, h2, h3, h4 {
   }
 
   .menu-nav {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: var(--space-3);
   }
 
