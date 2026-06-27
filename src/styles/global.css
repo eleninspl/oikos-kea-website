@@ -746,29 +746,41 @@ h1, h2, h3, h4 {
 /* ─── Menu page — drill-down: πλέγμα μεγάλων κουμπιών ⇄ οθόνη κατηγορίας ─── */
 .menu-nav {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--space-4);
   max-width: 100%;
   margin: 0 auto;
 }
 
+/* Κάρτα-κουμπί: φωτό αριστερά + τίτλος δίπλα */
 .menu-tab-btn {
-  min-height: 120px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-5) var(--space-4);
+  gap: var(--space-4);
+  text-align: left;
+  padding: var(--space-3);
+  background: transparent;
+  border: 1px solid rgba(24, 19, 15, 0.18);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+.menu-tab-img {
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-cream-alt);
+}
+.menu-tab-label {
   font-family: var(--font-heading);
   font-size: var(--text-lg);
   font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--text-dark);
-  background: transparent;
-  border: 1px solid rgba(24, 19, 15, 0.18);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  line-height: 1.2;
 }
 .menu-tab-btn:hover {
   border-color: var(--color-gold);
@@ -945,14 +957,6 @@ h1, h2, h3, h4 {
     border-bottom: 1px solid rgba(24, 19, 15, 0.1);
   }
 
-  .menu-section-header {
-    cursor: pointer;
-    margin-bottom: 0;
-    padding-block: var(--space-4);
-    gap: var(--space-4);
-    align-items: flex-start;
-  }
-
   .menu-section-header .menu-category {
     font-size: var(--text-2xl);
     white-space: normal;
@@ -960,31 +964,6 @@ h1, h2, h3, h4 {
   }
 
   .menu-section-line { display: none; }
-
-  .menu-section-chevron {
-    display: block;
-    width: 0.6rem;
-    height: 0.6rem;
-    flex-shrink: 0;
-    border-right: 2px solid var(--text-muted);
-    border-bottom: 2px solid var(--text-muted);
-    transform: rotate(45deg);
-    margin-top: -4px;
-    margin-left: auto;
-    transition: transform 0.25s ease;
-  }
-
-  .menu-section.open .menu-section-chevron {
-    transform: rotate(-135deg);
-    margin-top: 2px;
-  }
-
-  .menu-section__body {
-    display: none;
-    padding-bottom: var(--space-6);
-  }
-
-  .menu-section.open .menu-section__body { display: block; }
 }
 
 /* ─── Shared typography helpers ─── */
