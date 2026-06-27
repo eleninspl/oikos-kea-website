@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { ThLargeIcon, CogIcon, PackageIcon } from '@sanity/icons'
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 import { menuItem } from './menuItem'
 import { subsection } from './subsection'
 
@@ -29,10 +30,12 @@ export const category = defineType({
       }
     },
   },
-  orderings: [
-    { title: 'Σειρά', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
-  ],
+  orderings: [orderRankOrdering],
   fields: [
+    // Κρυφό πεδίο που κρατά τη σειρά από το drag & drop
+    orderRankField({ type: 'category' }),
+    // Παλιό αριθμητικό πεδίο — κρυμμένο, μένει μόνο για ιστορικούς λόγους
+    defineField({ name: 'order', title: 'Σειρά (παλιό)', type: 'number', hidden: true, readOnly: true }),
     // ── Περιεχόμενο: ό,τι αλλάζει ο ιδιοκτήτης καθημερινά ──
     defineField({
       name: 'titleEl',
@@ -76,14 +79,6 @@ export const category = defineType({
       group: 'settings',
       validation: (r) => r.required(),
       description: 'Σε ποια καρτέλα του μενού ανήκει αυτή η κατηγορία',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Σειρά εμφάνισης',
-      type: 'number',
-      group: 'settings',
-      description: 'Μικρότερος αριθμός = εμφανίζεται πρώτη μέσα στην καρτέλα',
-      validation: (r) => r.required(),
     }),
     defineField({
       name: 'hidden',
