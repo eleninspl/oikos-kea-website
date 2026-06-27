@@ -104,23 +104,37 @@ const menuTabs = await getMenu();
   const btns = document.querySelectorAll<HTMLButtonElement>('.menu-tab-btn');
   const panels = document.querySelectorAll<HTMLElement>('.menu-panel');
 
+  // Activate a tab by its panel key (e.g. "sushi"). Returns true if it matched.
+  function activateTab(key: string | null | undefined): boolean {
+    if (!key) return false;
+    const btn = Array.from(btns).find(b => b.dataset.panel === `panel-${key}`);
+    if (!btn) return false;
+    btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    document.getElementById(`panel-${key}`)?.classList.add('active');
+    // Collapse any opened accordion when the tab changes (mobile)
+    document.querySelectorAll('.menu-section.open').forEach(s => {
+      s.classList.remove('open');
+      s.querySelector('.menu-section-header')?.setAttribute('aria-expanded', 'false');
+    });
+    return true;
+  }
+
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-      panels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      const panelId = btn.dataset.panel;
-      if (!panelId) return;
-      const target = document.getElementById(panelId);
-      target?.classList.add('active');
-      // Collapse any opened accordion when the tab changes (mobile)
-      document.querySelectorAll('.menu-section.open').forEach(s => {
-        s.classList.remove('open');
-        s.querySelector('.menu-section-header')?.setAttribute('aria-expanded', 'false');
-      });
+      const key = btn.dataset.panel?.replace('panel-', '');
+      if (!activateTab(key)) return;
+      // Remember the tab in the URL so a refresh (or shared link) keeps it.
+      history.replaceState(null, '', `#${key}`);
     });
   });
+
+  // On load, restore the tab from the URL hash (falls back to the first tab).
+  activateTab(location.hash.slice(1));
+  // Keep in sync if the hash changes (e.g. back/forward).
+  window.addEventListener('hashchange', () => activateTab(location.hash.slice(1)));
 
   // ── Accordion (mobile only) ──
   const mobile = window.matchMedia('(max-width: 768px)');
