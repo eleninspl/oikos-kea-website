@@ -74,7 +74,6 @@ export const ui = {
     'menu.eyebrow': 'Κέα, Κυκλάδες',
     'menu.title': 'Το Μενού μας',
     'menu.subtitle': 'Από το πρωί μέχρι τα μεσάνυχτα — και τα πάντα ενδιάμεσα',
-    'menu.intro': 'Το μενού μας εξελίσσεται με τις εποχές και ό,τι είναι φρέσκο από τους τοπικούς παραγωγούς. Όλα τα πιάτα μαγειρεύονται κατά παραγγελία. Ενημερώστε μας για τυχόν αλλεργίες.',
     'menu.disclaimer': [
       'Σε περίπτωση αλλεργίας σε κάποιο προϊόν, παρακαλούμε επικοινωνήστε με τον υπεύθυνο ή τον Chef του καταστήματος.',
       'Το κατάστημα υποχρεούται στην έκδοση αποδείξεων λιανικών συναλλαγών. Ο καταναλωτής δεν έχει υποχρέωση να πληρώσει αν δεν λάβει το νόμιμο παραστατικό (απόδειξη-τιμολόγιο).',
@@ -88,12 +87,6 @@ export const ui = {
     'menu.cta.title': 'Ελάτε να γευτείτε',
     'menu.cta.subtitle': 'Ανοιχτοί καθημερινά 09:00 – 02:00',
     'menu.cta.btn': 'Καλέστε μας: 22880 22507',
-    'menu.cat.brunch': 'Brunch',
-    'menu.cat.bowls': 'Γιαούρτι & Bowls',
-    'menu.cat.sushi': 'Σούσι & Κυρίως Πιάτα',
-    'menu.cat.desserts': 'Επιδόρπια',
-    'menu.cat.cocktails': 'Cocktails',
-    'menu.cat.smoothies': 'Smoothies',
 
     // ABOUT PAGE
     'about.seo.title': 'Σχετικά — OIKOS Κέα | Η Ιστορία μας',
@@ -229,7 +222,6 @@ export const ui = {
     'menu.eyebrow': 'Kéa, Cyclades',
     'menu.title': 'Our Menu',
     'menu.subtitle': 'From morning to midnight — everything in between',
-    'menu.intro': "Our menu evolves with the seasons and what's fresh from local producers. All dishes are made to order. Please let us know of any allergies.",
     'menu.disclaimer': [
       'If you are allergic to any product, please speak to the Manager or the Chef of the restaurant.',
       'The restaurant is legally required to issue receipts in retail trade. The customer is not obliged to pay if they do not receive the legal document (receipt-invoice).',
@@ -243,12 +235,6 @@ export const ui = {
     'menu.cta.title': 'Come taste for yourself',
     'menu.cta.subtitle': 'Open every day from 09:00 to 02:00',
     'menu.cta.btn': 'Call us: 22880 22507',
-    'menu.cat.brunch': 'Brunch',
-    'menu.cat.bowls': 'Yogurt & Bowls',
-    'menu.cat.sushi': 'Sushi & Mains',
-    'menu.cat.desserts': 'Desserts',
-    'menu.cat.cocktails': 'Cocktails',
-    'menu.cat.smoothies': 'Smoothies',
 
     // ABOUT PAGE
     'about.seo.title': 'About — OIKOS Kéa | Our Story & Philosophy',
