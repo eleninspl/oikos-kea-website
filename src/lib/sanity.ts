@@ -56,11 +56,11 @@ type RawData = { menus: RawMenu[]; categories: RawCategory[] };
 // Key: αρχή του nameEn (case-insensitive prefix match).
 const localItemImages: Record<string, string> = {
   'kani':              '/images/food/kani.jpg',
-  'kyuri':             '/images/food/kyuri.png',
-  'spicy maguro':      '/images/food/spicy-maguro.png',
+  'kyuri':             '/images/food/kyuri.webp',
+  'spicy maguro':      '/images/food/spicy-maguro.webp',
   'hamachi':           '/images/food/hamachi-jalapeno.jpg',
-  'vegetarian':        '/images/food/vegetarian.png',
-  'chirashi':          '/images/food/donburi.png',
+  'vegetarian':        '/images/food/vegetarian.webp',
+  'chirashi':          '/images/food/donburi.webp',
   'chicken rigatoni':  '/images/food/rigatoni-chicken.jpg',
 };
 

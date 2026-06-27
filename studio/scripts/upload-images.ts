@@ -20,11 +20,11 @@ const client = createClient({
 // Local image file → prefix του nameEn του αντίστοιχου menuItem
 const IMAGE_MAP: { file: string; namePrefix: string }[] = [
   { file: 'kani.jpg',             namePrefix: 'Kani' },
-  { file: 'kyuri.png',            namePrefix: 'Kyuri' },
-  { file: 'spicy-maguro.png',     namePrefix: 'Spicy Maguro' },
+  { file: 'kyuri.webp',            namePrefix: 'Kyuri' },
+  { file: 'spicy-maguro.webp',     namePrefix: 'Spicy Maguro' },
   { file: 'hamachi-jalapeno.jpg', namePrefix: 'Hamachi' },
-  { file: 'vegetarian.png',       namePrefix: 'Vegetarian' },
-  { file: 'donburi.png',          namePrefix: 'Chirashi' },
+  { file: 'vegetarian.webp',       namePrefix: 'Vegetarian' },
+  { file: 'donburi.webp',          namePrefix: 'Chirashi' },
   { file: 'rigatoni-chicken.jpg', namePrefix: 'Chicken Rigatoni' },
 ];
 
@@ -53,7 +53,9 @@ async function run() {
     }
 
     const filePath = resolve(IMAGES_DIR, file);
-    const mimeType = extname(file) === '.png' ? 'image/png' : 'image/jpeg';
+    const ext = extname(file);
+    const mimeType =
+      ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
 
     console.log(`⬆️   Ανέβασμα ${file}  →  "${match.nameEn}" (${match._id})`);
 
