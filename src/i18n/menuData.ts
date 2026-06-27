@@ -38,6 +38,7 @@ export type MenuTab = {
   key: string;
   labelEl: string;
   labelEn: string;
+  image?: string;
   sections: Section[];
 };
 

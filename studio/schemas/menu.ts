@@ -45,6 +45,14 @@ export const menu = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: 'image',
+      title: 'Φωτογραφία καρτέλας',
+      type: 'image',
+      group: 'basic',
+      options: { hotspot: true },
+      description: 'Εμφανίζεται στο κουμπί της καρτέλας στο μενού. Ανέβασε ή σύρε μια φωτογραφία.',
+    }),
+    defineField({
       name: 'hidden',
       title: 'Απόκρυψη καρτέλας',
       type: 'boolean',

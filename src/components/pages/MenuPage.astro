@@ -33,7 +33,15 @@ const menuTabs = await getMenu();
               data-panel={`panel-${tab.key}`}
               aria-selected="false"
             >
-              {gl(tab.labelEl, tab.labelEn)}
+              <img
+                class="menu-tab-img"
+                src={tab.image ?? '/images/menu-placeholder.svg'}
+                alt=""
+                loading="lazy"
+                width="96"
+                height="96"
+              />
+              <span class="menu-tab-label">{gl(tab.labelEl, tab.labelEn)}</span>
             </button>
           ))}
         </div>
@@ -48,14 +56,13 @@ const menuTabs = await getMenu();
           <div class="menu-panel" id={`panel-${tab.key}`} role="tabpanel">
             <h2 class="menu-panel-title">{gl(tab.labelEl, tab.labelEn)}</h2>
             {tab.sections.map((section) => (
-              <div class="menu-section open">
-                <button class="menu-section-header" type="button" aria-expanded="true">
+              <div class="menu-section">
+                <div class="menu-section-header">
                   <h2 class="menu-category">
                     {gl(section.titleEl, section.titleEn)}
                   </h2>
                   <span class="menu-section-line" aria-hidden="true"></span>
-                  <span class="menu-section-chevron" aria-hidden="true"></span>
-                </button>
+                </div>
 
               <div class="menu-section__body">
                 {section.subsections ? (
@@ -152,16 +159,4 @@ const menuTabs = await getMenu();
 
   sync();
   window.addEventListener('hashchange', sync);
-
-  // ── Accordion: ανοιχτά by default· tap στην κεφαλίδα (mobile) για σύμπτυξη/άνοιγμα ──
-  const mobile = window.matchMedia('(max-width: 768px)');
-  document.querySelectorAll<HTMLButtonElement>('.menu-section-header').forEach(header => {
-    header.addEventListener('click', () => {
-      if (!mobile.matches) return;
-      const section = header.closest('.menu-section');
-      if (!section) return;
-      const isOpen = section.classList.toggle('open');
-      header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  });
 </script>
