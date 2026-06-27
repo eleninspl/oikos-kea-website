@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { ControlsIcon, CogIcon } from '@sanity/icons'
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
+import { TranslateInput } from '../components/TranslateInput'
 
 // Top-level καρτέλα του μενού (All Day, Cocktails, …). Ο ιδιοκτήτης μπορεί να
 // προσθέτει/μετονομάζει/αναδιατάσσει (drag & drop) καρτέλες ελεύθερα.
@@ -40,6 +41,7 @@ export const menu = defineType({
       title: 'Name (EN)',
       type: 'string',
       group: 'basic',
+      components: { input: TranslateInput },
       validation: (r) => r.required(),
     }),
     defineField({

@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { TranslateInput } from '../components/TranslateInput'
 import { menuItem } from './menuItem'
 
 export const subsection = defineType({
@@ -27,6 +28,7 @@ export const subsection = defineType({
       name: 'titleEn',
       title: 'Title (EN)',
       type: 'string',
+      components: { input: TranslateInput },
     }),
     defineField({
       name: 'sectionPrice',
