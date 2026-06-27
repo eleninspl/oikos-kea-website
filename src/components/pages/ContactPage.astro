@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
+import { site } from '../../lib/site';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -37,23 +38,23 @@ const days = [
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.phone.label')}</div>
-            <a href="tel:+302288022507" class="info-block__value" style="color:var(--color-gold-dim);">
-              22880 22507
+            <a href={`tel:${site.phoneTel}`} class="info-block__value" style="color:var(--color-gold-dim);">
+              {site.phoneDisplay}
             </a>
             <div class="info-block__sub">{t('contact.phone.sub')}</div>
           </div>
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.email.label')}</div>
-            <a href="mailto:info@oikoskea.gr" class="info-block__value" style="color:var(--color-gold-dim); font-size:var(--text-lg);">
-              info@oikoskea.gr
+            <a href={`mailto:${site.email}`} class="info-block__value" style="color:var(--color-gold-dim); font-size:var(--text-lg);">
+              {site.email}
             </a>
           </div>
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.ig.label')}</div>
             <a
-              href="https://www.instagram.com/oikos_kea/"
+              href={site.instagram}
               target="_blank"
               rel="noopener noreferrer"
               class="info-block__value"
@@ -106,7 +107,7 @@ const days = [
     <div class="container">
       <h2 class="section-title">{t('contact.cta.title')}</h2>
       <p>{t('contact.cta.subtitle')}</p>
-      <a href="tel:+302288022507" class="btn btn--dark">{t('contact.cta.btn')}</a>
+      <a href={`tel:${site.phoneTel}`} class="btn btn--dark">{t('contact.cta.btn')}</a>
     </div>
   </section>
 </BaseLayout>

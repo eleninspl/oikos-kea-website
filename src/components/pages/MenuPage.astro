@@ -4,6 +4,7 @@ import { useTranslations, getLabel } from '../../i18n/utils';
 import { getMenu } from '../../lib/sanity';
 import MenuItem from '../MenuItem.astro';
 import type { Lang } from '../../i18n/utils';
+import { site } from '../../lib/site';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -118,7 +119,7 @@ const tabImageFallback: Record<string, string> = {
     <div class="container">
       <h2 class="section-title">{t('menu.cta.title')}</h2>
       <p>{t('menu.cta.subtitle')}</p>
-      <a href="tel:+302288022507" class="btn btn--dark">{t('menu.cta.btn')}</a>
+      <a href={`tel:${site.phoneTel}`} class="btn btn--dark">{t('menu.cta.btn')}</a>
     </div>
   </section>
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import { useTranslations, getAlternateUrl, langBase } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
+import { site } from '../lib/site';
 
 interface Props {
   lang: Lang;
@@ -30,7 +31,7 @@ const isActive = (page: string) => {
       <li><a href={base + '/menu'} class:list={['nav__link', { active: isActive('/menu') }]}>{t('nav.menu')}</a></li>
       <li><a href={base + '/about'} class:list={['nav__link', { active: isActive('/about') }]}>{t('nav.about')}</a></li>
       <li><a href={base + '/contact'} class:list={['nav__link', { active: isActive('/contact') }]}>{t('nav.contact')}</a></li>
-      <li><a href="tel:+302288022507" class="nav__cta">{t('nav.reserve')}</a></li>
+      <li><a href={`tel:${site.phoneTel}`} class="nav__cta">{t('nav.reserve')}</a></li>
       <li>
         <a href={alternateUrl} class="nav__lang" aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>
           {t('nav.lang')}
@@ -51,7 +52,7 @@ const isActive = (page: string) => {
   <a href={base + '/menu'} class="nav__link">{t('nav.menu')}</a>
   <a href={base + '/about'} class="nav__link">{t('nav.about')}</a>
   <a href={base + '/contact'} class="nav__link">{t('nav.contact')}</a>
-  <a href="tel:+302288022507" class="btn btn--outline" style="margin-top: 1rem;">{t('nav.reserve')}</a>
+  <a href={`tel:${site.phoneTel}`} class="btn btn--outline" style="margin-top: 1rem;">{t('nav.reserve')}</a>
   <a href={alternateUrl} class="nav__lang" style="margin-top: var(--space-4);" aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>{t('nav.lang')}</a>
 </div>
 
