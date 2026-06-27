@@ -1,8 +1,9 @@
 import { defineField, defineType } from 'sanity'
 import { ControlsIcon, CogIcon } from '@sanity/icons'
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 
 // Top-level καρτέλα του μενού (All Day, Cocktails, …). Ο ιδιοκτήτης μπορεί να
-// προσθέτει/μετονομάζει/αναδιατάσσει καρτέλες ελεύθερα.
+// προσθέτει/μετονομάζει/αναδιατάσσει (drag & drop) καρτέλες ελεύθερα.
 export const menu = defineType({
   name: 'menu',
   title: 'Καρτέλα (Menu)',
@@ -13,19 +14,20 @@ export const menu = defineType({
     { name: 'settings', title: 'Ρυθμίσεις', icon: CogIcon },
   ],
   preview: {
-    select: { title: 'labelEl', en: 'labelEn', order: 'order', hidden: 'hidden' },
-    prepare({ title, en, order, hidden }) {
-      const parts = [order != null ? `Σειρά ${order}` : null, en && en !== title ? en : null]
+    select: { title: 'labelEl', en: 'labelEn', hidden: 'hidden' },
+    prepare({ title, en, hidden }) {
       return {
         title: hidden ? `${title}  (κρυφή)` : title,
-        subtitle: parts.filter(Boolean).join('   ·   '),
+        subtitle: en && en !== title ? en : undefined,
       }
     },
   },
-  orderings: [
-    { title: 'Σειρά', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
-  ],
+  orderings: [orderRankOrdering],
   fields: [
+    // Κρυφό πεδίο που κρατά τη σειρά από το drag & drop
+    orderRankField({ type: 'menu' }),
+    // Παλιό αριθμητικό πεδίο — κρυμμένο, μένει μόνο για ιστορικούς λόγους
+    defineField({ name: 'order', title: 'Σειρά (παλιό)', type: 'number', hidden: true, readOnly: true }),
     defineField({
       name: 'labelEl',
       title: 'Όνομα (ΕΛ)',
@@ -38,14 +40,6 @@ export const menu = defineType({
       title: 'Name (EN)',
       type: 'string',
       group: 'basic',
-      validation: (r) => r.required(),
-    }),
-    defineField({
-      name: 'order',
-      title: 'Σειρά εμφάνισης',
-      type: 'number',
-      group: 'settings',
-      description: 'Μικρότερος αριθμός = πιο αριστερά στο site',
       validation: (r) => r.required(),
     }),
     defineField({

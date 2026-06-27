@@ -26,10 +26,10 @@ export const sanity = createClient({
 const itemFields = `nameEl, nameEn, descEl, descEn, infoEl, infoEn, price, priceAlt, glass`
 
 export const MENU_QUERY = `{
-  "menus": *[_type == "menu" && !hidden] | order(order asc){
+  "menus": *[_type == "menu" && !hidden] | order(orderRank asc){
     "key": key.current, labelEl, labelEn
   },
-  "categories": *[_type == "category" && !hidden] | order(order asc){
+  "categories": *[_type == "category" && !hidden] | order(orderRank asc){
     titleEl, titleEn, "menuKey": coalesce(menu->key.current, menus[0]->key.current),
     "items": items[!hidden]{ ${itemFields} },
     "subsections": subsections[!hidden]{
