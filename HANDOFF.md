@@ -10,17 +10,19 @@
 - **Sanity Studio** στο `studio/` με επίπεδο schema (menu, category, subsection,
   menuItem). Οι **καρτέλες (menu)** ΚΑΙ οι **κατηγορίες** είναι documents που
   διαχειρίζεται ο ιδιοκτήτης. Η κατηγορία αναφέρεται (reference) σε μία ή
-  περισσότερες καρτέλες μέσω «Εμφανίζεται σε» (τα κρασιά → All Day + Κουζίνα).
-- **Migration**: το `studio/menu.ndjson` περιέχει τα 5 documents (4 tabs + λίστα
-  κρασιών), 130 μοναδικά προϊόντα. Έτοιμο για import.
-- **Astro integration**: `src/lib/sanity.ts` τραβάει το μενού με GROQ, ενώνει τη
-  λίστα κρασιών σε All Day & Κουζίνα, φιλτράρει τα κρυφά (hidden).
+  περισσότερες καρτέλες μέσω «Εμφανίζεται σε».
+- **Καρτέλες (5)**: All Day · Cocktails · Sushi · Κουζίνα · **Κρασιά** (τα κρασιά
+  είναι πλέον **δική τους ξεχωριστή καρτέλα** — όχι merged σε All Day/Κουζίνα).
+- **Migration**: το `studio/menu.ndjson` περιέχει 5 menu + 25 category documents,
+  **155 προϊόντα** (108 απευθείας + 47 σε subsections). Έτοιμο για import.
+- **Astro integration**: `src/lib/sanity.ts` τραβάει το μενού με GROQ, ομαδοποιεί
+  τις κατηγορίες κάτω από κάθε καρτέλα, φιλτράρει τα κρυφά (hidden).
 - **Render**: υποστήριξη `priceAlt` (Sashimi/Nigiri), `sectionPrice` (Milkshake),
   `hidden` σε κάθε επίπεδο.
 - **Safety fallback**: αν το Sanity είναι άδειο/απρόσιτο, το site πέφτει αυτόματα
   στα τοπικά seed δεδομένα — **το build δεν σπάει ποτέ**.
-- **Επαληθεύσεις**: `studio/scripts/verify.ts` → 11/11 pass· `npm run build` → 8
-  σελίδες χωρίς σφάλματα· EL & EN σελίδες μενού renderάρουν σωστά (158 items).
+- **Επαληθεύσεις**: `studio/scripts/verify.ts` → 15/15 pass· `npm run build` → 8
+  σελίδες χωρίς σφάλματα· EL & EN σελίδες μενού renderάρουν σωστά (155 items).
 
 ---
 
@@ -41,12 +43,12 @@
 - **Auth**: το project ανήκε στην **GitHub** ταυτότητα του `eleni.nspl@gmail.com`
   (το Sanity ξεχωρίζει Google vs GitHub vs Email ως διαφορετικούς χρήστες με
   ίδιο email). Λύθηκε με `npx sanity login` → **GitHub**.
-- **Import**: 5 documents ανέβηκαν (`sanity dataset import menu.ndjson production --replace`).
+- **Import**: 30 documents (5 menu + 25 category) ανέβηκαν (`sanity dataset import menu.ndjson production --replace`).
 - **Read token**: δημιουργήθηκε viewer token (label `astro-build-read`) και μπήκε
   στο `.env` ως `SANITY_READ_TOKEN` (build-time only, gitignored). Το `.env` ΔΕΝ
   ανεβαίνει στο git.
 - **Αποτέλεσμα**: το site (localhost) διαβάζει **live από Sanity** — επαληθεύτηκε
-  (priceAlt splits, sectionPrice, wine merge, EL+EN, 158 items).
+  (priceAlt splits, sectionPrice, ξεχωριστή καρτέλα Κρασιά, EL+EN, 155 items).
 
 > ⚠️ Για το **Vercel deploy**: πρόσθεσε το `SANITY_READ_TOKEN` (την τιμή από το
 > τοπικό `.env`) στα Environment Variables του Vercel — αλλιώς το production build
@@ -65,10 +67,12 @@ npx sanity dataset import menu.ndjson production --replace
 Έλεγχος: άνοιξε το Studio (`npm run dev` → http://localhost:3333) — θα δεις
 γεμάτα tabs & τη λίστα κρασιών.
 
-### 2) Deploy του Studio (δημόσιο URL για τον ιδιοκτήτη)
+### 2) Deploy του Studio (δημόσιο URL για τον ιδιοκτήτη) — ✅ ΕΓΙΝΕ (27 Ιουν)
+Live: **https://oikos-kea.sanity.studio/** (hostname κλειδωμένο ως `studioHost:
+'oikos-kea'` στο `studio/sanity.cli.ts`). Για μελλοντικό re-deploy:
 ```bash
-npx sanity deploy
-# διάλεξε hostname, π.χ. oikos-kea  →  https://oikos-kea.sanity.studio
+cd studio && nvm use 22
+SANITY_STUDIO_PROJECT_ID=s7x6np2r SANITY_STUDIO_DATASET=production npx sanity deploy
 ```
 
 ### 3) Σύνδεση site ↔ Sanity στο Vercel
@@ -118,6 +122,5 @@ cd .. && npm run build                        # production build
 ```
 
 - Πηγή αλήθειας = Sanity. Το `src/i18n/menuData.ts` μένει ως **seed/fallback**.
-- Τα κρασιά είναι κατηγορίες με `tabs:['allday','cuisine']` → γράφονται **μία
-  φορά**, εμφανίζονται σε All Day & Κουζίνα.
+- Τα κρασιά είναι **δική τους καρτέλα** (key `wines`, σειρά 5) — όχι merged αλλού.
 - Κρυφά (hidden) items δεν φτάνουν καν στο published HTML (φιλτράρονται στο GROQ).
