@@ -37,15 +37,15 @@ export const ui = {
     'svc.brunch.title': 'Brunch',
     'svc.brunch.desc':
       'Αυγά με κάθε τρόπο, granola bowls, avocado toast και φρέσκα pastries — η καλύτερη αρχή για κάθε πρωινό στο νησί.',
-    'svc.sushi.title': 'Σούσι & κυρίως',
+    'svc.sushi.title': 'Σούσι',
     'svc.sushi.desc':
-      'Φρέσκα σούσι rolls και signature πιάτα που φέρνουν μια μοντέρνα ματιά στα μεσογειακά υλικά.',
+      'Φρέσκα σούσι rolls με premium υλικά — μια μοντέρνα γεύση που ξεχωρίζει στο νησί.',
+    'svc.lunch.title': 'Μεσημεριανό & Δείπνο',
+    'svc.lunch.desc':
+      'Κυρίως πιάτα, σαλάτες και ορεκτικά που συνδυάζουν μεσογειακές γεύσεις με μοντέρνα ματιά.',
     'svc.cocktails.title': 'Cocktails',
     'svc.cocktails.desc':
       'House-crafted cocktails, φυσικά κρασιά και cold-pressed smoothies από το μεσημέρι μέχρι αργά.',
-    'svc.healthy.title': 'Υγιεινό & ελαφρύ',
-    'svc.healthy.desc':
-      'Smoothie bowls, γιαούρτι με μέλι, fitness omelettes — γεύσεις που σε γεμίζουν χωρίς να σε βαραίνουν.',
 
     // REVIEWS
     'reviews.eyebrow': 'Τι λένε οι επισκέπτες',
@@ -201,15 +201,15 @@ export const ui = {
     'svc.brunch.title': 'Brunch',
     'svc.brunch.desc':
       'Eggs every way, granola bowls, smashed avocado, and fresh pastries — the best start to any island morning.',
-    'svc.sushi.title': 'Sushi & mains',
+    'svc.sushi.title': 'Sushi',
     'svc.sushi.desc':
-      'Fresh sushi rolls and signature mains that bring a modern edge to Mediterranean ingredients.',
+      'Fresh sushi rolls made with premium ingredients — a modern flavour that stands out on the island.',
+    'svc.lunch.title': 'Lunch & Dinner',
+    'svc.lunch.desc':
+      'Mains, salads, and starters that bring Mediterranean flavours together with a modern culinary touch.',
     'svc.cocktails.title': 'Cocktails',
     'svc.cocktails.desc':
       'House-crafted cocktails, natural wines, and cold-pressed smoothies served from noon until late.',
-    'svc.healthy.title': 'Healthy & light',
-    'svc.healthy.desc':
-      "Smoothie bowls, yogurt parfaits, fitness omelettes — fuel that doesn't feel like a compromise.",
 
     // REVIEWS
     'reviews.eyebrow': 'What guests say',

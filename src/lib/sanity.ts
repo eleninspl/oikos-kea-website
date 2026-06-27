@@ -52,6 +52,27 @@ type RawMenu = {
 };
 type RawData = { menus: RawMenu[]; categories: RawCategory[] };
 
+// Local image fallbacks — εφαρμόζονται όταν το Sanity δεν έχει image για το item.
+// Key: αρχή του nameEn (case-insensitive prefix match).
+const localItemImages: Record<string, string> = {
+  'kani':              '/images/food/kani.jpg',
+  'kyuri':             '/images/food/kyuri.png',
+  'spicy maguro':      '/images/food/spicy-maguro.png',
+  'hamachi':           '/images/food/hamachi-jalapeno.jpg',
+  'vegetarian':        '/images/food/vegetarian.png',
+  'chirashi':          '/images/food/donburi.png',
+  'chicken rigatoni':  '/images/food/rigatoni-chicken.jpg',
+};
+
+function applyLocalImage(item: import('../i18n/menuData').Item): import('../i18n/menuData').Item {
+  if (item.image) return item;
+  const key = (item.nameEn ?? item.nameEl ?? '').toLowerCase();
+  for (const [prefix, path] of Object.entries(localItemImages)) {
+    if (key.startsWith(prefix)) return { ...item, image: path };
+  }
+  return item;
+}
+
 // ─── pure assembler (testable χωρίς δίκτυο) ───────────────────────────────────
 // Ομαδοποιεί τις κατηγορίες κάτω από την καρτέλα τους.
 export function assembleMenu(data: RawData): MenuTab[] {
@@ -66,7 +87,17 @@ export function assembleMenu(data: RawData): MenuTab[] {
       image: menu.image ?? undefined,
       sections: (categories ?? [])
         .filter((c) => c.menuKey === menu.key)
-        .map(({ menuKey, ...section }) => section as Section)
+        .map(({ menuKey, ...section }) => {
+          const s = section as Section;
+          return {
+            ...s,
+            items: s.items?.map(applyLocalImage),
+            subsections: s.subsections?.map((sub) => ({
+              ...sub,
+              items: sub.items.map(applyLocalImage),
+            })),
+          };
+        })
         // Κρύψε κατηγορίες χωρίς ορατά προϊόντα
         .filter((s) => (s.items?.length ?? 0) > 0 || (s.subsections?.length ?? 0) > 0),
     }))

@@ -358,7 +358,7 @@ const sushiTab: MenuTab = {
       titleEl: 'Donburi',
       titleEn: 'Donburi',
       items: [
-        d('Chirashi', '€16', 'Ρύζι, πίκλα ginger, τόνος, σολομός, hamachi, λαβράκι, shiso, αγγούρι, αβοκάντο, αυγά σολομού, chirashi dressing', 'Rice, pickled ginger, tuna, salmon, hamachi, sea bass, shiso, cucumber, avocado, salmon roe, chirashi dressing'),
+        { nameEl: 'Chirashi', nameEn: 'Chirashi', price: '€16', descEl: 'Ρύζι, πίκλα ginger, τόνος, σολομός, hamachi, λαβράκι, shiso, αγγούρι, αβοκάντο, αυγά σολομού, chirashi dressing', descEn: 'Rice, pickled ginger, tuna, salmon, hamachi, sea bass, shiso, cucumber, avocado, salmon roe, chirashi dressing', image: '/images/food/donburi.png' },
       ],
     },
     {
@@ -366,12 +366,12 @@ const sushiTab: MenuTab = {
       titleEn: 'Sushi Rolls',
       items: [
         bd('Fried Sake (5 τεμ.)', 'Fried Sake (5 pcs)', '€16', 'Μέσα: σολομός, σπαράγγι, takuan, αρωματική κρέμα — Πάνω: μαγιονέζα chili yuzu, ταρτάρ σολομού, πέρλες yuzu, unagi sauce', 'Inside: salmon, asparagus, takuan, aromatic cream — Top: chili yuzu mayo, salmon tartare, yuzu pearls, unagi sauce'),
-        bd('Kani (6 τεμ.)', 'Kani (6 pcs)', '€16', 'Μέσα: μπλε καβούρι, πίκλα αγγούρι, αβοκάντο — Πάνω: orange tobiko, μαύρο σκόρδο, μαγιονέζα yuzu kosho, καμένο κουνουπίδι, σκόνη lime', 'Inside: blue crab, pickled cucumber, avocado — Top: orange tobiko, black garlic, yuzu kosho mayo, burnt cauliflower, lime powder'),
-        bd('Kyuri (5 τεμ.)', 'Kyuri (5 pcs)', '€15', 'Μέσα: αγγούρι — Πάνω: ταρτάρ σολομού, σπαράγγι, shiso, takana, κρέμα χρένου, αυγά σολομού, φύτρες', 'Inside: cucumber — Top: salmon tartare, asparagus, shiso, takana, horseradish cream, salmon roe, cress'),
-        bd('Spicy Maguro (6 τεμ.)', 'Spicy Maguro (6 pcs)', '€14', 'Μέσα: σουσάμι kimchi — Πάνω: ταρτάρ τόνου, φρέσκο κρεμμύδι, yuzu tobiko, takuan, μαγιονέζα chili yuzu, κόκκινο τσίλι', 'Inside: kimchi sesame — Top: tuna tartare, fresh onion, yuzu tobiko, takuan, chili yuzu mayo, red chili'),
-        bd('Hamachi Jalapeño (6 τεμ.)', 'Hamachi Jalapeño (6 pcs)', '€18', 'Μέσα: αβοκάντο, μαγιονέζα τρούφας, φρέσκια τρούφα — Πάνω: ταρτάρ hamachi, takana, takuan, jalapeño dressing, μαύρο σκόρδο, λάδι κόκκινου τσίλι', 'Inside: avocado, truffle mayo, fresh truffle — Top: hamachi tartare, takana, takuan, jalapeño dressing, black garlic, chili oil'),
+        { nameEl: 'Kani (6 τεμ.)', nameEn: 'Kani (6 pcs)', price: '€16', descEl: 'Μέσα: μπλε καβούρι, πίκλα αγγούρι, αβοκάντο — Πάνω: orange tobiko, μαύρο σκόρδο, μαγιονέζα yuzu kosho, καμένο κουνουπίδι, σκόνη lime', descEn: 'Inside: blue crab, pickled cucumber, avocado — Top: orange tobiko, black garlic, yuzu kosho mayo, burnt cauliflower, lime powder', image: '/images/food/kani.jpg' },
+        { nameEl: 'Kyuri (5 τεμ.)', nameEn: 'Kyuri (5 pcs)', price: '€15', descEl: 'Μέσα: αγγούρι — Πάνω: ταρτάρ σολομού, σπαράγγι, shiso, takana, κρέμα χρένου, αυγά σολομού, φύτρες', descEn: 'Inside: cucumber — Top: salmon tartare, asparagus, shiso, takana, horseradish cream, salmon roe, cress', image: '/images/food/kyuri.png' },
+        { nameEl: 'Spicy Maguro (6 τεμ.)', nameEn: 'Spicy Maguro (6 pcs)', price: '€14', descEl: 'Μέσα: σουσάμι kimchi — Πάνω: ταρτάρ τόνου, φρέσκο κρεμμύδι, yuzu tobiko, takuan, μαγιονέζα chili yuzu, κόκκινο τσίλι', descEn: 'Inside: kimchi sesame — Top: tuna tartare, fresh onion, yuzu tobiko, takuan, chili yuzu mayo, red chili', image: '/images/food/spicy-maguro.png' },
+        { nameEl: 'Hamachi Jalapeño (6 τεμ.)', nameEn: 'Hamachi Jalapeño (6 pcs)', price: '€18', descEl: 'Μέσα: αβοκάντο, μαγιονέζα τρούφας, φρέσκια τρούφα — Πάνω: ταρτάρ hamachi, takana, takuan, jalapeño dressing, μαύρο σκόρδο, λάδι κόκκινου τσίλι', descEn: 'Inside: avocado, truffle mayo, fresh truffle — Top: hamachi tartare, takana, takuan, jalapeño dressing, black garlic, chili oil', image: '/images/food/hamachi-jalapeno.jpg' },
         bd('Ebi (5 τεμ.)', 'Ebi (5 pcs)', '€16', 'Μέσα: γαρίδα tempura, πίκλα καρότο — Πάνω: crispy tomato furikake, κρέμα αβοκάντο, τοματίνι, ανθός αλατιού, aji ponzu dressing, εσαλότ', 'Inside: prawn tempura, pickled carrot — Top: crispy tomato furikake, avocado cream, cherry tomato, sea salt, aji ponzu dressing, shallot'),
-        bd('Vegetarian (5 τεμ.)', 'Vegetarian (5 pcs)', '€12', 'Μέσα: shiso, takuan, takana, φρέσκο κρεμμύδι, enoki, αβοκάντο, σπαράγγι — Πάνω: σκόνη πιπεριάς Φλωρίνης, μαγιονέζα τρούφας, kale', 'Inside: shiso, takuan, takana, fresh onion, enoki, avocado, asparagus — Top: Florina pepper powder, truffle mayo, kale'),
+        { nameEl: 'Vegetarian (5 τεμ.)', nameEn: 'Vegetarian (5 pcs)', price: '€12', descEl: 'Μέσα: shiso, takuan, takana, φρέσκο κρεμμύδι, enoki, αβοκάντο, σπαράγγι — Πάνω: σκόνη πιπεριάς Φλωρίνης, μαγιονέζα τρούφας, kale', descEn: 'Inside: shiso, takuan, takana, fresh onion, enoki, avocado, asparagus — Top: Florina pepper powder, truffle mayo, kale', image: '/images/food/vegetarian.png' },
       ],
     },
   ],
@@ -406,7 +406,7 @@ const cuisineTab: MenuTab = {
       titleEl: 'Κυρίως Πιάτα',
       titleEn: 'Main Courses',
       items: [
-        bd('Ριγκατόνι Κοτόπουλο', 'Chicken Rigatoni', '€16,50', 'Γκουαντσιάλε, πολύχρωμες πιπεριές, μανιτάρια, κρέμα παρμεζάνας, ξύσμα λεμόνι', 'Guanciale, colorful peppers, mushrooms, parmesan cream, lemon zest'),
+        { nameEl: 'Ριγκατόνι Κοτόπουλο', nameEn: 'Chicken Rigatoni', price: '€16,50', descEl: 'Γκουαντσιάλε, πολύχρωμες πιπεριές, μανιτάρια, κρέμα παρμεζάνας, ξύσμα λεμόνι', descEn: 'Guanciale, colorful peppers, mushrooms, parmesan cream, lemon zest', image: '/images/food/rigatoni-chicken.jpg' },
         bd('Κριθαρότο Μανιταριών', 'Orzo with Mushrooms', '€15,50', 'Βασιλομανίταρα, σιτάκε, τρούφα, παλαιωμένη παρμεζάνα', 'King mushrooms, shiitake, truffle, aged parmesan'),
         bd('Μανέστρα', 'Orzo with Beef Ribs', '€17', 'Σιδηρόδρομος μοσχαρίσιος, κρέμα μετσοβόνε, μυρώνι', 'Beef ribs, metsovone cream, chervil'),
         d('Cacio e Pepe', '€16', 'Χειροποίητο λιγκουίνι, κρέμα πεκορίνο, μοσχαρίσια φιλετάκια', 'Handmade linguine, pecorino cream, beef fillets'),

@@ -188,4 +188,37 @@ const tabImageFallback: Record<string, string> = {
 
   sync();
   window.addEventListener('hashchange', sync);
+
+  // ── Image lightbox ──────────────────────────────────────────────────────────
+  const lightbox = document.createElement('div');
+  lightbox.className = 'img-lightbox';
+  const lbImg = document.createElement('img');
+  lbImg.className = 'img-lightbox__img';
+  lbImg.alt = '';
+  lightbox.appendChild(lbImg);
+  document.body.appendChild(lightbox);
+
+  function openLightbox(src: string) {
+    lbImg.src = src;
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', (e) => {
+    const img = (e.target as Element).closest('.menu-item__img');
+    if (img instanceof HTMLImageElement) {
+      openLightbox(img.src);
+    } else if (lightbox.classList.contains('is-open')) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
