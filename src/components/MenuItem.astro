@@ -1,25 +1,65 @@
 ---
 import type { Item } from '../i18n/menuData';
 import type { Lang } from '../i18n/utils';
+import { labelText, allergenText, formatPrice } from '../lib/menuLabels';
 
 interface Props { item: Item; lang: Lang; }
 const { item, lang } = Astro.props;
 
 const name = lang === 'el' ? item.nameEl : item.nameEn;
-const info = lang === 'el' ? item.infoEl : item.infoEn;
 const desc = lang === 'el' ? item.descEl : item.descEn;
-const glassLabel = lang === 'el' ? 'Ποτ.' : 'Glass';
+const info = lang === 'el' ? item.infoEl : item.infoEn; // legacy (seed fallback)
+
+// ── Τιμές: δομημένο μοντέλο, με fallback στα legacy πεδία ──
+type Rendered = { label?: string; text: string };
+let priceParts: Rendered[] = [];
+if (item.prices && item.prices.length) {
+  priceParts = item.prices.map((p) => ({
+    label: (lang === 'el' ? p.labelEl : p.labelEn) || p.labelEl || undefined,
+    text: formatPrice(p.amount),
+  }));
+} else if (item.price || item.glass || item.priceAlt) {
+  if (item.glass) priceParts.push({ label: lang === 'el' ? 'Ποτ.' : 'Glass', text: item.glass });
+  if (item.price) priceParts.push({ text: item.price });
+  if (item.priceAlt) priceParts.push({ text: item.priceAlt });
+}
+
+const labels = item.labels ?? [];
+const allergens = item.allergens ?? [];
+const extras = item.extras ?? [];
+const isWide = priceParts.length > 1 || !!info || extras.length > 0;
+const unavailable = item.available === false;
+const allergenLine = allergens.map((a) => allergenText(a, lang)).join(', ');
+const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
 ---
 
-<div class:list={['menu-item', { 'menu-item--wine': !!item.infoEl }]}>
+<div class:list={['menu-item', { 'menu-item--wide': isWide, 'menu-item--unavailable': unavailable }]}>
+  {item.image && (
+    <img class="menu-item__img" src={item.image} alt={name} loading="lazy" width="64" height="64" />
+  )}
   <div class="menu-item__body">
-    <div class="menu-item__name">{name}</div>
+    <div class="menu-item__name">
+      {name}
+      {labels.map((l) => <span class="menu-item__label">{labelText(l, lang)}</span>)}
+      {unavailable && <span class="menu-item__label menu-item__label--out">{soldOut}</span>}
+    </div>
     {info && <div class="menu-item__info">{info}</div>}
     {desc && <div class="menu-item__desc">{desc}</div>}
+    {extras.map((e) => (
+      <div class="menu-item__extra">
+        + {lang === 'el' ? e.labelEl : (e.labelEn || e.labelEl)}
+        {e.surcharge != null && <span> {formatPrice(e.surcharge)}</span>}
+      </div>
+    ))}
+    {allergenLine && (
+      <div class="menu-item__allergens">{lang === 'el' ? 'Αλλεργιογόνα: ' : 'Allergens: '}{allergenLine}</div>
+    )}
   </div>
   <div class="menu-item__price-wrap">
-    {item.glass && <span class="menu-item__price-glass">{glassLabel} {item.glass}</span>}
-    <span class="menu-item__price">{item.price}</span>
-    {item.priceAlt && <span class="menu-item__price">{item.priceAlt}</span>}
+    {priceParts.map((p) => (
+      <span class="menu-item__price">
+        {p.label && <span class="menu-item__price-label">{p.label} </span>}{p.text}
+      </span>
+    ))}
   </div>
 </div>

@@ -23,19 +23,24 @@ export const sanity = createClient({
 // ─── GROQ ─────────────────────────────────────────────────────────────────────
 // Φέρνει τις καρτέλες (menu) ΚΑΙ τις κατηγορίες — όλα φτιαγμένα από τον ιδιοκτήτη
 // στο Sanity. Φιλτράρει τα κρυφά σε κάθε επίπεδο.
-const itemFields = `nameEl, nameEn, descEl, descEn, infoEl, infoEn, price, priceAlt, glass`
+// Προϊόντα = ξεχωριστά menuItem documents που αναφέρονται στην κατηγορία.
+const itemFields = `
+  nameEl, nameEn, descEl, descEn,
+  "image": image.asset->url,
+  prices[]{ labelEl, labelEn, amount },
+  priceNote, labels, allergens,
+  extras[]{ labelEl, labelEn, surcharge },
+  available
+`
 
 export const MENU_QUERY = `{
   "menus": *[_type == "menu" && !hidden] | order(orderRank asc){
     "key": key.current, labelEl, labelEn, "image": image.asset->url
   },
   "categories": *[_type == "category" && !hidden] | order(orderRank asc){
-    titleEl, titleEn, "menuKey": coalesce(menu->key.current, menus[0]->key.current),
-    "items": items[!hidden]{ ${itemFields} },
-    "subsections": subsections[!hidden]{
-      titleEl, titleEn, sectionPrice,
-      "items": items[!hidden]{ ${itemFields} }
-    }
+    titleEl, titleEn, noteEl, noteEn,
+    "menuKey": coalesce(menu->key.current, menus[0]->key.current),
+    "items": *[_type == "menuItem" && references(^._id) && !hidden] | order(orderRank asc){ ${itemFields} }
   }
 }`
 
@@ -55,7 +60,9 @@ export function assembleMenu(data: RawData): MenuTab[] {
       image: menu.image ?? undefined,
       sections: (categories ?? [])
         .filter((c) => c.menuKey === menu.key)
-        .map(({ menuKey, ...section }) => section as Section),
+        .map(({ menuKey, ...section }) => section as Section)
+        // Κρύψε κατηγορίες χωρίς ορατά προϊόντα
+        .filter((s) => (s.items?.length ?? 0) > 0 || (s.subsections?.length ?? 0) > 0),
     }))
     .filter((tab) => tab.sections.length > 0)
 }
