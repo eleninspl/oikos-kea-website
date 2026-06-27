@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBanner from '../CtaBanner.astro';
 import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 import { site } from '../../lib/site';
@@ -183,16 +184,12 @@ const base = langBase(lang);
   </section>
 
   <!-- CTA -->
-  <section class="cta-banner">
-    <div class="container">
-      <h2 class="section-title">{t('cta.title')}</h2>
-      <p>{t('cta.subtitle')}</p>
-      <div style="display:flex; gap:var(--space-4); justify-content:center; flex-wrap:wrap;">
-        <a href={`tel:${site.phoneTel}`} class="btn btn--dark">{t('cta.call')}</a>
-        <a href={base + '/menu'} class="btn btn--outline">{t('cta.menu')}</a>
-      </div>
+  <CtaBanner title={t('cta.title')} subtitle={t('cta.subtitle')}>
+    <div class="cta-actions">
+      <a href={`tel:${site.phoneTel}`} class="btn btn--dark">{t('cta.call')}</a>
+      <a href={base + '/menu'} class="btn btn--outline">{t('cta.menu')}</a>
     </div>
-  </section>
+  </CtaBanner>
 
   <!-- Info strip -->
   <section class="section section--mid section--centered">

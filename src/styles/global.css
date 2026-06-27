@@ -705,6 +705,14 @@ h1, h2, h3, h4 {
 }
 .cta-banner .btn--dark:hover { background-color: var(--color-mid); }
 
+/* Κεντραρισμένη σειρά κουμπιών (CTA με δύο επιλογές) */
+.cta-actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* ─── Page hero (inner pages) ─── */
 .page-hero {
   background-color: var(--color-dark);
