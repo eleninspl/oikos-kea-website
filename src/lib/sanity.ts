@@ -55,13 +55,13 @@ type RawData = { menus: RawMenu[]; categories: RawCategory[] };
 // Local image fallbacks — εφαρμόζονται όταν το Sanity δεν έχει image για το item.
 // Key: αρχή του nameEn (case-insensitive prefix match).
 const localItemImages: Record<string, string> = {
-  'kani':              '/images/food/kani.jpg',
-  'kyuri':             '/images/food/kyuri.webp',
-  'spicy maguro':      '/images/food/spicy-maguro.webp',
-  'hamachi':           '/images/food/hamachi-jalapeno.jpg',
-  'vegetarian':        '/images/food/vegetarian.webp',
-  'chirashi':          '/images/food/donburi.webp',
-  'chicken rigatoni':  '/images/food/rigatoni-chicken.jpg',
+  kani: '/images/food/kani.jpg',
+  kyuri: '/images/food/kyuri.webp',
+  'spicy maguro': '/images/food/spicy-maguro.webp',
+  hamachi: '/images/food/hamachi-jalapeno.jpg',
+  vegetarian: '/images/food/vegetarian.webp',
+  chirashi: '/images/food/donburi.webp',
+  'chicken rigatoni': '/images/food/rigatoni-chicken.jpg',
 };
 
 function applyLocalImage(item: import('../i18n/menuData').Item): import('../i18n/menuData').Item {

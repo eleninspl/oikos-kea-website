@@ -1412,7 +1412,7 @@ h4 {
     grid-template-columns: 1fr 1fr;
     min-height: 200px;
     border-radius: var(--radius-md);
-    box-shadow: 0 2px 12px rgba(38, 38, 38, 0.10);
+    box-shadow: 0 2px 12px rgba(38, 38, 38, 0.1);
     overflow: hidden;
   }
 
