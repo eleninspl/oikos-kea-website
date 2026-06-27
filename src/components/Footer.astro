@@ -16,8 +16,9 @@ const base = lang === 'en' ? '/en' : '';
   <div class="container">
     <div class="footer__grid">
       <div>
-        <div class="footer__brand">OIK<span>O</span>S</div>
-        <p class="footer__desc">{t('footer.desc')}</p>
+        <a href={base + '/'} class="footer__brand" aria-label="OIKOS Kea — Αρχική">
+          <img src="/images/brand/logo-wordmark.png" alt="OIKOS Kea" width="450" height="106" />
+        </a>
       </div>
 
       <div>
@@ -45,7 +46,11 @@ const base = lang === 'en' ? '/en' : '';
       <span>© {year} {t('footer.copyright')}</span>
       <div class="footer__social">
         <a href="https://www.instagram.com/oikos_kea/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          Instagram
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
         </a>
       </div>
     </div>

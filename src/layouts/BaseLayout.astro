@@ -17,7 +17,7 @@ const {
   title,
   description,
   lang,
-  ogImage = '/images/og-image.jpg',
+  ogImage = '/images/brand/og-image.jpg',
   pageType = 'website',
 } = Astro.props;
 
@@ -105,7 +105,9 @@ const jsonLD = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/icons/favicon-180.png" />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />

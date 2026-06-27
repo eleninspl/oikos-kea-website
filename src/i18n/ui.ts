@@ -151,7 +151,6 @@ export const ui = {
     'contact.cta.btn': 'Καλέστε: 22880 22507',
 
     // FOOTER
-    'footer.desc': 'All day cuisine & bar στην καρδιά της Κορρησίας, Κέας. Από brunch το πρωί μέχρι cocktails αργά τη νύχτα — ιδρ. 2021.',
     'footer.nav': 'Πλοήγηση',
     'footer.find': 'Βρείτε μας',
     'footer.copyright': 'OIKOS Κέα. Όλα τα δικαιώματα διατηρούνται.',
@@ -307,7 +306,6 @@ export const ui = {
     'contact.cta.btn': 'Call: 22880 22507',
 
     // FOOTER
-    'footer.desc': 'All day cuisine & bar in the heart of Korrisia, Kéa. From morning brunch to late-night cocktails — est. 2021.',
     'footer.nav': 'Navigate',
     'footer.find': 'Find us',
     'footer.copyright': 'OIKOS Kéa. All rights reserved.',
