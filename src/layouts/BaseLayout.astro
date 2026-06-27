@@ -122,9 +122,18 @@ const jsonLD = {
       const burger = document.querySelector('.nav__burger');
       const mobileMenu = document.querySelector('.nav__mobile');
 
-      window.addEventListener('scroll', () => {
-        nav?.classList.toggle('nav--scrolled', window.scrollY > 20);
-      });
+      let scrolled = false;
+      window.addEventListener(
+        'scroll',
+        () => {
+          const isScrolled = window.scrollY > 20;
+          if (isScrolled !== scrolled) {
+            scrolled = isScrolled;
+            nav?.classList.toggle('nav--scrolled', isScrolled);
+          }
+        },
+        { passive: true }
+      );
 
       burger?.addEventListener('click', () => {
         const isOpen = mobileMenu?.classList.toggle('open');
