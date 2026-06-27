@@ -811,8 +811,15 @@ h1, h2, h3, h4 {
   font-family: var(--font-heading);
   font-size: var(--text-3xl);
   font-weight: 600;
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-3);
   color: var(--text-dark);
+}
+
+.menu-panel-note {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: var(--space-10);
 }
 
 .menu-panel { display: none; }

@@ -55,6 +55,9 @@ const menuTabs = await getMenu();
         {menuTabs.map((tab) => (
           <div class="menu-panel" id={`panel-${tab.key}`} role="tabpanel">
             <h2 class="menu-panel-title">{gl(tab.labelEl, tab.labelEn)}</h2>
+            {(tab.noteEl || tab.noteEn) && (
+              <p class="menu-panel-note">{gl(tab.noteEl ?? '', tab.noteEn ?? '')}</p>
+            )}
             {tab.sections.map((section) => (
               <div class="menu-section">
                 <div class="menu-section-header">
