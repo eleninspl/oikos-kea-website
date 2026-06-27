@@ -27,13 +27,12 @@ if (item.prices && item.prices.length) {
 const labels = item.labels ?? [];
 const allergens = item.allergens ?? [];
 const extras = item.extras ?? [];
-const isWide = priceParts.length > 1 || !!info || extras.length > 0;
 const unavailable = item.available === false;
 const allergenLine = allergens.map((a) => allergenText(a, lang)).join(', ');
 const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
 ---
 
-<div class:list={['menu-item', { 'menu-item--wide': isWide, 'menu-item--unavailable': unavailable }]}>
+<div class:list={['menu-item', { 'menu-item--unavailable': unavailable }]}>
   {item.image && (
     <img class="menu-item__img" src={item.image} alt={name} loading="lazy" width="64" height="64" />
   )}
