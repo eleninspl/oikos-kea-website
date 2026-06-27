@@ -2,20 +2,20 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import type { StructureBuilder, StructureResolverContext } from 'sanity/structure'
 import { orderableDocumentListDeskItem, orderRankOrdering } from '@sanity/orderable-document-list'
-import { HelpCircleIcon, DocumentTextIcon, ControlsIcon } from '@sanity/icons'
+import { HelpCircleIcon, DocumentTextIcon, ControlsIcon, ThLargeIcon, TagIcon } from '@sanity/icons'
 import { schemaTypes } from './schemas'
 import { oikosTheme } from './theme'
 import { Logo } from './components/Logo'
 import { HelpGuide } from './components/HelpGuide'
 
 // ─── Sidebar structure ────────────────────────────────────────────────────────
-// Ένας ξεκάθαρος κύριος δρόμος («Το Μενού μου»: καρτέλα → κατηγορίες → προϊόντα,
-// με drag & drop αναδιάταξη) και ένα τυλιγμένο «Ρυθμίσεις δομής» για τα σπάνια.
+// Κύριος δρόμος «Το Μενού μου»: καρτέλα → κατηγορία → προϊόντα (drag & drop).
+// + ξεχωριστά: αναδιάταξη καρτελών/κατηγοριών, καθολική λίστα προϊόντων.
 const structure = (S: StructureBuilder, context: StructureResolverContext) =>
   S.list()
     .title('Μενού OIKOS')
     .items([
-      // Καθημερινή χρήση: διάλεξε καρτέλα → σύρε/άνοιξε τις κατηγορίες της → προϊόντα
+      // Καθημερινή χρήση: καρτέλα → κατηγορία → προϊόντα (σύρε για σειρά)
       S.listItem()
         .title('Το Μενού μου')
         .icon(DocumentTextIcon)
@@ -24,27 +24,40 @@ const structure = (S: StructureBuilder, context: StructureResolverContext) =>
             .title('Διάλεξε καρτέλα')
             .defaultOrdering(orderRankOrdering.by)
             .child((menuId) =>
-              // Per-menu λίστα κατηγοριών με drag & drop (το .child του orderable deskItem)
-              orderableDocumentListDeskItem({
-                type: 'category',
-                title: 'Κατηγορίες',
-                filter: 'menu._ref == $menuId',
-                params: { menuId },
-                id: `ordered-categories-${menuId}`,
-                S,
-                context,
-              }).child
+              S.documentList()
+                .title('Διάλεξε κατηγορία')
+                .schemaType('category')
+                .filter('_type == "category" && menu._ref == $menuId')
+                .params({ menuId })
+                .defaultOrdering(orderRankOrdering.by)
+                .child((catId) =>
+                  // Προϊόντα της κατηγορίας με drag & drop (το .child του orderable deskItem)
+                  orderableDocumentListDeskItem({
+                    type: 'menuItem',
+                    title: 'Προϊόντα',
+                    filter: 'category._ref == $catId',
+                    params: { catId },
+                    id: `items-${catId}`,
+                    S,
+                    context,
+                  }).child
+                )
             )
         ),
-      // Drag & drop αναδιάταξη των καρτελών (tabs) — απευθείας, χωρίς περιττό επίπεδο
+      S.divider(),
+      // Αναδιάταξη καρτελών (tabs)
       orderableDocumentListDeskItem({
-        type: 'menu',
-        title: 'Καρτέλες',
-        icon: ControlsIcon,
-        id: 'ordered-menus',
-        S,
-        context,
+        type: 'menu', title: 'Καρτέλες', icon: ControlsIcon, id: 'ordered-menus', S, context,
       }),
+      // Αναδιάταξη/επεξεργασία κατηγοριών
+      orderableDocumentListDeskItem({
+        type: 'category', title: 'Κατηγορίες', icon: ThLargeIcon, id: 'ordered-categories', S, context,
+      }),
+      // Καθολική λίστα προϊόντων (αναζήτηση)
+      S.listItem()
+        .title('Όλα τα προϊόντα')
+        .icon(TagIcon)
+        .child(S.documentTypeList('menuItem').title('Όλα τα προϊόντα')),
       S.divider(),
       S.listItem()
         .title('Οδηγίες Χρήσης')

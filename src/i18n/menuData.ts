@@ -8,16 +8,28 @@
 //      build-time fallback if Sanity is unreachable.
 // ─────────────────────────────────────────────────────────────────────────────
 
+export type PriceVariant = { labelEl?: string; labelEn?: string; amount: number };
+export type Extra = { labelEl: string; labelEn?: string; surcharge?: number };
+
 export type Item = {
   nameEl: string;
   nameEn: string;
   descEl?: string;
   descEn?: string;
-  infoEl?: string;   // wine: variety + winery line
+  // ── structured model (Sanity, source of truth) ──
+  image?: string;
+  prices?: PriceVariant[];
+  priceNote?: string;
+  labels?: string[];
+  allergens?: string[];
+  extras?: Extra[];
+  available?: boolean;
+  // ── legacy (seed/fallback data) ──
+  infoEl?: string;
   infoEn?: string;
-  price: string;     // bottle / simple price
-  priceAlt?: string; // second price (e.g. Nigiri, when price is Sashimi)
-  glass?: string;    // glass price (wines only)
+  price?: string;
+  priceAlt?: string;
+  glass?: string;
 };
 
 export type Subsection = {
@@ -30,6 +42,8 @@ export type Subsection = {
 export type Section = {
   titleEl: string;
   titleEn: string;
+  noteEl?: string;
+  noteEn?: string;
   items?: Item[];
   subsections?: Subsection[];
 };
