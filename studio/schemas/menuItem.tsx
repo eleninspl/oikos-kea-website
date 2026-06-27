@@ -1,5 +1,6 @@
 import React from 'react'
 import { defineField, defineType } from 'sanity'
+import { TranslateInput } from '../components/TranslateInput'
 
 const TAG_OPTIONS = [
   { title: 'Vegetarian', value: 'vegetarian' },
@@ -72,6 +73,7 @@ export const menuItem = defineType({
       name: 'nameEn',
       title: 'Name (EN)',
       type: 'string',
+      components: { input: TranslateInput },
       validation: (r) => r.required(),
     }),
     defineField({
@@ -102,6 +104,7 @@ export const menuItem = defineType({
       type: 'text',
       rows: 2,
       fieldset: 'details',
+      components: { input: TranslateInput },
     }),
     defineField({
       name: 'tags',
@@ -126,6 +129,7 @@ export const menuItem = defineType({
       type: 'string',
       description: 'Variety + Winery — only for wines',
       fieldset: 'special',
+      components: { input: TranslateInput },
     }),
     defineField({
       name: 'glass',

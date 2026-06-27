@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { ThLargeIcon, CogIcon, PackageIcon } from '@sanity/icons'
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
+import { TranslateInput } from '../components/TranslateInput'
 import { menuItem } from './menuItem'
 import { subsection } from './subsection'
 
@@ -49,6 +50,7 @@ export const category = defineType({
       title: 'Category Name (EN)',
       type: 'string',
       group: 'content',
+      components: { input: TranslateInput },
       validation: (r) => r.required(),
     }),
     defineField({
