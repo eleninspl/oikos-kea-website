@@ -1,54 +1,62 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import type { StructureBuilder } from 'sanity/structure'
+import { HelpCircleIcon, DocumentTextIcon, ControlsIcon, ThLargeIcon, CogIcon } from '@sanity/icons'
 import { schemaTypes } from './schemas'
 import { oikosTheme } from './theme'
 import { Logo } from './components/Logo'
 import { HelpGuide } from './components/HelpGuide'
 
+const byOrder = [{ field: 'order', direction: 'asc' as const }]
+
 // ─── Sidebar structure ────────────────────────────────────────────────────────
-// «Προϊόντα ανά menu»: δυναμικό drill-down — καρτέλα → κατηγορίες της → προϊόντα.
-// «Καρτέλες» & «Όλες οι κατηγορίες»: διαχείριση δομής.
+// Ένας ξεκάθαρος κύριος δρόμος («Το Μενού μου»: καρτέλα → κατηγορίες → προϊόντα)
+// και ένα τυλιγμένο «Ρυθμίσεις δομής» για τα σπάνια.
 const structure = (S: StructureBuilder) =>
   S.list()
     .title('Μενού OIKOS')
     .items([
-      S.listItem()
-        .title('Οδηγίες Χρήσης')
-        .child(S.component(HelpGuide).title('Οδηγίες Χρήσης')),
-      S.divider(),
       // Καθημερινή χρήση: διάλεξε καρτέλα → δες τις κατηγορίες της → άνοιξε προϊόντα
       S.listItem()
-        .title('Προϊόντα (ανά καρτέλα)')
+        .title('Το Μενού μου')
+        .icon(DocumentTextIcon)
         .child(
           S.documentTypeList('menu')
             .title('Διάλεξε καρτέλα')
-            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+            .defaultOrdering(byOrder)
             .child((menuId) =>
               S.documentList()
                 .title('Κατηγορίες')
                 .schemaType('category')
-                .filter('_type == "category" && $menuId in menus[]._ref')
+                .filter('_type == "category" && (menu._ref == $menuId || $menuId in menus[]._ref)')
                 .params({ menuId })
-                .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                .defaultOrdering(byOrder)
             )
         ),
       S.divider(),
-      // Διαχείριση δομής
+      // Σπάνια χρήση — τυλιγμένα σε μία ομάδα ώστε να μην μπερδεύουν
       S.listItem()
-        .title('Καρτέλες (Menu)')
+        .title('Ρυθμίσεις δομής')
+        .icon(CogIcon)
         .child(
-          S.documentTypeList('menu')
-            .title('Καρτέλες')
-            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+          S.list()
+            .title('Ρυθμίσεις δομής')
+            .items([
+              S.listItem()
+                .title('Καρτέλες (Menu)')
+                .icon(ControlsIcon)
+                .child(S.documentTypeList('menu').title('Καρτέλες').defaultOrdering(byOrder)),
+              S.listItem()
+                .title('Όλες οι κατηγορίες')
+                .icon(ThLargeIcon)
+                .child(S.documentTypeList('category').title('Όλες οι κατηγορίες').defaultOrdering(byOrder)),
+            ])
         ),
+      S.divider(),
       S.listItem()
-        .title('Όλες οι κατηγορίες')
-        .child(
-          S.documentTypeList('category')
-            .title('Όλες οι κατηγορίες')
-            .defaultOrdering([{ field: 'order', direction: 'asc' }])
-        ),
+        .title('Οδηγίες Χρήσης')
+        .icon(HelpCircleIcon)
+        .child(S.component(HelpGuide).title('Οδηγίες Χρήσης')),
     ])
 
 export default defineConfig({

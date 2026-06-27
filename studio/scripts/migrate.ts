@@ -64,15 +64,15 @@ function toSubsection(sub: Subsection) {
     items: sub.items.map(toItem),
   }
 }
-const menuRef = (key: string) => ({ _type: 'reference', _ref: `menu.${key}`, _key: key })
+const menuRef = (key: string) => ({ _type: 'reference', _ref: `menu.${key}` })
 
-function toCategory(section: Section, menuKeys: string[], order: number, idPrefix: string) {
+function toCategory(section: Section, menuKey: string, order: number, idPrefix: string) {
   return {
     _id: `${idPrefix}.${slugify(section.titleEn)}`,
     _type: 'category',
     titleEl: section.titleEl,
     titleEn: section.titleEn,
-    menus: menuKeys.map(menuRef),
+    menu: menuRef(menuKey),
     order,
     hidden: false,
     ...(section.subsections
@@ -97,10 +97,10 @@ menuTabs.forEach((tab, i) => {
   })
 })
 
-// 1) κατηγορίες: μία ανά section, menus = [η καρτέλα της]
+// 1) κατηγορίες: μία ανά section, menu = η καρτέλα της
 menuTabs.forEach((tab) => {
   tab.sections.forEach((section, i) => {
-    docs.push(toCategory(section, [tab.key], i, `cat.${tab.key}`))
+    docs.push(toCategory(section, tab.key, i, `cat.${tab.key}`))
   })
 })
 
