@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity'
-import { ControlsIcon, CogIcon } from '@sanity/icons'
-import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
-import { TranslateInput } from '../components/TranslateInput'
+import { defineField, defineType } from 'sanity';
+import { ControlsIcon, CogIcon } from '@sanity/icons';
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
+import { TranslateInput } from '../components/TranslateInput';
 
 // Top-level καρτέλα του μενού (All Day, Cocktails, …). Ο ιδιοκτήτης μπορεί να
 // προσθέτει/μετονομάζει/αναδιατάσσει (drag & drop) καρτέλες ελεύθερα.
@@ -20,7 +20,7 @@ export const menu = defineType({
       return {
         title: hidden ? `${title}  (κρυφή)` : title,
         subtitle: en && en !== title ? en : undefined,
-      }
+      };
     },
   },
   orderings: [orderRankOrdering],
@@ -28,7 +28,13 @@ export const menu = defineType({
     // Κρυφό πεδίο που κρατά τη σειρά από το drag & drop
     orderRankField({ type: 'menu' }),
     // Παλιό αριθμητικό πεδίο — κρυμμένο, μένει μόνο για ιστορικούς λόγους
-    defineField({ name: 'order', title: 'Σειρά (παλιό)', type: 'number', hidden: true, readOnly: true }),
+    defineField({
+      name: 'order',
+      title: 'Σειρά (παλιό)',
+      type: 'number',
+      hidden: true,
+      readOnly: true,
+    }),
     defineField({
       name: 'labelEl',
       title: 'Όνομα (ΕΛ)',
@@ -57,7 +63,8 @@ export const menu = defineType({
       title: 'Σημείωση (ΕΛ)',
       type: 'string',
       group: 'basic',
-      description: 'Προαιρετικό κείμενο κάτω από τον τίτλο της καρτέλας (π.χ. «Σερβίρεται 08.30–15.00»).',
+      description:
+        'Προαιρετικό κείμενο κάτω από τον τίτλο της καρτέλας (π.χ. «Σερβίρεται 08.30–15.00»).',
     }),
     defineField({
       name: 'noteEn',
@@ -85,4 +92,4 @@ export const menu = defineType({
       validation: (r) => r.required(),
     }),
   ],
-})
+});

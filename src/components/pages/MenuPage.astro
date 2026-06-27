@@ -8,7 +8,9 @@ import MenuItem from '../MenuItem.astro';
 import type { Lang } from '../../i18n/utils';
 import { site } from '../../lib/site';
 
-interface Props { lang: Lang; }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const gl = (el: string, en: string) => getLabel(lang, el, en);
@@ -30,79 +32,87 @@ const tabImageFallback: Record<string, string> = {
 
   <section class="section section--cream">
     <div class="container">
-
       <div class="menu-tabs" id="menu-tabs" data-view="grid">
         <!-- Πλέγμα μεγάλων κουμπιών (μία καρτέλα ανά κουμπί) -->
         <div class="menu-nav">
-          {menuTabs.map((tab) => (
-            <button
-              type="button"
-              class="menu-tab-btn"
-              data-panel={`panel-${tab.key}`}
-              aria-controls={`panel-${tab.key}`}
-            >
-              <img
-                class="menu-tab-img"
-                src={tab.image ?? tabImageFallback[tab.key] ?? '/images/ui/menu-placeholder.svg'}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                width="96"
-                height="96"
-              />
-              <span class="menu-tab-label">{gl(tab.labelEl, tab.labelEn)}</span>
-            </button>
-          ))}
+          {
+            menuTabs.map((tab) => (
+              <button
+                type="button"
+                class="menu-tab-btn"
+                data-panel={`panel-${tab.key}`}
+                aria-controls={`panel-${tab.key}`}
+              >
+                <img
+                  class="menu-tab-img"
+                  src={tab.image ?? tabImageFallback[tab.key] ?? '/images/ui/menu-placeholder.svg'}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  width="96"
+                  height="96"
+                />
+                <span class="menu-tab-label">{gl(tab.labelEl, tab.labelEn)}</span>
+              </button>
+            ))
+          }
         </div>
 
         <!-- Πίσω στις κατηγορίες (φαίνεται μόνο στην οθόνη λεπτομέρειας) -->
         <button class="menu-back" id="menu-back" type="button">
-          <span aria-hidden="true">←</span> {gl('Όλες οι κατηγορίες', 'All categories')}
+          <span aria-hidden="true">←</span>
+          {gl('Όλες οι κατηγορίες', 'All categories')}
         </button>
 
         <!-- Οθόνες περιεχομένου -->
-        {menuTabs.map((tab) => (
-          <div class="menu-panel" id={`panel-${tab.key}`}>
-            <h2 class="menu-panel-title" tabindex="-1">{gl(tab.labelEl, tab.labelEn)}</h2>
-            {(tab.noteEl || tab.noteEn) && (
-              <p class="menu-panel-note">{gl(tab.noteEl ?? '', tab.noteEn ?? '')}</p>
-            )}
-            {tab.sections.map((section) => (
-              <div class="menu-section">
-                <div class="menu-section-header">
-                  <h3 class="menu-category">
-                    {gl(section.titleEl, section.titleEn)}
-                  </h3>
-                  <span class="menu-section-line" aria-hidden="true"></span>
-                </div>
-
-              <div class="menu-section__body">
-                {section.subsections?.length ? (
-                  section.subsections.map((sub) => (
-                    <div class="menu-subsection">
-                      {(sub.titleEl || sub.titleEn) && (
-                        <h4 class="menu-subsection-title">
-                          {gl(sub.titleEl ?? '', sub.titleEn ?? '')}
-                          {sub.sectionPrice && (
-                            <span class="menu-subsection-price"> — {sub.sectionPrice}</span>
-                          )}
-                        </h4>
-                      )}
-                      <div class="menu-grid">
-                        {sub.items.map((item) => <MenuItem item={item} lang={lang} />)}
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div class="menu-grid">
-                    {section.items?.map((item) => <MenuItem item={item} lang={lang} />)}
+        {
+          menuTabs.map((tab) => (
+            <div class="menu-panel" id={`panel-${tab.key}`}>
+              <h2 class="menu-panel-title" tabindex="-1">
+                {gl(tab.labelEl, tab.labelEn)}
+              </h2>
+              {(tab.noteEl || tab.noteEn) && (
+                <p class="menu-panel-note">{gl(tab.noteEl ?? '', tab.noteEn ?? '')}</p>
+              )}
+              {tab.sections.map((section) => (
+                <div class="menu-section">
+                  <div class="menu-section-header">
+                    <h3 class="menu-category">{gl(section.titleEl, section.titleEn)}</h3>
+                    <span class="menu-section-line" aria-hidden="true" />
                   </div>
-                )}
-              </div>
+
+                  <div class="menu-section__body">
+                    {section.subsections?.length ? (
+                      section.subsections.map((sub) => (
+                        <div class="menu-subsection">
+                          {(sub.titleEl || sub.titleEn) && (
+                            <h4 class="menu-subsection-title">
+                              {gl(sub.titleEl ?? '', sub.titleEn ?? '')}
+                              {sub.sectionPrice && (
+                                <span class="menu-subsection-price"> — {sub.sectionPrice}</span>
+                              )}
+                            </h4>
+                          )}
+                          <div class="menu-grid">
+                            {sub.items.map((item) => (
+                              <MenuItem item={item} lang={lang} />
+                            ))}
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div class="menu-grid">
+                        {section.items?.map((item) => (
+                          <MenuItem item={item} lang={lang} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        ))}
+          ))
+        }
 
         <!-- Disclaimer (μόνο στην οθόνη λεπτομέρειας) -->
         <div class="menu-disclaimer">
@@ -132,14 +142,14 @@ const tabImageFallback: Record<string, string> = {
 
   function showGrid() {
     root.dataset.view = 'grid';
-    panels.forEach(p => p.classList.remove('active'));
+    panels.forEach((p) => p.classList.remove('active'));
   }
 
   function showDetail(key: string | null | undefined): boolean {
     if (!key) return false;
     const panel = document.getElementById(`panel-${key}`);
     if (!panel) return false;
-    panels.forEach(p => p.classList.remove('active'));
+    panels.forEach((p) => p.classList.remove('active'));
     panel.classList.add('active');
     root.dataset.view = 'detail';
     return true;
@@ -152,14 +162,16 @@ const tabImageFallback: Record<string, string> = {
       // Μετέφερε το focus στον τίτλο της καρτέλας ώστε χρήστες πληκτρολογίου/
       // screen reader να «προσγειώνονται» στο νέο περιεχόμενο (preventScroll:
       // αφήνουμε το scrollMenuTop να ελέγχει τη θέση λόγω του fixed nav).
-      const heading = document.getElementById(`panel-${key}`)?.querySelector<HTMLElement>('.menu-panel-title');
+      const heading = document
+        .getElementById(`panel-${key}`)
+        ?.querySelector<HTMLElement>('.menu-panel-title');
       heading?.focus({ preventScroll: true });
     } else {
       showGrid();
     }
   }
 
-  btns.forEach(btn => {
+  btns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.panel?.replace('panel-', '');
       if (key) location.hash = key; // αλλάζει το hash → sync· το «πίσω» επιστρέφει στο πλέγμα

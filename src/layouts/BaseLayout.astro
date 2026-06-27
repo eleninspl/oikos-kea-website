@@ -32,9 +32,10 @@ const jsonLD = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
   name: 'OIKOS',
-  description: lang === 'el'
-    ? 'All day cuisine bar στην Κορρησία, Κέα. Brunch, σούσι, cocktails και πολλά άλλα.'
-    : 'All day cuisine bar in Korrisia, Kéa. Brunch, sushi, cocktails and more.',
+  description:
+    lang === 'el'
+      ? 'All day cuisine bar στην Κορρησία, Κέα. Brunch, σούσι, cocktails και πολλά άλλα.'
+      : 'All day cuisine bar in Korrisia, Kéa. Brunch, sushi, cocktails and more.',
   url: 'https://oikoskea.gr',
   telephone: site.phoneTel,
   email: site.email,
@@ -136,7 +137,7 @@ const jsonLD = {
             nav?.classList.toggle('nav--scrolled', isScrolled);
           }
         },
-        { passive: true }
+        { passive: true },
       );
 
       function setMenu(open: boolean) {

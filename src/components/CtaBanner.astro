@@ -1,9 +1,13 @@
 ---
 // Κοινό CTA banner. Τα κουμπιά δίνονται ως slot ώστε κάθε σελίδα να βάζει τα
 // δικά της (ένα ή δύο, τηλέφωνο ή σύνδεσμο).
-interface Props { title: string; subtitle: string; }
+interface Props {
+  title: string;
+  subtitle: string;
+}
 const { title, subtitle } = Astro.props;
 ---
+
 <section class="cta-banner">
   <div class="container">
     <h2 class="section-title">{title}</h2>

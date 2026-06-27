@@ -1,7 +1,7 @@
-import React from 'react'
-import { Card, Container, Stack, Heading, Text, Box } from '@sanity/ui'
+import React from 'react';
+import { Card, Container, Stack, Heading, Text, Box } from '@sanity/ui';
 
-type Step = { title: string; body: string }
+type Step = { title: string; body: string };
 
 const STEPS: Step[] = [
   {
@@ -36,7 +36,7 @@ const STEPS: Step[] = [
     title: 'Δημοσίευση',
     body: 'Κάθε αλλαγή χρειάζεται «Publish». Το site ενημερώνεται μόνο του μέσα σε ~1 λεπτό.',
   },
-]
+];
 
 export function HelpGuide() {
   return (
@@ -68,9 +68,9 @@ export function HelpGuide() {
 
         <Card padding={4} radius={3} tone="primary">
           <Text size={1}>
-            <strong>Συμβουλή:</strong> Αν κάτι πάει στραβά, οι αλλαγές δεν χάνονται —
-            μπορείς πάντα να επιστρέψεις σε προηγούμενη έκδοση από το ιστορικό (το ρολόι
-            πάνω δεξιά σε κάθε προϊόν).
+            <strong>Συμβουλή:</strong> Αν κάτι πάει στραβά, οι αλλαγές δεν χάνονται — μπορείς πάντα
+            να επιστρέψεις σε προηγούμενη έκδοση από το ιστορικό (το ρολόι πάνω δεξιά σε κάθε
+            προϊόν).
           </Text>
         </Card>
 
@@ -81,7 +81,7 @@ export function HelpGuide() {
         </Box>
       </Stack>
     </Container>
-  )
+  );
 }
 
-export default HelpGuide
+export default HelpGuide;

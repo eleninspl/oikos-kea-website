@@ -6,7 +6,9 @@ import { useTranslations } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 import { site } from '../../lib/site';
 
-interface Props { lang: Lang; }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
@@ -22,7 +24,11 @@ const days = [
 ---
 
 <BaseLayout title={t('contact.seo.title')} description={t('contact.seo.desc')} lang={lang}>
-  <PageHero eyebrow={t('contact.eyebrow')} title={t('contact.title')} subtitle={t('contact.subtitle')} />
+  <PageHero
+    eyebrow={t('contact.eyebrow')}
+    title={t('contact.title')}
+    subtitle={t('contact.subtitle')}
+  />
 
   <section class="section section--cream">
     <div class="container">
@@ -36,7 +42,11 @@ const days = [
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.phone.label')}</div>
-            <a href={`tel:${site.phoneTel}`} class="info-block__value" style="color:var(--color-gold-dim);">
+            <a
+              href={`tel:${site.phoneTel}`}
+              class="info-block__value"
+              style="color:var(--color-gold-dim);"
+            >
               {site.phoneDisplay}
             </a>
             <div class="info-block__sub">{t('contact.phone.sub')}</div>
@@ -44,7 +54,11 @@ const days = [
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.email.label')}</div>
-            <a href={`mailto:${site.email}`} class="info-block__value" style="color:var(--color-gold-dim); font-size:var(--text-lg);">
+            <a
+              href={`mailto:${site.email}`}
+              class="info-block__value"
+              style="color:var(--color-gold-dim); font-size:var(--text-lg);"
+            >
               {site.email}
             </a>
           </div>
@@ -64,15 +78,19 @@ const days = [
 
           <div class="divider" style="margin-top:var(--space-10);"></div>
 
-          <div class="info-block__label" style="margin-bottom:var(--space-4);">{t('contact.hours.label')}</div>
+          <div class="info-block__label" style="margin-bottom:var(--space-4);">
+            {t('contact.hours.label')}
+          </div>
           <table class="hours-table">
             <tbody>
-              {days.map((day) => (
-                <tr>
-                  <td>{day}</td>
-                  <td>09:00 – 02:00</td>
-                </tr>
-              ))}
+              {
+                days.map((day) => (
+                  <tr>
+                    <td>{day}</td>
+                    <td>09:00 – 02:00</td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>
@@ -87,10 +105,11 @@ const days = [
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="OIKOS location in Korrisia, Kéa"
-          ></iframe>
+            title="OIKOS location in Korrisia, Kéa"></iframe>
 
-          <div style="margin-top:var(--space-8); padding:var(--space-8); background:var(--color-cream-alt); border-radius:var(--radius-md);">
+          <div
+            style="margin-top:var(--space-8); padding:var(--space-8); background:var(--color-cream-alt); border-radius:var(--radius-md);"
+          >
             <p class="eyebrow" style="margin-bottom:var(--space-3);">{t('contact.here.label')}</p>
             <p style="font-size:var(--text-sm); color:var(--text-muted); line-height:1.8;">
               {t('contact.here.text')}

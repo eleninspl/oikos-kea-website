@@ -27,19 +27,45 @@ const isActive = (page: string) => {
     </a>
 
     <ul class="nav__links">
-      <li><a href={base + '/'} class:list={['nav__link', { active: isActive('/') }]}>{t('nav.home')}</a></li>
-      <li><a href={base + '/menu'} class:list={['nav__link', { active: isActive('/menu') }]}>{t('nav.menu')}</a></li>
-      <li><a href={base + '/about'} class:list={['nav__link', { active: isActive('/about') }]}>{t('nav.about')}</a></li>
-      <li><a href={base + '/contact'} class:list={['nav__link', { active: isActive('/contact') }]}>{t('nav.contact')}</a></li>
+      <li>
+        <a href={base + '/'} class:list={['nav__link', { active: isActive('/') }]}
+          >{t('nav.home')}</a
+        >
+      </li>
+      <li>
+        <a href={base + '/menu'} class:list={['nav__link', { active: isActive('/menu') }]}
+          >{t('nav.menu')}</a
+        >
+      </li>
+      <li>
+        <a href={base + '/about'} class:list={['nav__link', { active: isActive('/about') }]}
+          >{t('nav.about')}</a
+        >
+      </li>
+      <li>
+        <a href={base + '/contact'} class:list={['nav__link', { active: isActive('/contact') }]}
+          >{t('nav.contact')}</a
+        >
+      </li>
       <li><a href={`tel:${site.phoneTel}`} class="nav__cta">{t('nav.reserve')}</a></li>
       <li>
-        <a href={alternateUrl} class="nav__lang" aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>
+        <a
+          href={alternateUrl}
+          class="nav__lang"
+          aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}
+        >
           {t('nav.lang')}
         </a>
       </li>
     </ul>
 
-    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+    <button
+      class="nav__burger"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="nav-mobile"
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -52,8 +78,15 @@ const isActive = (page: string) => {
   <a href={base + '/menu'} class="nav__link">{t('nav.menu')}</a>
   <a href={base + '/about'} class="nav__link">{t('nav.about')}</a>
   <a href={base + '/contact'} class="nav__link">{t('nav.contact')}</a>
-  <a href={`tel:${site.phoneTel}`} class="btn btn--outline" style="margin-top: 1rem;">{t('nav.reserve')}</a>
-  <a href={alternateUrl} class="nav__lang" style="margin-top: var(--space-4);" aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>{t('nav.lang')}</a>
+  <a href={`tel:${site.phoneTel}`} class="btn btn--outline" style="margin-top: 1rem;"
+    >{t('nav.reserve')}</a
+  >
+  <a
+    href={alternateUrl}
+    class="nav__lang"
+    style="margin-top: var(--space-4);"
+    aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>{t('nav.lang')}</a
+  >
 </div>
 
 <script>
