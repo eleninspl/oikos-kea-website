@@ -23,36 +23,39 @@ const menuTabs = await getMenu();
   <section class="section section--cream">
     <div class="container">
 
-      <!-- Tab navigation -->
-      <div class="menu-tabs-nav" role="tablist">
-        {menuTabs.map((tab, i) => (
-          <button
-            role="tab"
-            class:list={['menu-tab-btn', { active: i === 0 }]}
-            data-panel={`panel-${tab.key}`}
-            aria-selected={i === 0 ? 'true' : 'false'}
-          >
-            {gl(tab.labelEl, tab.labelEn)}
-          </button>
-        ))}
-      </div>
+      <div class="menu-tabs" id="menu-tabs" data-view="grid">
+        <!-- Πλέγμα μεγάλων κουμπιών (μία καρτέλα ανά κουμπί) -->
+        <div class="menu-nav" role="tablist">
+          {menuTabs.map((tab) => (
+            <button
+              role="tab"
+              class="menu-tab-btn"
+              data-panel={`panel-${tab.key}`}
+              aria-selected="false"
+            >
+              {gl(tab.labelEl, tab.labelEn)}
+            </button>
+          ))}
+        </div>
 
-      <!-- Tab panels -->
-      {menuTabs.map((tab, tabIdx) => (
-        <div
-          class:list={['menu-panel', { active: tabIdx === 0 }]}
-          id={`panel-${tab.key}`}
-          role="tabpanel"
-        >
-          {tab.sections.map((section) => (
-            <div class="menu-section">
-              <button class="menu-section-header" type="button" aria-expanded="false">
-                <h2 class="menu-category">
-                  {gl(section.titleEl, section.titleEn)}
-                </h2>
-                <span class="menu-section-line" aria-hidden="true"></span>
-                <span class="menu-section-chevron" aria-hidden="true"></span>
-              </button>
+        <!-- Πίσω στις κατηγορίες (φαίνεται μόνο στην οθόνη λεπτομέρειας) -->
+        <button class="menu-back" id="menu-back" type="button">
+          <span aria-hidden="true">←</span> {gl('Όλες οι κατηγορίες', 'All categories')}
+        </button>
+
+        <!-- Οθόνες περιεχομένου -->
+        {menuTabs.map((tab) => (
+          <div class="menu-panel" id={`panel-${tab.key}`} role="tabpanel">
+            <h2 class="menu-panel-title">{gl(tab.labelEl, tab.labelEn)}</h2>
+            {tab.sections.map((section) => (
+              <div class="menu-section open">
+                <button class="menu-section-header" type="button" aria-expanded="true">
+                  <h2 class="menu-category">
+                    {gl(section.titleEl, section.titleEn)}
+                  </h2>
+                  <span class="menu-section-line" aria-hidden="true"></span>
+                  <span class="menu-section-chevron" aria-hidden="true"></span>
+                </button>
 
               <div class="menu-section__body">
                 {section.subsections ? (
@@ -80,12 +83,13 @@ const menuTabs = await getMenu();
             </div>
           ))}
         </div>
-      ))}
+        ))}
 
-      <!-- Disclaimer -->
-      <div class="menu-disclaimer">
-        <p class="eyebrow" style="margin-bottom:var(--space-3);">{t('menu.note.eyebrow')}</p>
-        <p>{t('menu.disclaimer')}</p>
+        <!-- Disclaimer (μόνο στην οθόνη λεπτομέρειας) -->
+        <div class="menu-disclaimer">
+          <p class="eyebrow" style="margin-bottom:var(--space-3);">{t('menu.note.eyebrow')}</p>
+          <p>{t('menu.disclaimer')}</p>
+        </div>
       </div>
     </div>
   </section>
@@ -100,49 +104,60 @@ const menuTabs = await getMenu();
 </BaseLayout>
 
 <script>
-  // ── Tab switching ──
+  // ── Drill-down navigation: πλέγμα κουμπιών ⇄ οθόνη κατηγορίας ──
+  const root = document.getElementById('menu-tabs')!;
   const btns = document.querySelectorAll<HTMLButtonElement>('.menu-tab-btn');
   const panels = document.querySelectorAll<HTMLElement>('.menu-panel');
+  const back = document.getElementById('menu-back');
 
-  // Activate a tab by its panel key (e.g. "sushi"). Returns true if it matched.
-  function activateTab(key: string | null | undefined): boolean {
-    if (!key) return false;
-    const btn = Array.from(btns).find(b => b.dataset.panel === `panel-${key}`);
-    if (!btn) return false;
-    btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+  function scrollMenuTop() {
+    const top = root.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top: Math.max(0, top) });
+  }
+
+  function showGrid() {
+    root.dataset.view = 'grid';
     panels.forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-    document.getElementById(`panel-${key}`)?.classList.add('active');
-    // Collapse any opened accordion when the tab changes (mobile)
-    document.querySelectorAll('.menu-section.open').forEach(s => {
-      s.classList.remove('open');
-      s.querySelector('.menu-section-header')?.setAttribute('aria-expanded', 'false');
-    });
+    btns.forEach(b => b.setAttribute('aria-selected', 'false'));
+  }
+
+  function showDetail(key: string | null | undefined): boolean {
+    if (!key) return false;
+    const panel = document.getElementById(`panel-${key}`);
+    if (!panel) return false;
+    panels.forEach(p => p.classList.remove('active'));
+    panel.classList.add('active');
+    btns.forEach(b => b.setAttribute('aria-selected', b.dataset.panel === `panel-${key}` ? 'true' : 'false'));
+    root.dataset.view = 'detail';
     return true;
+  }
+
+  function sync() {
+    const key = location.hash.slice(1);
+    if (showDetail(key)) scrollMenuTop();
+    else showGrid();
   }
 
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.panel?.replace('panel-', '');
-      if (!activateTab(key)) return;
-      // Remember the tab in the URL so a refresh (or shared link) keeps it.
-      history.replaceState(null, '', `#${key}`);
+      if (key) location.hash = key; // αλλάζει το hash → sync· το «πίσω» επιστρέφει στο πλέγμα
     });
   });
 
-  // On load, restore the tab from the URL hash (falls back to the first tab).
-  activateTab(location.hash.slice(1));
-  // Keep in sync if the hash changes (e.g. back/forward).
-  window.addEventListener('hashchange', () => activateTab(location.hash.slice(1)));
+  back?.addEventListener('click', () => {
+    if (location.hash) history.back();
+    else showGrid();
+  });
 
-  // ── Accordion (mobile only) ──
+  sync();
+  window.addEventListener('hashchange', sync);
+
+  // ── Accordion: ανοιχτά by default· tap στην κεφαλίδα (mobile) για σύμπτυξη/άνοιγμα ──
   const mobile = window.matchMedia('(max-width: 768px)');
-  const headers = document.querySelectorAll<HTMLButtonElement>('.menu-section-header');
-
-  headers.forEach(header => {
+  document.querySelectorAll<HTMLButtonElement>('.menu-section-header').forEach(header => {
     header.addEventListener('click', () => {
-      if (!mobile.matches) return; // desktop: sections always open
+      if (!mobile.matches) return;
       const section = header.closest('.menu-section');
       if (!section) return;
       const isOpen = section.classList.toggle('open');
