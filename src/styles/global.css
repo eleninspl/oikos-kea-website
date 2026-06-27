@@ -743,44 +743,73 @@ h1, h2, h3, h4 {
   font-weight: 300;
 }
 
-/* ─── Menu page — tabs (editorial underline) ─── */
-.menu-tabs-nav {
-  display: flex;
-  justify-content: center;
-  gap: clamp(var(--space-6), 5vw, var(--space-12));
+/* ─── Menu page — drill-down: πλέγμα μεγάλων κουμπιών ⇄ οθόνη κατηγορίας ─── */
+.menu-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
   max-width: 100%;
-  margin: 0 auto var(--space-16);
-  border-bottom: 1px solid rgba(24, 19, 15, 0.12);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  margin: 0 auto;
 }
-.menu-tabs-nav::-webkit-scrollbar { display: none; }
 
 .menu-tab-btn {
-  flex-shrink: 0;
-  padding: 0 0 var(--space-4);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-5) var(--space-4);
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 600;
   letter-spacing: 0.01em;
-  color: var(--text-muted);
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 0.25s ease, border-color 0.25s ease;
-}
-.menu-tab-btn:hover { color: var(--text-dark); }
-.menu-tab-btn.active {
   color: var(--text-dark);
-  border-bottom-color: var(--color-gold);
+  background: transparent;
+  border: 1px solid rgba(24, 19, 15, 0.18);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+.menu-tab-btn:hover {
+  border-color: var(--color-gold);
+  background-color: rgba(201, 169, 110, 0.12);
+}
+.menu-tab-btn:active { transform: scale(0.98); }
+
+/* «Πίσω» κουμπί — μόνο στην οθόνη λεπτομέρειας */
+.menu-back {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-dark);
+  background: transparent;
+  border: 1px solid rgba(24, 19, 15, 0.18);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.menu-back:hover { border-color: var(--color-gold); background-color: rgba(201, 169, 110, 0.12); }
+
+.menu-panel-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  margin-bottom: var(--space-10);
+  color: var(--text-dark);
 }
 
 .menu-panel { display: none; }
-.menu-panel.active { display: block; }
+
+/* Εναλλαγή όψεων μέσω data-view στο .menu-tabs */
+.menu-tabs[data-view="detail"] .menu-nav { display: none; }
+.menu-tabs[data-view="detail"] .menu-back { display: inline-flex; }
+.menu-tabs[data-view="detail"] .menu-panel.active { display: block; }
+.menu-tabs[data-view="grid"] .menu-disclaimer { display: none; }
 
 /* ─── Menu page — sections ─── */
 .menu-section { margin-bottom: var(--space-16); }
@@ -1183,13 +1212,15 @@ h1, h2, h3, h4 {
     padding: var(--space-10) var(--space-6);
   }
 
-  .menu-tabs-nav {
-    gap: var(--space-6);
+  .menu-nav {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
   }
 
   .menu-tab-btn {
+    min-height: 90px;
     font-size: var(--text-base);
-    padding-bottom: var(--space-3);
+    padding: var(--space-4) var(--space-3);
   }
 
   .menu-category {

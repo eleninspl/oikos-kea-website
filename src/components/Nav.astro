@@ -61,11 +61,14 @@ const isActive = (page: string) => {
 
   document.querySelectorAll<HTMLAnchorElement>('.nav__lang').forEach((link) => {
     link.addEventListener('click', () => {
-      const active = document.querySelector('.menu-tab-btn.active');
-      sessionStorage.setItem(KEY, JSON.stringify({
-        y: window.scrollY,
-        panel: active?.getAttribute('data-panel') ?? null,
-      }));
+      // Μετάφερε την ανοιχτή κατηγορία μενού (hash) στη νέα γλώσσα
+      if (location.hash) {
+        const url = new URL(link.href, location.origin);
+        url.hash = location.hash;
+        link.href = url.toString();
+      }
+      // Κράτα τη θέση scroll για σελίδες χωρίς hash (αρχική, σχετικά, κ.λπ.)
+      sessionStorage.setItem(KEY, JSON.stringify({ y: window.scrollY, hash: location.hash }));
     });
   });
 
@@ -73,22 +76,10 @@ const isActive = (page: string) => {
   if (raw) {
     sessionStorage.removeItem(KEY);
     try {
-      const { y, panel } = JSON.parse(raw) as { y: number; panel: string | null };
-      if (panel) {
-        const btn = document.querySelector(`.menu-tab-btn[data-panel="${panel}"]`);
-        const target = document.getElementById(panel);
-        if (btn && target) {
-          document.querySelectorAll('.menu-tab-btn').forEach((b) => {
-            b.classList.remove('active');
-            b.setAttribute('aria-selected', 'false');
-          });
-          document.querySelectorAll('.menu-panel').forEach((p) => p.classList.remove('active'));
-          btn.classList.add('active');
-          btn.setAttribute('aria-selected', 'true');
-          target.classList.add('active');
-        }
-      }
-      requestAnimationFrame(() => window.scrollTo(0, y));
+      const { y } = JSON.parse(raw) as { y: number };
+      // Αν είμαστε σε λεπτομέρεια μενού (hash), το MenuPage κάνει το scroll·
+      // αλλιώς επανέφερε τη θέση scroll όπως ήταν πριν την αλλαγή γλώσσας.
+      if (!location.hash) requestAnimationFrame(() => window.scrollTo(0, y));
     } catch {}
   }
 </script>
