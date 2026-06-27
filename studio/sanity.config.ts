@@ -2,7 +2,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import type { StructureBuilder, StructureResolverContext } from 'sanity/structure'
 import { orderableDocumentListDeskItem, orderRankOrdering } from '@sanity/orderable-document-list'
-import { HelpCircleIcon, DocumentTextIcon, ControlsIcon, CogIcon } from '@sanity/icons'
+import { HelpCircleIcon, DocumentTextIcon, ControlsIcon } from '@sanity/icons'
 import { schemaTypes } from './schemas'
 import { oikosTheme } from './theme'
 import { Logo } from './components/Logo'
@@ -27,7 +27,7 @@ const structure = (S: StructureBuilder, context: StructureResolverContext) =>
               // Per-menu λίστα κατηγοριών με drag & drop (το .child του orderable deskItem)
               orderableDocumentListDeskItem({
                 type: 'category',
-                title: 'Κατηγορίες — σύρε για σειρά',
+                title: 'Κατηγορίες',
                 filter: 'menu._ref == $menuId',
                 params: { menuId },
                 id: `ordered-categories-${menuId}`,
@@ -36,26 +36,15 @@ const structure = (S: StructureBuilder, context: StructureResolverContext) =>
               }).child
             )
         ),
-      S.divider(),
-      // Σπάνια χρήση — τυλιγμένα σε μία ομάδα ώστε να μην μπερδεύουν
-      S.listItem()
-        .title('Ρυθμίσεις δομής')
-        .icon(CogIcon)
-        .child(
-          S.list()
-            .title('Ρυθμίσεις δομής')
-            .items([
-              // Drag & drop αναδιάταξη των καρτελών (tabs)
-              orderableDocumentListDeskItem({
-                type: 'menu',
-                title: 'Καρτέλες — σύρε για σειρά',
-                icon: ControlsIcon,
-                id: 'ordered-menus',
-                S,
-                context,
-              }),
-            ])
-        ),
+      // Drag & drop αναδιάταξη των καρτελών (tabs) — απευθείας, χωρίς περιττό επίπεδο
+      orderableDocumentListDeskItem({
+        type: 'menu',
+        title: 'Καρτέλες',
+        icon: ControlsIcon,
+        id: 'ordered-menus',
+        S,
+        context,
+      }),
       S.divider(),
       S.listItem()
         .title('Οδηγίες Χρήσης')
