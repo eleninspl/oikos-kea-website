@@ -824,14 +824,14 @@ h1, h2, h3, h4 {
 .menu-tabs[data-view="grid"] .menu-disclaimer { display: none; }
 
 /* ─── Menu page — sections ─── */
-.menu-section { margin-bottom: var(--space-16); }
+.menu-section { margin-bottom: var(--space-12); }
 
 .menu-section-header {
   width: 100%;
   display: flex;
   align-items: center;
   gap: var(--space-6);
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-6);
   background: none;
   border: none;
   padding: 0;
@@ -950,11 +950,14 @@ h1, h2, h3, h4 {
   line-height: 1.8;
 }
 
-/* ─── Menu page — mobile accordion ─── */
+/* ─── Menu page — mobile ─── */
 @media (max-width: 768px) {
   .menu-section {
-    margin-bottom: 0;
-    border-bottom: 1px solid rgba(24, 19, 15, 0.1);
+    margin-bottom: var(--space-10);
+  }
+
+  .menu-section-header {
+    margin-bottom: var(--space-4);
   }
 
   .menu-section-header .menu-category {
