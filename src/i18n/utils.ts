@@ -5,10 +5,6 @@ export type { Lang };
 
 export const defaultLang: Lang = 'el';
 
-export function getLangFromPath(pathname: string): Lang {
-  return pathname.startsWith('/en') ? 'en' : 'el';
-}
-
 export function useTranslations(lang: Lang) {
   return function t(key: UIKeys): string {
     return (ui[lang][key] ?? ui[defaultLang][key]) as string;
