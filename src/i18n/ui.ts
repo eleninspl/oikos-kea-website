@@ -135,7 +135,7 @@ export const ui = {
     'contact.seo.desc':
       'Βρείτε το OIKOS στην Κορρησία, Κέα. Ώρες λειτουργίας, τηλέφωνο, διεύθυνση και χάρτης. Ανοιχτοί καθημερινά 09:00 – 02:00.',
     'contact.eyebrow': 'Κορρησία · Κέα · Ελλάδα',
-    'contact.title': 'Πού μας Βρείτε',
+    'contact.title': 'Βρείτε μας',
     'contact.subtitle': 'Εδώ κάθε μέρα — ελάτε όπως είστε',
     'contact.address.label': 'Διεύθυνση',
     'contact.address.val': 'Κορρησία, Κέα',
