@@ -14,11 +14,11 @@ const menuTabs = await getMenu();
 
 // Τοπικές φωτογραφίες ανά καρτέλα — fallback όταν το CMS δεν έχει εικόνα.
 const tabImageFallback: Record<string, string> = {
-  brunch: '/images/brunch.jpg',
-  sushi: '/images/sushi.jpg',
-  cocktails: '/images/drink.jpg',
-  'lunch-dinner': '/images/luchdish.jpg',
-  wines: '/images/wine.jpg',
+  brunch: '/images/food/brunch.jpg',
+  sushi: '/images/food/sushi.jpg',
+  cocktails: '/images/drinks/cocktail.jpg',
+  'lunch-dinner': '/images/food/risotto.jpg',
+  wines: '/images/drinks/wine.jpg',
 };
 ---
 
@@ -44,7 +44,7 @@ const tabImageFallback: Record<string, string> = {
             >
               <img
                 class="menu-tab-img"
-                src={tab.image ?? tabImageFallback[tab.key] ?? '/images/menu-placeholder.svg'}
+                src={tab.image ?? tabImageFallback[tab.key] ?? '/images/ui/menu-placeholder.svg'}
                 alt=""
                 loading="lazy"
                 decoding="async"
