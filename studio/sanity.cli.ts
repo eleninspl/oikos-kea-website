@@ -1,4 +1,4 @@
-import { defineCliConfig } from 'sanity/cli'
+import { defineCliConfig } from 'sanity/cli';
 
 export default defineCliConfig({
   api: {
@@ -6,4 +6,4 @@ export default defineCliConfig({
     dataset: process.env.SANITY_STUDIO_DATASET ?? 'production',
   },
   studioHost: 'oikos-kea',
-})
+});

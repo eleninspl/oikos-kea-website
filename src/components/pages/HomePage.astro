@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../i18n/utils';
+import CtaBanner from '../CtaBanner.astro';
+import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
+import { site } from '../../lib/site';
 
-interface Props { lang: Lang; }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const base = lang === 'en' ? '/en' : '';
+const base = langBase(lang);
 ---
 
 <BaseLayout title={t('home.seo.title')} description={t('home.seo.desc')} lang={lang}>
@@ -63,7 +67,12 @@ const base = lang === 'en' ? '/en' : '';
     <div class="services">
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/food/brunch.jpg" alt="Poached eggs with halloumi and salad at OIKOS" loading="lazy" decoding="async" />
+          <img
+            src="/images/food/brunch.jpg"
+            alt="Poached eggs with halloumi and salad at OIKOS"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.brunch.title')}</h3>
@@ -72,7 +81,12 @@ const base = lang === 'en' ? '/en' : '';
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/food/sushi.jpg" alt="Freshly prepared sushi rolls at OIKOS" loading="lazy" decoding="async" />
+          <img
+            src="/images/food/sushi.jpg"
+            alt="Freshly prepared sushi rolls at OIKOS"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.sushi.title')}</h3>
@@ -81,7 +95,12 @@ const base = lang === 'en' ? '/en' : '';
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/drinks/cocktail.jpg" alt="Craft cocktail with bitters at the OIKOS bar" loading="lazy" decoding="async" />
+          <img
+            src="/images/drinks/cocktail.jpg"
+            alt="Craft cocktail with bitters at the OIKOS bar"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.cocktails.title')}</h3>
@@ -90,7 +109,12 @@ const base = lang === 'en' ? '/en' : '';
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/food/acai-bowl.jpg" alt="Açai berry bowl with granola at OIKOS" loading="lazy" decoding="async" />
+          <img
+            src="/images/food/acai-bowl.jpg"
+            alt="Açai berry bowl with granola at OIKOS"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.healthy.title')}</h3>
@@ -110,7 +134,7 @@ const base = lang === 'en' ? '/en' : '';
           {t('reviews.title1')}<br />{t('reviews.title2')}
         </h2>
         <a
-          href="https://share.google/3bZUCeosoxPlrULbs"
+          href={site.googleReviews}
           target="_blank"
           rel="noopener noreferrer"
           class="google-rating"
@@ -125,25 +149,24 @@ const base = lang === 'en' ? '/en' : '';
         <div class="review-card">
           <div class="review-card__stars" aria-label="5 out of 5 stars" role="img">★★★★★</div>
           <p class="review-card__text">
-            "All the food we tasted was delicious. With the coffee and shakes, it
-            was amazing… I definitely recommend it."
+            "All the food we tasted was delicious. With the coffee and shakes, it was amazing… I
+            definitely recommend it."
           </p>
           <span class="review-card__author">Stano Bagin · {t('reviews.guide')}</span>
         </div>
         <div class="review-card">
           <div class="review-card__stars" aria-label="5 out of 5 stars" role="img">★★★★★</div>
           <p class="review-card__text">
-            "Food was delicious ✨ wine was also good. The lemon pie is enormous —
-            share it with three people! I really recommend the salmon with couscous."
+            "Food was delicious ✨ wine was also good. The lemon pie is enormous — share it with
+            three people! I really recommend the salmon with couscous."
           </p>
           <span class="review-card__author">Anys Hruba · {t('reviews.guide')}</span>
         </div>
         <div class="review-card">
           <div class="review-card__stars" aria-label="5 out of 5 stars" role="img">★★★★★</div>
           <p class="review-card__text">
-            "The food here is absolutely amazing. We came for breakfast 3 times and
-            for lunch 1 time and everything was perfect. So tasty and the service
-            amazing. Recommend for everyone."
+            "The food here is absolutely amazing. We came for breakfast 3 times and for lunch 1 time
+            and everything was perfect. So tasty and the service amazing. Recommend for everyone."
           </p>
           <span class="review-card__author">Petros Isaias · {t('reviews.guide')}</span>
         </div>
@@ -163,35 +186,56 @@ const base = lang === 'en' ? '/en' : '';
     <div class="container">
       <div class="gallery-mosaic">
         <div class="gallery-mosaic__item">
-          <img src="/images/food/risotto.jpg" alt="Crab with saffron risotto on an OIKOS plate" loading="lazy" decoding="async" />
+          <img
+            src="/images/food/risotto.jpg"
+            alt="Crab with saffron risotto on an OIKOS plate"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/drinks/cocktail.jpg" alt="Craft cocktail with bitters at the OIKOS bar" loading="lazy" decoding="async" />
+          <img
+            src="/images/drinks/cocktail.jpg"
+            alt="Craft cocktail with bitters at the OIKOS bar"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/food/dessert.jpg" alt="Chocolate dessert with pistachio on an OIKOS plate" loading="lazy" decoding="async" />
+          <img
+            src="/images/food/dessert.jpg"
+            alt="Chocolate dessert with pistachio on an OIKOS plate"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/food/granola-bowl.jpg" alt="Acai bowl with berries next to an OIKOS napkin" loading="lazy" decoding="async" />
+          <img
+            src="/images/food/granola-bowl.jpg"
+            alt="Acai bowl with berries next to an OIKOS napkin"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/food/sushi.jpg" alt="Sushi rolls on the OIKOS branded placemat" loading="lazy" decoding="async" />
+          <img
+            src="/images/food/sushi.jpg"
+            alt="Sushi rolls on the OIKOS branded placemat"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta-banner">
-    <div class="container">
-      <h2 class="section-title">{t('cta.title')}</h2>
-      <p>{t('cta.subtitle')}</p>
-      <div style="display:flex; gap:var(--space-4); justify-content:center; flex-wrap:wrap;">
-        <a href="tel:+302288022507" class="btn btn--dark">{t('cta.call')}</a>
-        <a href={base + '/menu'} class="btn btn--outline">{t('cta.menu')}</a>
-      </div>
+  <CtaBanner title={t('cta.title')} subtitle={t('cta.subtitle')}>
+    <div class="cta-actions">
+      <a href={`tel:${site.phoneTel}`} class="btn btn--dark">{t('cta.call')}</a>
+      <a href={base + '/menu'} class="btn btn--outline">{t('cta.menu')}</a>
     </div>
-  </section>
+  </CtaBanner>
 
   <!-- Info strip -->
   <section class="section section--mid section--centered">
@@ -209,7 +253,7 @@ const base = lang === 'en' ? '/en' : '';
         </div>
         <div>
           <p class="eyebrow">{t('info.res.label')}</p>
-          <p class="info-strip__val">22880 22507</p>
+          <p class="info-strip__val">{site.phoneDisplay}</p>
           <p class="info-strip__sub">{t('info.res.sub')}</p>
         </div>
       </div>

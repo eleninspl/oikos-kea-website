@@ -1,9 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
+import CtaBanner from '../CtaBanner.astro';
 import { useTranslations } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
+import { site } from '../../lib/site';
 
-interface Props { lang: Lang; }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
@@ -19,11 +24,11 @@ const days = [
 ---
 
 <BaseLayout title={t('contact.seo.title')} description={t('contact.seo.desc')} lang={lang}>
-  <div class="page-hero">
-    <p class="eyebrow">{t('contact.eyebrow')}</p>
-    <h1 class="page-hero__title">{t('contact.title')}</h1>
-    <p class="page-hero__sub">{t('contact.subtitle')}</p>
-  </div>
+  <PageHero
+    eyebrow={t('contact.eyebrow')}
+    title={t('contact.title')}
+    subtitle={t('contact.subtitle')}
+  />
 
   <section class="section section--cream">
     <div class="container">
@@ -37,23 +42,31 @@ const days = [
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.phone.label')}</div>
-            <a href="tel:+302288022507" class="info-block__value" style="color:var(--color-gold-dim);">
-              22880 22507
+            <a
+              href={`tel:${site.phoneTel}`}
+              class="info-block__value"
+              style="color:var(--color-gold-dim);"
+            >
+              {site.phoneDisplay}
             </a>
             <div class="info-block__sub">{t('contact.phone.sub')}</div>
           </div>
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.email.label')}</div>
-            <a href="mailto:info@oikoskea.gr" class="info-block__value" style="color:var(--color-gold-dim); font-size:var(--text-lg);">
-              info@oikoskea.gr
+            <a
+              href={`mailto:${site.email}`}
+              class="info-block__value"
+              style="color:var(--color-gold-dim); font-size:var(--text-lg);"
+            >
+              {site.email}
             </a>
           </div>
 
           <div class="info-block">
             <div class="info-block__label">{t('contact.ig.label')}</div>
             <a
-              href="https://www.instagram.com/oikos_kea/"
+              href={site.instagram}
               target="_blank"
               rel="noopener noreferrer"
               class="info-block__value"
@@ -65,15 +78,19 @@ const days = [
 
           <div class="divider" style="margin-top:var(--space-10);"></div>
 
-          <div class="info-block__label" style="margin-bottom:var(--space-4);">{t('contact.hours.label')}</div>
+          <div class="info-block__label" style="margin-bottom:var(--space-4);">
+            {t('contact.hours.label')}
+          </div>
           <table class="hours-table">
             <tbody>
-              {days.map((day) => (
-                <tr>
-                  <td>{day}</td>
-                  <td>09:00 – 02:00</td>
-                </tr>
-              ))}
+              {
+                days.map((day) => (
+                  <tr>
+                    <td>{day}</td>
+                    <td>09:00 – 02:00</td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>
@@ -81,17 +98,18 @@ const days = [
         <div>
           <iframe
             class="map-embed"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3158.1!2d24.33!3d37.64!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1b2c3d4e5f6a7%3A0x0!2sKorrisia%2C+K%C3%A9a%2C+Greece!5e0!3m2!1sen!2sgr!4v1234567890"
+            src="https://www.google.com/maps?q=37.660513,24.312061&z=17&output=embed"
             width="100%"
             height="400"
             style="border:0;"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="OIKOS location in Korrisia, Kéa"
-          ></iframe>
+            title="OIKOS location in Korrisia, Kéa"></iframe>
 
-          <div style="margin-top:var(--space-8); padding:var(--space-8); background:var(--color-cream-alt); border-radius:var(--radius-md);">
+          <div
+            style="margin-top:var(--space-8); padding:var(--space-8); background:var(--color-cream-alt); border-radius:var(--radius-md);"
+          >
             <p class="eyebrow" style="margin-bottom:var(--space-3);">{t('contact.here.label')}</p>
             <p style="font-size:var(--text-sm); color:var(--text-muted); line-height:1.8;">
               {t('contact.here.text')}
@@ -102,11 +120,7 @@ const days = [
     </div>
   </section>
 
-  <section class="cta-banner">
-    <div class="container">
-      <h2 class="section-title">{t('contact.cta.title')}</h2>
-      <p>{t('contact.cta.subtitle')}</p>
-      <a href="tel:+302288022507" class="btn btn--dark">{t('contact.cta.btn')}</a>
-    </div>
-  </section>
+  <CtaBanner title={t('contact.cta.title')} subtitle={t('contact.cta.subtitle')}>
+    <a href={`tel:${site.phoneTel}`} class="btn btn--dark">{t('contact.cta.btn')}</a>
+  </CtaBanner>
 </BaseLayout>

@@ -1,0 +1,15 @@
+---
+// Κοινό header εσωτερικών σελίδων (Μενού, Σχετικά, Επικοινωνία).
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+}
+const { eyebrow, title, subtitle } = Astro.props;
+---
+
+<div class="page-hero">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1 class="page-hero__title">{title}</h1>
+  <p class="page-hero__sub">{subtitle}</p>
+</div>

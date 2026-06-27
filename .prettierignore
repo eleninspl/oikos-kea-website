@@ -1,0 +1,18 @@
+# build output & deps
+node_modules
+dist
+.vercel
+.astro
+studio/dist
+studio/.sanity
+
+# lockfiles
+package-lock.json
+studio/package-lock.json
+
+# prose / generated docs — keep out of the code formatter
+*.md
+studio/guide.html
+
+# Data file with intentional hand-alignment
+src/i18n/menuData.ts

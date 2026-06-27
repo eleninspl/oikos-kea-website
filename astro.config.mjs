@@ -6,7 +6,7 @@ export default defineConfig({
   site: 'https://oikoskea.gr',
   integrations: [sitemap()],
   adapter: vercel({
-    webAnalytics: { enabled: true }
+    webAnalytics: { enabled: true },
   }),
   output: 'static',
 });

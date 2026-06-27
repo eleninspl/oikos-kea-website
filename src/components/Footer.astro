@@ -1,6 +1,7 @@
 ---
-import { useTranslations } from '../i18n/utils';
+import { useTranslations, langBase } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
+import { site } from '../lib/site';
 
 interface Props {
   lang: Lang;
@@ -9,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
-const base = lang === 'en' ? '/en' : '';
+const base = langBase(lang);
 ---
 
 <footer class="footer">
@@ -17,7 +18,7 @@ const base = lang === 'en' ? '/en' : '';
     <div class="footer__grid">
       <div>
         <a href={base + '/'} class="footer__brand" aria-label="OIKOS Kea — Αρχική">
-          <img src="/images/brand/logo-wordmark.png" alt="OIKOS Kea" width="450" height="106" />
+          <img src="/images/brand/logo-wordmark.png" alt="" width="450" height="106" />
         </a>
       </div>
 
@@ -36,8 +37,8 @@ const base = lang === 'en' ? '/en' : '';
         <ul class="footer__links">
           <li class="footer__link">{t('contact.address.val')}</li>
           <li class="footer__link">{t('contact.address.sub')}</li>
-          <li><a href="tel:+302288022507" class="footer__link">+30 22880 22507</a></li>
-          <li><a href="mailto:info@oikoskea.gr" class="footer__link">info@oikoskea.gr</a></li>
+          <li><a href={`tel:${site.phoneTel}`} class="footer__link">+30 {site.phoneDisplay}</a></li>
+          <li><a href={`mailto:${site.email}`} class="footer__link">{site.email}</a></li>
         </ul>
       </div>
     </div>
@@ -45,11 +46,21 @@ const base = lang === 'en' ? '/en' : '';
     <div class="footer__bottom">
       <span>© {year} {t('footer.copyright')}</span>
       <div class="footer__social">
-        <a href="https://www.instagram.com/oikos_kea/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
       </div>

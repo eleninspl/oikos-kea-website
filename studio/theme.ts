@@ -1,4 +1,4 @@
-import { buildLegacyTheme } from 'sanity'
+import { buildLegacyTheme } from 'sanity';
 
 // Χρώματα OIKOS (από το Instagram aesthetic)
 const props = {
@@ -32,6 +32,6 @@ const props = {
   '--main-navigation-color--inverted': '#f4ece0',
 
   '--focus-color': '#c9a96e',
-}
+};
 
-export const oikosTheme = buildLegacyTheme(props)
+export const oikosTheme = buildLegacyTheme(props);

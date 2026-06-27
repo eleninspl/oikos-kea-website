@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { getAlternateUrl } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
+import { site } from '../lib/site';
 
 interface Props {
   title: string;
@@ -31,12 +32,13 @@ const jsonLD = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
   name: 'OIKOS',
-  description: lang === 'el'
-    ? 'All day cuisine bar στην Κορρησία, Κέα. Brunch, σούσι, cocktails και πολλά άλλα.'
-    : 'All day cuisine bar in Korrisia, Kéa. Brunch, sushi, cocktails and more.',
+  description:
+    lang === 'el'
+      ? 'All day cuisine bar στην Κορρησία, Κέα. Brunch, σούσι, cocktails και πολλά άλλα.'
+      : 'All day cuisine bar in Korrisia, Kéa. Brunch, sushi, cocktails and more.',
   url: 'https://oikoskea.gr',
-  telephone: '+302288022507',
-  email: 'info@oikoskea.gr',
+  telephone: site.phoneTel,
+  email: site.email,
   servesCuisine: ['Mediterranean', 'Japanese', 'Brunch', 'Cocktails'],
   priceRange: '€€',
   image: ogImageURL.toString(),
@@ -56,8 +58,8 @@ const jsonLD = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 37.6442,
-    longitude: 24.3326,
+    latitude: 37.660513,
+    longitude: 24.312061,
   },
   openingHoursSpecification: [
     {
@@ -67,7 +69,7 @@ const jsonLD = {
       closes: '02:00',
     },
   ],
-  sameAs: ['https://www.instagram.com/oikos_kea/'],
+  sameAs: [site.instagram],
 };
 ---
 
@@ -81,7 +83,7 @@ const jsonLD = {
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang={lang === 'el' ? 'el' : 'en'} href={canonicalURL} />
     <link rel="alternate" hreflang={lang === 'el' ? 'en' : 'el'} href={alternateURL} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={lang === 'el' ? canonicalURL : alternateURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={pageType} />
@@ -106,6 +108,7 @@ const jsonLD = {
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
     <link rel="apple-touch-icon" href="/icons/favicon-180.png" />
 
@@ -121,8 +124,8 @@ const jsonLD = {
 
     <script>
       const nav = document.querySelector('.nav');
-      const burger = document.querySelector('.nav__burger');
-      const mobileMenu = document.querySelector('.nav__mobile');
+      const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
+      const mobileMenu = document.querySelector<HTMLElement>('.nav__mobile');
 
       let scrolled = false;
       window.addEventListener(
@@ -134,19 +137,32 @@ const jsonLD = {
             nav?.classList.toggle('nav--scrolled', isScrolled);
           }
         },
-        { passive: true }
+        { passive: true },
       );
 
+      function setMenu(open: boolean) {
+        mobileMenu?.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+        burger?.setAttribute('aria-expanded', String(open));
+      }
+
       burger?.addEventListener('click', () => {
-        const isOpen = mobileMenu?.classList.toggle('open');
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+        const open = !mobileMenu?.classList.contains('open');
+        setMenu(open);
+        // Σε άνοιγμα, μετέφερε το focus στον πρώτο σύνδεσμο του overlay.
+        if (open) mobileMenu?.querySelector<HTMLElement>('a')?.focus();
       });
 
       mobileMenu?.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('open');
-          document.body.style.overflow = '';
-        });
+        link.addEventListener('click', () => setMenu(false));
+      });
+
+      // Escape κλείνει το μενού και επιστρέφει το focus στο burger.
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
+          setMenu(false);
+          burger?.focus();
+        }
       });
     </script>
   </body>

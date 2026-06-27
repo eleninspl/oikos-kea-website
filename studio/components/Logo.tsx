@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 /** OIKOS wordmark για το navbar του Studio. */
 export function Logo() {
@@ -29,5 +29,5 @@ export function Logo() {
         Μενού
       </span>
     </span>
-  )
+  );
 }

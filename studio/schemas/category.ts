@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity'
-import { ThLargeIcon, CogIcon } from '@sanity/icons'
-import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
-import { TranslateInput } from '../components/TranslateInput'
+import { defineField, defineType } from 'sanity';
+import { ThLargeIcon, CogIcon } from '@sanity/icons';
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
+import { TranslateInput } from '../components/TranslateInput';
 
 export const category = defineType({
   name: 'category',
@@ -19,46 +19,76 @@ export const category = defineType({
         title: hidden ? `${title}  (κρυφή)` : title,
         subtitle: menuLabel,
         media,
-      }
+      };
     },
   },
   orderings: [orderRankOrdering],
   fields: [
     orderRankField({ type: 'category' }),
-    defineField({ name: 'order', title: 'Σειρά (παλιό)', type: 'number', hidden: true, readOnly: true }),
+    defineField({
+      name: 'order',
+      title: 'Σειρά (παλιό)',
+      type: 'number',
+      hidden: true,
+      readOnly: true,
+    }),
 
     // ── Βασικά ──
     defineField({
-      name: 'titleEl', title: 'Όνομα Κατηγορίας (ΕΛ)', type: 'string', group: 'content',
+      name: 'titleEl',
+      title: 'Όνομα Κατηγορίας (ΕΛ)',
+      type: 'string',
+      group: 'content',
       validation: (r) => r.required(),
     }),
     defineField({
-      name: 'titleEn', title: 'Category Name (EN)', type: 'string', group: 'content',
-      components: { input: TranslateInput }, validation: (r) => r.required(),
+      name: 'titleEn',
+      title: 'Category Name (EN)',
+      type: 'string',
+      group: 'content',
+      components: { input: TranslateInput },
+      validation: (r) => r.required(),
     }),
     defineField({
-      name: 'noteEl', title: 'Σημείωση (ΕΛ)', type: 'string', group: 'content',
+      name: 'noteEl',
+      title: 'Σημείωση (ΕΛ)',
+      type: 'string',
+      group: 'content',
       description: 'Προαιρετικό κείμενο κάτω από τον τίτλο (π.χ. «όλα τα milkshakes €6,50»).',
     }),
     defineField({
-      name: 'noteEn', title: 'Note (EN)', type: 'string', group: 'content',
+      name: 'noteEn',
+      title: 'Note (EN)',
+      type: 'string',
+      group: 'content',
       components: { input: TranslateInput },
     }),
     defineField({
-      name: 'image', title: 'Εικόνα κατηγορίας', type: 'image', group: 'content',
+      name: 'image',
+      title: 'Εικόνα κατηγορίας',
+      type: 'image',
+      group: 'content',
       options: { hotspot: true },
       description: 'Προαιρετική — δεν χρειάζεται για τη λειτουργία.',
     }),
 
     // ── Ρυθμίσεις ──
     defineField({
-      name: 'menu', title: 'Καρτέλα', type: 'reference', to: [{ type: 'menu' }],
-      group: 'settings', validation: (r) => r.required(),
+      name: 'menu',
+      title: 'Καρτέλα',
+      type: 'reference',
+      to: [{ type: 'menu' }],
+      group: 'settings',
+      validation: (r) => r.required(),
       description: 'Σε ποια καρτέλα του μενού ανήκει αυτή η κατηγορία.',
     }),
     defineField({
-      name: 'hidden', title: 'Απόκρυψη κατηγορίας', type: 'boolean', group: 'settings',
-      initialValue: false, description: 'Αν είναι ενεργό, δεν εμφανίζεται στο site.',
+      name: 'hidden',
+      title: 'Απόκρυψη κατηγορίας',
+      type: 'boolean',
+      group: 'settings',
+      initialValue: false,
+      description: 'Αν είναι ενεργό, δεν εμφανίζεται στο site.',
     }),
   ],
-})
+});

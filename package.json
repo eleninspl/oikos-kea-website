@@ -6,12 +6,18 @@
     "dev": "astro dev --port ${PORT:-4321}",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/vercel": "^8.0.0",
     "@sanity/client": "^7.23.0",
     "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.0",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

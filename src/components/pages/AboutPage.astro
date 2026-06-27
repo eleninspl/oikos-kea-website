@@ -1,20 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../i18n/utils';
+import PageHero from '../PageHero.astro';
+import CtaBanner from '../CtaBanner.astro';
+import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 
-interface Props { lang: Lang; }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const base = lang === 'en' ? '/en' : '';
+const base = langBase(lang);
 ---
 
 <BaseLayout title={t('about.seo.title')} description={t('about.seo.desc')} lang={lang}>
-  <div class="page-hero">
-    <p class="eyebrow">{t('about.eyebrow')}</p>
-    <h1 class="page-hero__title">{t('about.title')}</h1>
-    <p class="page-hero__sub">{t('about.subtitle')}</p>
-  </div>
+  <PageHero eyebrow={t('about.eyebrow')} title={t('about.title')} subtitle={t('about.subtitle')} />
 
   <!-- Who we are -->
   <section class="section section--cream">
@@ -107,14 +107,10 @@ const base = lang === 'en' ? '/en' : '';
   </section>
 
   <!-- CTA -->
-  <section class="cta-banner">
-    <div class="container">
-      <h2 class="section-title">{t('about.cta.title')}</h2>
-      <p>{t('about.cta.subtitle')}</p>
-      <div style="display:flex; gap:var(--space-4); justify-content:center; flex-wrap:wrap;">
-        <a href={base + '/contact'} class="btn btn--dark">{t('about.cta.dir')}</a>
-        <a href={base + '/menu'} class="btn btn--outline">{t('about.cta.menu')}</a>
-      </div>
+  <CtaBanner title={t('about.cta.title')} subtitle={t('about.cta.subtitle')}>
+    <div class="cta-actions">
+      <a href={base + '/contact'} class="btn btn--dark">{t('about.cta.dir')}</a>
+      <a href={base + '/menu'} class="btn btn--outline">{t('about.cta.menu')}</a>
     </div>
-  </section>
+  </CtaBanner>
 </BaseLayout>
