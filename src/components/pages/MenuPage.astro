@@ -11,6 +11,15 @@ const t = useTranslations(lang);
 const gl = (el: string, en: string) => getLabel(lang, el, en);
 
 const menuTabs = await getMenu();
+
+// Τοπικές φωτογραφίες ανά καρτέλα — fallback όταν το CMS δεν έχει εικόνα.
+const tabImageFallback: Record<string, string> = {
+  brunch: '/images/brunch.jpg',
+  sushi: '/images/sushi.jpg',
+  cocktails: '/images/drink.jpg',
+  'lunch-dinner': '/images/luchdish.jpg',
+  wines: '/images/wine.jpg',
+};
 ---
 
 <BaseLayout title={t('menu.seo.title')} description={t('menu.seo.desc')} lang={lang}>
@@ -35,9 +44,10 @@ const menuTabs = await getMenu();
             >
               <img
                 class="menu-tab-img"
-                src={tab.image ?? '/images/menu-placeholder.svg'}
+                src={tab.image ?? tabImageFallback[tab.key] ?? '/images/menu-placeholder.svg'}
                 alt=""
                 loading="lazy"
+                decoding="async"
                 width="96"
                 height="96"
               />

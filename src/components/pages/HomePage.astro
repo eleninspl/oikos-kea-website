@@ -12,9 +12,13 @@ const base = lang === 'en' ? '/en' : '';
 <BaseLayout title={t('home.seo.title')} description={t('home.seo.desc')} lang={lang}>
   <!-- Hero -->
   <section class="hero">
-    <video class="hero__bg" autoplay muted loop playsinline>
-      <source src="/videos/dishes.mp4" type="video/mp4" />
-    </video>
+    <img
+      class="hero__bg"
+      src="/images/salad.jpg"
+      alt="Fresh seasonal dish at OIKOS"
+      fetchpriority="high"
+      decoding="async"
+    />
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <p class="hero__eyebrow">{t('hero.eyebrow')}</p>
@@ -40,6 +44,7 @@ const base = lang === 'en' ? '/en' : '';
         src="/images/logo.jpg"
         alt="The OIKOS sign on a marble wall with guests in the foreground"
         loading="lazy"
+        decoding="async"
       />
     </div>
     <div class="about-strip__content">
@@ -58,7 +63,7 @@ const base = lang === 'en' ? '/en' : '';
     <div class="services">
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/brunch.jpg" alt="Poached eggs with halloumi and salad at OIKOS" loading="lazy" />
+          <img src="/images/brunch.jpg" alt="Poached eggs with halloumi and salad at OIKOS" loading="lazy" decoding="async" />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.brunch.title')}</h3>
@@ -67,7 +72,7 @@ const base = lang === 'en' ? '/en' : '';
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/sushi.jpg" alt="Freshly prepared sushi rolls at OIKOS" loading="lazy" />
+          <img src="/images/sushi.jpg" alt="Freshly prepared sushi rolls at OIKOS" loading="lazy" decoding="async" />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.sushi.title')}</h3>
@@ -76,7 +81,7 @@ const base = lang === 'en' ? '/en' : '';
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/drink.jpg" alt="Craft cocktail with bitters at the OIKOS bar" loading="lazy" />
+          <img src="/images/drink.jpg" alt="Craft cocktail with bitters at the OIKOS bar" loading="lazy" decoding="async" />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.cocktails.title')}</h3>
@@ -85,7 +90,7 @@ const base = lang === 'en' ? '/en' : '';
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img src="/images/healthy.jpg" alt="Açai berry bowl with granola at OIKOS" loading="lazy" />
+          <img src="/images/healthy.jpg" alt="Açai berry bowl with granola at OIKOS" loading="lazy" decoding="async" />
         </div>
         <div class="service-card__body">
           <h3 class="service-card__title">{t('svc.healthy.title')}</h3>
@@ -158,19 +163,19 @@ const base = lang === 'en' ? '/en' : '';
     <div class="container">
       <div class="gallery-mosaic">
         <div class="gallery-mosaic__item">
-          <img src="/images/luchdish.jpg" alt="Crab with saffron risotto on an OIKOS plate" loading="lazy" />
+          <img src="/images/luchdish.jpg" alt="Crab with saffron risotto on an OIKOS plate" loading="lazy" decoding="async" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/drink.jpg" alt="Craft cocktail with bitters at the OIKOS bar" loading="lazy" />
+          <img src="/images/drink.jpg" alt="Craft cocktail with bitters at the OIKOS bar" loading="lazy" decoding="async" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/dessert.jpg" alt="Chocolate dessert with pistachio on an OIKOS plate" loading="lazy" />
+          <img src="/images/dessert.jpg" alt="Chocolate dessert with pistachio on an OIKOS plate" loading="lazy" decoding="async" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/dessertvid.jpg" alt="Acai bowl with berries next to an OIKOS napkin" loading="lazy" />
+          <img src="/images/dessertvid.jpg" alt="Acai bowl with berries next to an OIKOS napkin" loading="lazy" decoding="async" />
         </div>
         <div class="gallery-mosaic__item">
-          <img src="/images/sushi.jpg" alt="Sushi rolls on the OIKOS branded placemat" loading="lazy" />
+          <img src="/images/sushi.jpg" alt="Sushi rolls on the OIKOS branded placemat" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
