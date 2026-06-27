@@ -123,6 +123,26 @@ h4 {
   color: var(--color-gold);
 }
 
+/* ─── Skip link (keyboard a11y — ορατό μόνο σε focus) ─── */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  margin: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-dark);
+  color: var(--color-cream);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  transform: translateY(-150%);
+  transition: transform var(--transition-fast);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 /* ─── Layout ─── */
 .container {
   max-width: var(--max-width);

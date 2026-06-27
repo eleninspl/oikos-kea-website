@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { getAlternateUrl } from '../i18n/utils';
+import { getAlternateUrl, useTranslations } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
 import { site } from '../lib/site';
 
@@ -22,6 +22,7 @@ const {
   pageType = 'website',
 } = Astro.props;
 
+const t = useTranslations(lang);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(ogImage, Astro.site);
 const alternateLang = lang === 'el' ? 'en' : 'el';
@@ -116,8 +117,9 @@ const jsonLD = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
   </head>
   <body>
+    <a href="#main" class="skip-link">{t('a11y.skip')}</a>
     <Nav lang={lang} />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <Footer lang={lang} />

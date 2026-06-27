@@ -9,6 +9,7 @@ export const ui = {
     'nav.contact': 'Επικοινωνία',
     'nav.reserve': 'Κράτηση',
     'nav.lang': 'EN',
+    'a11y.skip': 'Μετάβαση στο περιεχόμενο',
 
     // HOME SEO
     'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Κέα, Κυκλάδες',
@@ -169,6 +170,7 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.reserve': 'Reserve a Table',
     'nav.lang': 'ΕΛ',
+    'a11y.skip': 'Skip to content',
 
     // HOME SEO
     'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Kéa, Cyclades',
