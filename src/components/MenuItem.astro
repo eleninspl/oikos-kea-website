@@ -9,7 +9,8 @@ interface Props {
 }
 const { item, lang } = Astro.props;
 
-const name = lang === 'el' ? item.nameEl : item.nameEn;
+// Πέσε πίσω στο άλλο locale αν λείπει το όνομα (ο owner μπορεί να αφήσει κενό το EN στο CMS).
+const name = (lang === 'el' ? item.nameEl : item.nameEn) || item.nameEl || item.nameEn;
 const desc = lang === 'el' ? item.descEl : item.descEn;
 const info = lang === 'el' ? item.infoEl : item.infoEn; // legacy (seed fallback)
 
@@ -77,6 +78,7 @@ const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
           </span>
         ))
       }
+      {item.priceNote && <span class="menu-item__price-note">{item.priceNote}</span>}
     </div>
     {item.image && (
       <img class="menu-item__img" src={item.image} alt="" loading="lazy" width="80" height="80" />

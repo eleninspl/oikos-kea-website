@@ -82,6 +82,9 @@ const tabImageFallback: Record<string, string> = {
                     <h3 class="menu-category">{gl(section.titleEl, section.titleEn)}</h3>
                     <span class="menu-section-line" aria-hidden="true" />
                   </div>
+                  {(section.noteEl || section.noteEn) && (
+                    <p class="menu-section-note">{gl(section.noteEl ?? '', section.noteEn ?? '')}</p>
+                  )}
 
                   <div class="menu-section__body">
                     {section.subsections?.length ? (
