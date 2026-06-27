@@ -26,7 +26,7 @@ const categories = docs
   .sort((a, b) => a.order - b.order)
   .map((c) => ({
     titleEl: c.titleEl, titleEn: c.titleEn,
-    menuKeys: (c.menus ?? []).map((r: any) => menuById[r._ref]),
+    menuKey: c.menu?._ref ? menuById[c.menu._ref] : undefined,
     items: (c.items ?? []).filter((i: any) => !i.hidden).map(stripItem),
     subsections: (c.subsections ?? []).filter((x: any) => !x.hidden).map((sub: any) => ({
       titleEl: sub.titleEl, titleEn: sub.titleEn, sectionPrice: sub.sectionPrice,

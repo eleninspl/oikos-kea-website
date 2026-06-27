@@ -30,7 +30,7 @@ export const MENU_QUERY = `{
     "key": key.current, labelEl, labelEn
   },
   "categories": *[_type == "category" && !hidden] | order(order asc){
-    titleEl, titleEn, "menuKeys": menus[]->key.current,
+    titleEl, titleEn, "menuKey": coalesce(menu->key.current, menus[0]->key.current),
     "items": items[!hidden]{ ${itemFields} },
     "subsections": subsections[!hidden]{
       titleEl, titleEn, sectionPrice,
@@ -39,13 +39,12 @@ export const MENU_QUERY = `{
   }
 }`
 
-type RawCategory = Section & { menuKeys: (string | null)[] }
+type RawCategory = Section & { menuKey: string | null }
 type RawMenu = { key: string; labelEl: string; labelEn: string }
 type RawData = { menus: RawMenu[]; categories: RawCategory[] }
 
 // ─── pure assembler (testable χωρίς δίκτυο) ───────────────────────────────────
-// Ομαδοποιεί τις κατηγορίες κάτω από κάθε καρτέλα. Κατηγορία που ανήκει σε δύο
-// καρτέλες (π.χ. κρασιά → All Day + Κουζίνα) εμφανίζεται και στις δύο.
+// Ομαδοποιεί τις κατηγορίες κάτω από την καρτέλα τους.
 export function assembleMenu(data: RawData): MenuTab[] {
   const { menus, categories } = data
   return (menus ?? [])
@@ -54,8 +53,8 @@ export function assembleMenu(data: RawData): MenuTab[] {
       labelEl: menu.labelEl,
       labelEn: menu.labelEn,
       sections: (categories ?? [])
-        .filter((c) => (c.menuKeys ?? []).includes(menu.key))
-        .map(({ menuKeys, ...section }) => section as Section),
+        .filter((c) => c.menuKey === menu.key)
+        .map(({ menuKey, ...section }) => section as Section),
     }))
     .filter((tab) => tab.sections.length > 0)
 }
