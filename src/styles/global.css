@@ -1004,10 +1004,14 @@ h1, h2, h3, h4 {
   margin-top: var(--space-8);
   padding-block: var(--space-8);
   border-top: 1px solid rgba(24, 19, 15, 0.1);
-  max-width: 48rem;
+  max-width: 52rem;
   color: var(--text-muted);
-  font-size: var(--text-sm);
-  line-height: 1.8;
+  font-size: var(--text-xs);
+  line-height: 1.7;
+}
+/* Κάθε γραμμή της σημείωσης = bullet */
+.menu-disclaimer p:last-child {
+  white-space: pre-line;
 }
 
 /* ─── Menu page — mobile ─── */
