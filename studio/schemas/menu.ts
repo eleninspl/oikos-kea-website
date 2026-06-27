@@ -53,6 +53,20 @@ export const menu = defineType({
       description: 'Εμφανίζεται στο κουμπί της καρτέλας στο μενού. Ανέβασε ή σύρε μια φωτογραφία.',
     }),
     defineField({
+      name: 'noteEl',
+      title: 'Σημείωση (ΕΛ)',
+      type: 'string',
+      group: 'basic',
+      description: 'Προαιρετικό κείμενο κάτω από τον τίτλο της καρτέλας (π.χ. «Σερβίρεται 08.30–15.00»).',
+    }),
+    defineField({
+      name: 'noteEn',
+      title: 'Note (EN)',
+      type: 'string',
+      group: 'basic',
+      components: { input: TranslateInput },
+    }),
+    defineField({
       name: 'hidden',
       title: 'Απόκρυψη καρτέλας',
       type: 'boolean',

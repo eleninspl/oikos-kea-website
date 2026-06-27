@@ -35,7 +35,7 @@ const itemFields = `
 
 export const MENU_QUERY = `{
   "menus": *[_type == "menu" && !hidden] | order(orderRank asc){
-    "key": key.current, labelEl, labelEn, "image": image.asset->url
+    "key": key.current, labelEl, labelEn, noteEl, noteEn, "image": image.asset->url
   },
   "categories": *[_type == "category" && !hidden] | order(orderRank asc){
     titleEl, titleEn, noteEl, noteEn,
@@ -45,7 +45,7 @@ export const MENU_QUERY = `{
 }`
 
 type RawCategory = Section & { menuKey: string | null }
-type RawMenu = { key: string; labelEl: string; labelEn: string; image?: string | null }
+type RawMenu = { key: string; labelEl: string; labelEn: string; noteEl?: string | null; noteEn?: string | null; image?: string | null }
 type RawData = { menus: RawMenu[]; categories: RawCategory[] }
 
 // ─── pure assembler (testable χωρίς δίκτυο) ───────────────────────────────────
@@ -57,6 +57,8 @@ export function assembleMenu(data: RawData): MenuTab[] {
       key: menu.key,
       labelEl: menu.labelEl,
       labelEn: menu.labelEn,
+      noteEl: menu.noteEl ?? undefined,
+      noteEn: menu.noteEn ?? undefined,
       image: menu.image ?? undefined,
       sections: (categories ?? [])
         .filter((c) => c.menuKey === menu.key)
