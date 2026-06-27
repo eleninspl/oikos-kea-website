@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const base = lang === 'en' ? '/en' : '';
+const base = langBase(lang);
 ---
 
 <BaseLayout title={t('home.seo.title')} description={t('home.seo.desc')} lang={lang}>

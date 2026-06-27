@@ -1,5 +1,5 @@
 ---
-import { useTranslations, getAlternateUrl } from '../i18n/utils';
+import { useTranslations, getAlternateUrl, langBase } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
 
 interface Props {
@@ -12,7 +12,7 @@ const path = Astro.url.pathname;
 const alternateLang = lang === 'el' ? 'en' : 'el';
 const alternateUrl = getAlternateUrl(path, alternateLang);
 
-const base = lang === 'en' ? '/en' : '';
+const base = langBase(lang);
 const isActive = (page: string) => {
   if (page === '/') return path === '/' || path === '/en' || path === '/en/';
   return path.endsWith(page) || path.endsWith(page + '/');

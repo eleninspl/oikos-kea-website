@@ -1,5 +1,5 @@
 ---
-import { useTranslations } from '../i18n/utils';
+import { useTranslations, langBase } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
-const base = lang === 'en' ? '/en' : '';
+const base = langBase(lang);
 ---
 
 <footer class="footer">
