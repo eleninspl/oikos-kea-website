@@ -1,10 +1,18 @@
 /**
+ * ⚠️ OBSOLETE — ΜΗΝ ΤΟ ΤΡΕΞΕΙΣ ΣΤΗΝ ΠΑΡΑΓΩΓΗ ⚠️
+ * Αυτό το script ανήκει στο ΠΑΛΙΟ μοντέλο δεδομένων (κατηγορίες με πεδίο `tabs`,
+ * χωρίς ξεχωριστά `menuItem` documents). Το τρέχον schema έχει items ως
+ * documents (βλ. migrate-items-to-docs.ts) και single `menu` reference ανά
+ * κατηγορία. Η εντολή import χρησιμοποιεί `--replace`, που ΣΒΗΝΕΙ ΟΛΟΚΛΗΡΟ το
+ * production dataset — και το παραγόμενο NDJSON ΔΕΝ ταιριάζει πλέον με το schema.
+ * Κρατείται μόνο ως ιστορικό. Πηγή αλήθειας είναι πλέον το ίδιο το Sanity.
+ *
  * Migration: src/i18n/menuData.ts  →  Sanity NDJSON (flat category documents)
  *
  *   npx tsx scripts/migrate.ts > menu.ndjson
  *   npx sanity dataset import menu.ndjson production --replace
  *
- * Νέο μοντέλο: κάθε ΚΑΤΗΓΟΡΙΑ = ξεχωριστό document με πεδίο `tabs` (σε ποια menu
+ * Παλιό μοντέλο: κάθε ΚΑΤΗΓΟΡΙΑ = ξεχωριστό document με πεδίο `tabs` (σε ποια menu
  * εμφανίζεται). Οι κατηγορίες κρασιών παίρνουν tabs:['allday','cuisine'] ώστε να
  * εμφανίζονται και στα δύο — χωρίς ξεχωριστό wineList document.
  */
