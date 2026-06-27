@@ -81,7 +81,7 @@ const jsonLD = {
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang={lang === 'el' ? 'el' : 'en'} href={canonicalURL} />
     <link rel="alternate" hreflang={lang === 'el' ? 'en' : 'el'} href={alternateURL} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={lang === 'el' ? canonicalURL : alternateURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={pageType} />
@@ -106,6 +106,7 @@ const jsonLD = {
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
     <link rel="apple-touch-icon" href="/icons/favicon-180.png" />
 
