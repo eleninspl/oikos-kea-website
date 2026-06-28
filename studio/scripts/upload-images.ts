@@ -19,12 +19,12 @@ const client = createClient({
 
 // Local image file → prefix του nameEn του αντίστοιχου menuItem
 const IMAGE_MAP: { file: string; namePrefix: string }[] = [
-  { file: 'kani.jpg',             namePrefix: 'Kani' },
-  { file: 'kyuri.png',            namePrefix: 'Kyuri' },
-  { file: 'spicy-maguro.png',     namePrefix: 'Spicy Maguro' },
+  { file: 'kani.jpg', namePrefix: 'Kani' },
+  { file: 'kyuri.webp', namePrefix: 'Kyuri' },
+  { file: 'spicy-maguro.webp', namePrefix: 'Spicy Maguro' },
   { file: 'hamachi-jalapeno.jpg', namePrefix: 'Hamachi' },
-  { file: 'vegetarian.png',       namePrefix: 'Vegetarian' },
-  { file: 'donburi.png',          namePrefix: 'Chirashi' },
+  { file: 'vegetarian.webp', namePrefix: 'Vegetarian' },
+  { file: 'donburi.webp', namePrefix: 'Chirashi' },
   { file: 'rigatoni-chicken.jpg', namePrefix: 'Chicken Rigatoni' },
 ];
 
@@ -32,19 +32,21 @@ const IMAGES_DIR = resolve(__dirname, '../../public/images/food');
 
 async function run() {
   if (!process.env.SANITY_WRITE_TOKEN) {
-    console.error('❌  Λείπει το SANITY_WRITE_TOKEN.\n   Πάρτο από: https://sanity.io/manage/project/s7x6np2r → API → Tokens');
+    console.error(
+      '❌  Λείπει το SANITY_WRITE_TOKEN.\n   Πάρτο από: https://sanity.io/manage/project/s7x6np2r → API → Tokens',
+    );
     process.exit(1);
   }
 
   // Φέρε όλα τα menuItem documents χωρίς image
   const items = await client.fetch<{ _id: string; nameEn: string }[]>(
-    `*[_type == "menuItem" && !defined(image)]{ _id, nameEn }`
+    `*[_type == "menuItem" && !defined(image)]{ _id, nameEn }`,
   );
   console.log(`📋  ${items.length} items χωρίς εικόνα στο Sanity`);
 
   for (const { file, namePrefix } of IMAGE_MAP) {
     const match = items.find((it) =>
-      (it.nameEn ?? '').toLowerCase().startsWith(namePrefix.toLowerCase())
+      (it.nameEn ?? '').toLowerCase().startsWith(namePrefix.toLowerCase()),
     );
 
     if (!match) {
@@ -53,7 +55,8 @@ async function run() {
     }
 
     const filePath = resolve(IMAGES_DIR, file);
-    const mimeType = extname(file) === '.png' ? 'image/png' : 'image/jpeg';
+    const ext = extname(file);
+    const mimeType = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
 
     console.log(`⬆️   Ανέβασμα ${file}  →  "${match.nameEn}" (${match._id})`);
 

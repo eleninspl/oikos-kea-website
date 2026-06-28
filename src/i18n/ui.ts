@@ -9,6 +9,7 @@ export const ui = {
     'nav.contact': 'Επικοινωνία',
     'nav.reserve': 'Κράτηση',
     'nav.lang': 'EN',
+    'a11y.skip': 'Μετάβαση στο περιεχόμενο',
 
     // HOME SEO
     'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Κέα, Κυκλάδες',
@@ -35,17 +36,13 @@ export const ui = {
 
     // SERVICES
     'svc.brunch.title': 'Brunch',
-    'svc.brunch.desc':
-      'Αυγά με κάθε τρόπο, granola bowls, avocado toast και φρέσκα pastries — η καλύτερη αρχή για κάθε πρωινό στο νησί.',
+    'svc.brunch.desc': 'Αυγά, granola bowls, avocado toast — από το πρωί στο νησί.',
     'svc.sushi.title': 'Σούσι',
-    'svc.sushi.desc':
-      'Φρέσκα σούσι rolls με premium υλικά — μια μοντέρνα γεύση που ξεχωρίζει στο νησί.',
+    'svc.sushi.desc': 'Φρέσκα rolls με premium υλικά, κάθε μέρα.',
     'svc.lunch.title': 'Μεσημεριανό & Δείπνο',
-    'svc.lunch.desc':
-      'Κυρίως πιάτα, σαλάτες και ορεκτικά που συνδυάζουν μεσογειακές γεύσεις με μοντέρνα ματιά.',
+    'svc.lunch.desc': 'Μεσογειακές γεύσεις με μοντέρνα ματιά.',
     'svc.cocktails.title': 'Cocktails',
-    'svc.cocktails.desc':
-      'House-crafted cocktails, φυσικά κρασιά και cold-pressed smoothies από το μεσημέρι μέχρι αργά.',
+    'svc.cocktails.desc': 'House cocktails, φυσικά κρασιά, smoothies — από το μεσημέρι αργά.',
 
     // REVIEWS
     'reviews.eyebrow': 'Τι λένε οι επισκέπτες',
@@ -173,6 +170,7 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.reserve': 'Reserve a Table',
     'nav.lang': 'ΕΛ',
+    'a11y.skip': 'Skip to content',
 
     // HOME SEO
     'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Kéa, Cyclades',
@@ -199,17 +197,13 @@ export const ui = {
 
     // SERVICES
     'svc.brunch.title': 'Brunch',
-    'svc.brunch.desc':
-      'Eggs every way, granola bowls, smashed avocado, and fresh pastries — the best start to any island morning.',
+    'svc.brunch.desc': 'Eggs, granola bowls, avocado toast — mornings on the island.',
     'svc.sushi.title': 'Sushi',
-    'svc.sushi.desc':
-      'Fresh sushi rolls made with premium ingredients — a modern flavour that stands out on the island.',
+    'svc.sushi.desc': 'Fresh rolls with premium ingredients, every day.',
     'svc.lunch.title': 'Lunch & Dinner',
-    'svc.lunch.desc':
-      'Mains, salads, and starters that bring Mediterranean flavours together with a modern culinary touch.',
+    'svc.lunch.desc': 'Mediterranean flavours with a modern touch.',
     'svc.cocktails.title': 'Cocktails',
-    'svc.cocktails.desc':
-      'House-crafted cocktails, natural wines, and cold-pressed smoothies served from noon until late.',
+    'svc.cocktails.desc': 'House cocktails, natural wines, smoothies — from noon till late.',
 
     // REVIEWS
     'reviews.eyebrow': 'What guests say',

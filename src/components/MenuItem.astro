@@ -9,7 +9,8 @@ interface Props {
 }
 const { item, lang } = Astro.props;
 
-const name = lang === 'el' ? item.nameEl : item.nameEn;
+// Πέσε πίσω στο άλλο locale αν λείπει το όνομα (ο owner μπορεί να αφήσει κενό το EN στο CMS).
+const name = (lang === 'el' ? item.nameEl : item.nameEn) || item.nameEl || item.nameEn;
 const desc = lang === 'el' ? item.descEl : item.descEn;
 const info = lang === 'el' ? item.infoEl : item.infoEn; // legacy (seed fallback)
 
@@ -35,7 +36,12 @@ const allergenLine = allergens.map((a) => allergenText(a, lang)).join(', ');
 const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
 ---
 
-<div class:list={['menu-item', { 'menu-item--unavailable': unavailable, 'menu-item--has-img': !!item.image }]}>
+<div
+  class:list={[
+    'menu-item',
+    { 'menu-item--unavailable': unavailable, 'menu-item--has-img': !!item.image },
+  ]}
+>
   <div class="menu-item__body">
     <div class="menu-item__name">
       {name}
@@ -43,13 +49,15 @@ const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
       {unavailable && <span class="menu-item__label menu-item__label--out">{soldOut}</span>}
     </div>
     {info && <div class="menu-item__info">{info}</div>}
-    {desc && (
-      <div class="menu-item__desc">
-        {desc.includes(' · ')
-          ? desc.split(' · ').map((part) => <span class="menu-item__desc-line">{part}</span>)
-          : desc}
-      </div>
-    )}
+    {
+      desc && (
+        <div class="menu-item__desc">
+          {desc.includes(' · ')
+            ? desc.split(' · ').map((part) => <span class="menu-item__desc-line">{part}</span>)
+            : desc}
+        </div>
+      )
+    }
     {
       extras.map((e) => (
         <div class="menu-item__extra">
@@ -77,9 +85,12 @@ const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
           </span>
         ))
       }
+      {item.priceNote && <span class="menu-item__price-note">{item.priceNote}</span>}
     </div>
-    {item.image && (
-      <img class="menu-item__img" src={item.image} alt="" loading="lazy" width="80" height="80" />
-    )}
+    {
+      item.image && (
+        <img class="menu-item__img" src={item.image} alt="" loading="lazy" width="80" height="80" />
+      )
+    }
   </div>
 </div>

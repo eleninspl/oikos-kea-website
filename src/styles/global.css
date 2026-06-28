@@ -123,6 +123,26 @@ h4 {
   color: var(--color-gold);
 }
 
+/* ─── Skip link (keyboard a11y — ορατό μόνο σε focus) ─── */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  margin: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-dark);
+  color: var(--color-cream);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  transform: translateY(-150%);
+  transition: transform var(--transition-fast);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 /* ─── Layout ─── */
 .container {
   max-width: var(--max-width);
@@ -934,6 +954,15 @@ h4 {
   background-color: rgba(38, 38, 38, 0.1);
 }
 
+/* Σημείωση κατηγορίας (π.χ. «όλα τα milkshakes €6,50») — κάτω από τον τίτλο */
+.menu-section-note {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: calc(-1 * var(--space-2));
+  margin-bottom: var(--space-6);
+}
+
 .menu-category {
   font-family: var(--font-heading);
   font-size: var(--text-3xl);
@@ -1029,7 +1058,7 @@ h4 {
   max-width: min(680px, 92vw);
   max-height: 85vh;
   object-fit: contain;
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   transform: scale(0.92);
   transition: transform 0.25s ease;
 }
@@ -1063,6 +1092,14 @@ h4 {
   font-size: 0.85em;
 }
 
+/* Σημείωση τιμής (π.χ. «τιμή ημέρας») — κάτω από την τιμή */
+.menu-item__price-note {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-style: italic;
+  white-space: nowrap;
+}
+
 .menu-item--unavailable {
   opacity: 0.5;
 }
@@ -1081,7 +1118,7 @@ h4 {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   display: block;
 }
 
@@ -1365,6 +1402,38 @@ h4 {
 
   .services {
     grid-template-columns: 1fr;
+    gap: var(--space-4);
+    background-color: transparent;
+    padding-inline: var(--space-4);
+  }
+
+  .service-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 200px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 12px rgba(38, 38, 38, 0.1);
+    overflow: hidden;
+  }
+
+  .service-card__media {
+    height: 100%;
+  }
+
+  /* Odd cards: text left, image right */
+  .service-card:nth-child(odd) .service-card__media {
+    order: 2;
+  }
+  .service-card:nth-child(odd) .service-card__body {
+    order: 1;
+  }
+
+  /* Even cards: image left, text right (default order) */
+  .service-card:nth-child(even) .service-card__media {
+    order: 1;
+  }
+  .service-card:nth-child(even) .service-card__body {
+    order: 2;
   }
 
   .gallery-mosaic {
