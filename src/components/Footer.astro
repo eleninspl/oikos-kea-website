@@ -35,7 +35,7 @@ const base = langBase(lang);
       <div>
         <div class="footer__heading">{t('footer.find')}</div>
         <ul class="footer__links">
-          <li class="footer__link">{t('contact.address.val')}</li>
+          <li><a href={site.googleMaps} target="_blank" rel="noopener noreferrer" class="footer__link">{t('contact.address.val')}</a></li>
           <li class="footer__link">{t('contact.address.sub')}</li>
           <li><a href={`tel:${site.phoneTel}`} class="footer__link">+30 {site.phoneDisplay}</a></li>
           <li><a href={`mailto:${site.email}`} class="footer__link">{site.email}</a></li>
