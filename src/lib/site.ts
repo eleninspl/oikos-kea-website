@@ -6,4 +6,5 @@ export const site = {
   email: 'oikoskeas@gmail.com',
   instagram: 'https://www.instagram.com/oikos_kea/',
   googleReviews: 'https://share.google/3bZUCeosoxPlrULbs',
+  googleMaps: 'https://share.google/Yw4cgwG7pkaVCz3eY',
 } as const;
