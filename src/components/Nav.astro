@@ -47,7 +47,6 @@ const isActive = (page: string) => {
           >{t('nav.contact')}</a
         >
       </li>
-      <li><a href={`tel:${site.phoneTel}`} class="nav__cta">{t('nav.reserve')}</a></li>
       <li>
         <a
           href={alternateUrl}
@@ -57,19 +56,28 @@ const isActive = (page: string) => {
           {t('nav.lang')}
         </a>
       </li>
+      <li><a href={`tel:${site.phoneTel}`} class="nav__cta">{t('nav.reserve')}</a></li>
     </ul>
 
-    <button
-      class="nav__burger"
-      type="button"
-      aria-label="Open menu"
-      aria-expanded="false"
-      aria-controls="nav-mobile"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <div class="nav__mobile-controls">
+      <a
+        href={alternateUrl}
+        class="nav__lang nav__lang--burger"
+        aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}
+      >{t('nav.lang')}</a>
+
+      <button
+        class="nav__burger"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -80,12 +88,6 @@ const isActive = (page: string) => {
   <a href={base + '/contact'} class="nav__link">{t('nav.contact')}</a>
   <a href={`tel:${site.phoneTel}`} class="btn btn--outline" style="margin-top: 1rem;"
     >{t('nav.reserve')}</a
-  >
-  <a
-    href={alternateUrl}
-    class="nav__lang"
-    style="margin-top: var(--space-4);"
-    aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>{t('nav.lang')}</a
   >
 </div>
 

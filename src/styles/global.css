@@ -377,6 +377,16 @@ h4 {
   border-color: rgba(141, 138, 133, 0.5);
 }
 
+.nav__mobile-controls {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nav__lang--burger {
+  display: none;
+}
+
 .nav__burger {
   display: none;
   flex-direction: column;
@@ -1372,8 +1382,15 @@ h4 {
   .nav__links {
     display: none;
   }
+  .nav__mobile-controls {
+    display: flex;
+  }
   .nav__burger {
     display: flex;
+  }
+  .nav__lang--burger {
+    display: inline-flex;
+    align-items: center;
   }
 
   .footer__grid {
