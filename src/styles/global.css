@@ -590,8 +590,8 @@ h4 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
-  min-height: 420px;
-  margin-top: var(--space-16);
+  height: 620px;
+  margin-top: var(--space-8);
 }
 
 .about-strip__image {
@@ -1322,6 +1322,7 @@ h4 {
 @media (max-width: 900px) {
   .about-strip {
     grid-template-columns: 1fr;
+    height: auto;
   }
 
   .about-strip__image {
