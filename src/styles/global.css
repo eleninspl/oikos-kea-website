@@ -803,6 +803,14 @@ h4 {
 .cta-banner .btn--dark:hover {
   background-color: var(--color-mid);
 }
+.cta-banner .btn--outline {
+  border-color: var(--color-dark);
+  color: var(--color-dark);
+}
+.cta-banner .btn--outline:hover {
+  background-color: var(--color-dark);
+  color: var(--color-cream);
+}
 
 /* Κεντραρισμένη σειρά κουμπιών (CTA με δύο επιλογές) */
 .cta-actions {
