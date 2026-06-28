@@ -14,9 +14,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const gl = (el: string, en: string) => getLabel(lang, el, en);
-// Sushi tab is always displayed in English regardless of site language.
-const glt = (tabKey: string, el: string, en: string) =>
-  tabKey === 'sushi' ? en || el : gl(el, en);
 
 const menuTabs = await getMenu();
 
@@ -57,7 +54,7 @@ const tabImageFallback: Record<string, string> = {
                   width="96"
                   height="96"
                 />
-                <span class="menu-tab-label">{glt(tab.key, tab.labelEl, tab.labelEn)}</span>
+                <span class="menu-tab-label">{gl(tab.labelEl, tab.labelEn)}</span>
               </button>
             ))
           }
@@ -74,20 +71,20 @@ const tabImageFallback: Record<string, string> = {
           menuTabs.map((tab) => (
             <div class="menu-panel" id={`panel-${tab.key}`}>
               <h2 class="menu-panel-title" tabindex="-1">
-                {glt(tab.key, tab.labelEl, tab.labelEn)}
+                {gl(tab.labelEl, tab.labelEn)}
               </h2>
               {(tab.noteEl || tab.noteEn) && (
-                <p class="menu-panel-note">{glt(tab.key, tab.noteEl ?? '', tab.noteEn ?? '')}</p>
+                <p class="menu-panel-note">{gl(tab.noteEl ?? '', tab.noteEn ?? '')}</p>
               )}
               {tab.sections.map((section) => (
                 <div class="menu-section">
                   <div class="menu-section-header">
-                    <h3 class="menu-category">{glt(tab.key, section.titleEl, section.titleEn)}</h3>
+                    <h3 class="menu-category">{gl(section.titleEl, section.titleEn)}</h3>
                     <span class="menu-section-line" aria-hidden="true" />
                   </div>
                   {(section.noteEl || section.noteEn) && (
                     <p class="menu-section-note">
-                      {glt(tab.key, section.noteEl ?? '', section.noteEn ?? '')}
+                      {gl(section.noteEl ?? '', section.noteEn ?? '')}
                     </p>
                   )}
 
@@ -97,7 +94,7 @@ const tabImageFallback: Record<string, string> = {
                         <div class="menu-subsection">
                           {(sub.titleEl || sub.titleEn) && (
                             <h4 class="menu-subsection-title">
-                              {glt(tab.key, sub.titleEl ?? '', sub.titleEn ?? '')}
+                              {gl(sub.titleEl ?? '', sub.titleEn ?? '')}
                               {sub.sectionPrice && (
                                 <span class="menu-subsection-price"> — {sub.sectionPrice}</span>
                               )}
@@ -105,7 +102,7 @@ const tabImageFallback: Record<string, string> = {
                           )}
                           <div class="menu-grid">
                             {sub.items.map((item) => (
-                              <MenuItem item={item} lang={tab.key === 'sushi' ? 'en' : lang} />
+                              <MenuItem item={item} lang={lang} />
                             ))}
                           </div>
                         </div>
@@ -113,7 +110,7 @@ const tabImageFallback: Record<string, string> = {
                     ) : (
                       <div class="menu-grid">
                         {section.items?.map((item) => (
-                          <MenuItem item={item} lang={tab.key === 'sushi' ? 'en' : lang} />
+                          <MenuItem item={item} lang={lang} />
                         ))}
                       </div>
                     )}
