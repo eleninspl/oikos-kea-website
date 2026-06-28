@@ -1,6 +1,6 @@
 # Codebase Health Report — OIKOS Kéa (Pass 2)
 
-**Branch:** `chore/codebase-health-pass-2` (11 themed commits, **not pushed, no PR opened**)
+**Branch:** `chore/codebase-health-pass-2` (12 commits — reviewed and merged into `main`)
 **Scope:** Astro 5 static site (`src/`) + Sanity Studio CMS (`studio/`)
 **Method:** repo + media fully mapped, then a 6-dimension multi-agent read-only
 audit (dead code/CSS/assets/deps, correctness, a11y/SEO, studio) whose every
@@ -210,5 +210,5 @@ in the live preview.
 
 ---
 
-_Generated during an autonomous codebase health pass. All work is on
-`chore/codebase-health-pass-2` for review; nothing was pushed and no PR was opened._
+_Generated during an autonomous codebase health pass on
+`chore/codebase-health-pass-2`; reviewed and merged into `main`._
