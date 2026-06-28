@@ -67,7 +67,7 @@ export const ui = {
     'info.location.val': 'Κορρησία, Κέα',
     'info.location.sub': 'Κυκλάδες, Ελλάδα',
     'info.hours.label': 'Ώρες',
-    'info.hours.val': '09:00 – 02:00',
+    'info.hours.val': '06:00 – 02:00',
     'info.hours.sub': 'Καθημερινά',
     'info.res.label': 'Κρατήσεις',
     'info.res.sub': 'Τηλεφωνικά ή χωρίς κράτηση',
@@ -90,7 +90,7 @@ export const ui = {
     ].join('\n'),
     'menu.note.eyebrow': 'Σημείωση',
     'menu.cta.title': 'Ελάτε να γευτείτε',
-    'menu.cta.subtitle': 'Ανοιχτοί καθημερινά 09:00 – 02:00',
+    'menu.cta.subtitle': 'Ανοιχτοί καθημερινά 06:00 – 02:00',
     'menu.cta.btn': 'Καλέστε μας: 22880 22507',
 
     // ABOUT PAGE
@@ -107,7 +107,7 @@ export const ui = {
     'about.who.text2':
       'Ανοίξαμε το 2021 στο λιμανάκι της Κορρησίας στην Κέα, με μια απλή πεποίθηση: ότι κάθε ώρα της ημέρας αξίζει ένα υπέροχο γεύμα και καλή παρέα.',
     'about.stat1.label': 'Χρονιά ίδρυσης',
-    'about.stat2.val': '17ω',
+    'about.stat2.val': '20ω',
     'about.stat2.label': 'Ανοιχτοί καθημερινά',
     'about.stat3.val': 'Κέα',
     'about.stat3.label': 'Το νησί μας',
@@ -123,14 +123,14 @@ export const ui = {
     'about.space.text':
       'Ο χώρος του OIKOS συνδυάζει τη ζεστασιά της κυκλαδίτικης αρχιτεκτονικής με μια σύγχρονη, χαλαρή αισθητική. Τοξωτές πόρτες, ζεστό ξύλο και απαλός φωτισμός σε προσκαλούν να καθίσεις και να ξεχάσεις την ώρα. Διαθέτουμε εσωτερικό χώρο και βεράντα για τα ιδανικά βράδια της Κέας.',
     'about.cta.title': 'Ελάτε να μας βρείτε',
-    'about.cta.subtitle': 'Κορρησία, Κέα — Ανοιχτοί καθημερινά, 09:00 – 02:00',
+    'about.cta.subtitle': 'Κορρησία, Κέα — Ανοιχτοί καθημερινά, 06:00 – 02:00',
     'about.cta.dir': 'Πού είμαστε',
     'about.cta.menu': 'Δείτε το μενού',
 
     // CONTACT PAGE
     'contact.seo.title': 'Επικοινωνία & Πού μας Βρείτε — OIKOS Κέα',
     'contact.seo.desc':
-      'Βρείτε το OIKOS στην Κορρησία, Κέα. Ώρες λειτουργίας, τηλέφωνο, διεύθυνση και χάρτης. Ανοιχτοί καθημερινά 09:00 – 02:00.',
+      'Βρείτε το OIKOS στην Κορρησία, Κέα. Ώρες λειτουργίας, τηλέφωνο, διεύθυνση και χάρτης. Ανοιχτοί καθημερινά 06:00 – 02:00.',
     'contact.eyebrow': 'Κορρησία · Κέα · Ελλάδα',
     'contact.title': 'Βρείτε μας',
     'contact.subtitle': 'Εδώ κάθε μέρα — ελάτε όπως είστε',
@@ -228,7 +228,7 @@ export const ui = {
     'info.location.val': 'Korrisia, Kéa',
     'info.location.sub': 'Cyclades, Greece',
     'info.hours.label': 'Hours',
-    'info.hours.val': '09:00 – 02:00',
+    'info.hours.val': '06:00 – 02:00',
     'info.hours.sub': 'Every day',
     'info.res.label': 'Reservations',
     'info.res.sub': 'Call or walk in',
@@ -251,7 +251,7 @@ export const ui = {
     ].join('\n'),
     'menu.note.eyebrow': 'Note',
     'menu.cta.title': 'Come taste for yourself',
-    'menu.cta.subtitle': 'Open every day from 09:00 to 02:00',
+    'menu.cta.subtitle': 'Open every day from 06:00 to 02:00',
     'menu.cta.btn': 'Call us: 22880 22507',
 
     // ABOUT PAGE
@@ -268,7 +268,7 @@ export const ui = {
     'about.who.text2':
       'We opened in 2021 in the harbour village of Korrisia on the island of Kéa, with a simple belief: that every hour of the day deserves a great meal and good company.',
     'about.stat1.label': 'Year we opened',
-    'about.stat2.val': '17h',
+    'about.stat2.val': '20h',
     'about.stat2.label': 'Open daily',
     'about.stat3.val': 'Kéa',
     'about.stat3.label': 'Our home island',
@@ -284,14 +284,14 @@ export const ui = {
     'about.space.text':
       'The OIKOS space blends the warmth of Cycladic stone architecture with a contemporary, unpretentious sensibility. Arched doorways, warm wood, and soft lighting invite you to sit down and forget the time. We have indoor seating and a terrace for when the Kéa evenings are at their best.',
     'about.cta.title': 'Come and see us',
-    'about.cta.subtitle': 'Korrisia, Kéa — open every day, 09:00 to 02:00',
+    'about.cta.subtitle': 'Korrisia, Kéa — open every day, 06:00 to 02:00',
     'about.cta.dir': 'Get directions',
     'about.cta.menu': 'See the menu',
 
     // CONTACT PAGE
     'contact.seo.title': 'Contact & Find Us — OIKOS Kéa',
     'contact.seo.desc':
-      "Find OIKOS in Korrisia, Kéa. Opening hours, phone number, address and map. We're open every day from 09:00 to 02:00.",
+      "Find OIKOS in Korrisia, Kéa. Opening hours, phone number, address and map. We're open every day from 06:00 to 02:00.",
     'contact.eyebrow': 'Korrisia · Kéa · Greece',
     'contact.title': 'Find Us',
     'contact.subtitle': "We're here every day — come as you are",
