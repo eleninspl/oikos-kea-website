@@ -477,6 +477,12 @@ h4 {
   color: var(--color-cream);
 }
 
+.footer__insta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
 .footer__bottom {
   border-top: 1px solid rgba(245, 244, 241, 0.08);
   padding-top: var(--space-6);
@@ -601,7 +607,7 @@ h4 {
   grid-template-columns: 1fr 1fr;
   gap: 0;
   height: 620px;
-  margin-top: var(--space-8);
+  margin-top: 0;
 }
 
 .about-strip__image {
