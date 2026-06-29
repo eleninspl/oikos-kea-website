@@ -128,14 +128,16 @@ const base = langBase(lang);
           {t('reviews.title1')}<br />{t('reviews.title2')}
         </h2>
         <a
-          href={site.googleReviews}
+          href={site.social.googleReviews}
           target="_blank"
           rel="noopener noreferrer"
           class="google-rating"
         >
-          <span class="google-rating__score">4.7</span>
+          <span class="google-rating__score">{site.social.googleRating.value}</span>
           <span class="google-rating__stars" aria-label="5 out of 5 stars" role="img">★★★★★</span>
-          <span class="google-rating__count">330 {t('reviews.google')}</span>
+          <span class="google-rating__count"
+            >{site.social.googleRating.count} {t('reviews.google')}</span
+          >
         </a>
       </div>
 
@@ -191,7 +193,7 @@ const base = langBase(lang);
   <!-- CTA -->
   <CtaBanner title={t('cta.title')} subtitle={t('cta.subtitle')}>
     <div class="cta-actions">
-      <a href={`tel:${site.phoneTel}`} class="btn btn--dark">{t('cta.call')}</a>
+      <a href={`tel:${site.contact.phoneTel}`} class="btn btn--dark">{t('cta.call')}</a>
       <a href={base + '/menu'} class="btn btn--outline">{t('cta.menu')}</a>
     </div>
   </CtaBanner>
@@ -202,7 +204,13 @@ const base = langBase(lang);
       <div class="info-strip">
         <div>
           <p class="eyebrow">{t('info.location.label')}</p>
-          <a href={site.googleMaps} target="_blank" rel="noopener noreferrer" class="info-strip__val" style="color:inherit;">{t('info.location.val')}</a>
+          <a
+            href={site.social.googleMaps}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="info-strip__val"
+            style="color:inherit;">{t('info.location.val')}</a
+          >
           <p class="info-strip__sub">{t('info.location.sub')}</p>
         </div>
         <div>
@@ -212,7 +220,7 @@ const base = langBase(lang);
         </div>
         <div>
           <p class="eyebrow">{t('info.res.label')}</p>
-          <p class="info-strip__val">{site.phoneDisplay}</p>
+          <p class="info-strip__val">{site.contact.phoneDisplay}</p>
           <p class="info-strip__sub">{t('info.res.sub')}</p>
         </div>
       </div>

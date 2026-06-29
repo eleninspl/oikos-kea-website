@@ -112,7 +112,12 @@ const base = langBase(lang);
   <!-- CTA -->
   <CtaBanner title={t('about.cta.title')} subtitle={t('about.cta.subtitle')}>
     <div class="cta-actions">
-      <a href={site.googleMaps} target="_blank" rel="noopener noreferrer" class="btn btn--dark">{t('about.cta.dir')}</a>
+      <a
+        href={site.social.googleMaps}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--dark">{t('about.cta.dir')}</a
+      >
       <a href={base + '/menu'} class="btn btn--outline">{t('about.cta.menu')}</a>
     </div>
   </CtaBanner>

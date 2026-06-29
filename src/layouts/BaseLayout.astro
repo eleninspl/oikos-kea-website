@@ -18,7 +18,7 @@ const {
   title,
   description,
   lang,
-  ogImage = '/images/brand/og-image.jpg',
+  ogImage = site.web.defaultOgImage,
   pageType = 'website',
 } = Astro.props;
 
@@ -30,51 +30,51 @@ const alternateURL = new URL(getAlternateUrl(Astro.url.pathname, alternateLang),
 const ogLocale = lang === 'el' ? 'el_GR' : 'en_GB';
 const ogImageAlt =
   lang === 'el'
-    ? 'OIKOS — all day cuisine bar, Κορρησία, Κέα'
-    : 'OIKOS — all day cuisine bar, Korrisia, Kéa';
+    ? `${site.brand.name} — all day cuisine bar, ${site.address.areaEl}, ${site.address.cityEl}`
+    : `${site.brand.name} — all day cuisine bar, ${site.address.areaEn}, ${site.address.cityEn}`;
 
 const jsonLD = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
-  name: 'OIKOS',
+  name: site.brand.name,
   description:
     lang === 'el'
-      ? 'All day cuisine bar στην Κορρησία, Κέα. Brunch, σούσι, cocktails και πολλά άλλα.'
-      : 'All day cuisine bar in Korrisia, Kéa. Brunch, sushi, cocktails and more.',
-  url: 'https://oikoskea.gr',
-  telephone: site.phoneTel,
-  email: site.email,
+      ? `All day cuisine bar στην ${site.address.areaEl}, ${site.address.cityEl}. Brunch, σούσι, cocktails και πολλά άλλα.`
+      : `All day cuisine bar in ${site.address.areaEn}, ${site.address.cityEn}. Brunch, sushi, cocktails and more.`,
+  url: site.web.siteUrl,
+  telephone: site.contact.phoneTel,
+  email: site.contact.email,
   servesCuisine: ['Mediterranean', 'Japanese', 'Brunch', 'Cocktails'],
   priceRange: '€€',
   image: ogImageURL.toString(),
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '4.7',
-    reviewCount: '330',
+    ratingValue: site.social.googleRating.value,
+    reviewCount: site.social.googleRating.count,
     bestRating: '5',
   },
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Korrisia',
-    addressLocality: 'Kéa',
-    addressRegion: 'Cyclades',
-    postalCode: '84002',
-    addressCountry: 'GR',
+    streetAddress: site.address.areaEn,
+    addressLocality: site.address.cityEn,
+    addressRegion: site.address.regionEn,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.countryCode,
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 37.660513,
-    longitude: 24.312061,
+    latitude: site.geo.lat,
+    longitude: site.geo.lng,
   },
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '06:00',
-      closes: '02:00',
+      opens: site.hours.opens,
+      closes: site.hours.closes,
     },
   ],
-  sameAs: [site.instagram],
+  sameAs: [site.social.instagram],
 };
 ---
 
@@ -98,11 +98,11 @@ const jsonLD = {
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:image:alt" content={ogImageAlt} />
-    <meta property="og:image:width" content="1206" />
-    <meta property="og:image:height" content="1548" />
+    <meta property="og:image:width" content={String(site.web.ogImageWidth)} />
+    <meta property="og:image:height" content={String(site.web.ogImageHeight)} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content={ogLocale} />
-    <meta property="og:site_name" content="OIKOS Kéa" />
+    <meta property="og:site_name" content={`${site.brand.name} ${site.address.cityEn}`} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

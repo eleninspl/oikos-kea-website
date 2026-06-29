@@ -22,7 +22,7 @@ const isActive = (page: string) => {
 
 <nav class="nav">
   <div class="nav__inner">
-    <a href={base + '/'} class="nav__logo" aria-label={`OIKOS Kea — ${t('nav.home')}`}>
+    <a href={base + '/'} class="nav__logo" aria-label={`${site.brand.name} Kea — ${t('nav.home')}`}>
       <img src="/images/brand/logo-wordmark.png" alt="" width="450" height="106" />
     </a>
 
@@ -56,15 +56,15 @@ const isActive = (page: string) => {
           {t('nav.lang')}
         </a>
       </li>
-      <li><a href={`tel:${site.phoneTel}`} class="nav__cta">{t('nav.reserve')}</a></li>
+      <li><a href={`tel:${site.contact.phoneTel}`} class="nav__cta">{t('nav.reserve')}</a></li>
     </ul>
 
     <div class="nav__mobile-controls">
       <a
         href={alternateUrl}
         class="nav__lang nav__lang--burger"
-        aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}
-      >{t('nav.lang')}</a>
+        aria-label={`Switch to ${alternateLang === 'en' ? 'English' : 'Greek'}`}>{t('nav.lang')}</a
+      >
 
       <button
         class="nav__burger"
@@ -86,7 +86,7 @@ const isActive = (page: string) => {
   <a href={base + '/menu'} class="nav__link">{t('nav.menu')}</a>
   <a href={base + '/about'} class="nav__link">{t('nav.about')}</a>
   <a href={base + '/contact'} class="nav__link">{t('nav.contact')}</a>
-  <a href={`tel:${site.phoneTel}`} class="btn btn--outline" style="margin-top: 1rem;"
+  <a href={`tel:${site.contact.phoneTel}`} class="btn btn--outline" style="margin-top: 1rem;"
     >{t('nav.reserve')}</a
   >
 </div>

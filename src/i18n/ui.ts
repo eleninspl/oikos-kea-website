@@ -1,4 +1,20 @@
+import { site } from '../lib/site';
+
 export type Lang = 'el' | 'en';
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  UI STRINGS (δίγλωσσα EL/EN) — κείμενα διεπαφής & marketing/SEO copy.
+//
+//  Τα ΣΤΟΙΧΕΙΑ ΤΗΣ ΕΠΙΧΕΙΡΗΣΗΣ (brand, τόπος, ωράριο, τηλέφωνο, νομικά) ΔΕΝ
+//  γράφονται hardcoded εδώ — διαβάζονται από το κεντρικό config (src/lib/site.ts)
+//  μέσω των παρακάτω aliases. Έτσι μια αλλαγή στο site.ts ενημερώνει ταυτόχρονα
+//  και τα κείμενα. Ό,τι απομένει εδώ είναι αμιγώς κείμενο (περιεχόμενο) — το
+//  αλλάζεις ανά πελάτη όταν κλωνοποιείς το template (δες TEMPLATE.md).
+// ─────────────────────────────────────────────────────────────────────────────
+const brand = site.brand.name;
+const addr = site.address;
+const hrs = site.hours;
+const phone = site.contact.phoneDisplay;
 
 export const ui = {
   el: {
@@ -12,12 +28,11 @@ export const ui = {
     'a11y.skip': 'Μετάβαση στο περιεχόμενο',
 
     // HOME SEO
-    'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Κέα, Κυκλάδες',
-    'home.seo.desc':
-      'Το OIKOS είναι το all day cuisine bar στην Κορρησία, Κέα. Brunch, σούσι, cocktails, smoothies και πολλά άλλα. Ανοιχτοί καθημερινά από το πρωί μέχρι αργά.',
+    'home.seo.title': `${brand} — All Day Cuisine & Bar | ${addr.cityEl}, ${addr.regionEl}`,
+    'home.seo.desc': `Το ${brand} είναι το all day cuisine bar στην ${addr.areaEl}, ${addr.cityEl}. Brunch, σούσι, cocktails, smoothies και πολλά άλλα. Ανοιχτοί καθημερινά από το πρωί μέχρι αργά.`,
 
     // HERO
-    'hero.eyebrow': 'Κορρησία · Κέα · Κυκλάδες',
+    'hero.eyebrow': `${addr.areaEl} · ${addr.cityEl} · ${addr.regionEl}`,
     'hero.title1': 'Εκεί που η μέρα',
     'hero.title2': 'ξεδιπλώνεται',
     'hero.subtitle':
@@ -30,8 +45,7 @@ export const ui = {
     'home.about.eyebrow': 'Η ιστορία μας',
     'home.about.title1': 'Ένα μέρος για να μείνεις',
     'home.about.title2': 'λίγο παραπάνω',
-    'home.about.text':
-      'Γεννημένο το 2021, το OIKOS δημιουργήθηκε ως χώρος συνάντησης για ντόπιους και ταξιδιώτες. Πιστεύουμε ότι η καλή κουζίνα, τα τίμια ποτά και η σωστή ατμόσφαιρα κάνουν κάθε ώρα της ημέρας αξέχαστη.',
+    'home.about.text': `Γεννημένο το 2021, το ${brand} δημιουργήθηκε ως χώρος συνάντησης για ντόπιους και ταξιδιώτες. Πιστεύουμε ότι η καλή κουζίνα, τα τίμια ποτά και η σωστή ατμόσφαιρα κάνουν κάθε ώρα της ημέρας αξέχαστη.`,
     'home.about.cta': 'Η ιστορία μας',
 
     // SERVICES
@@ -64,19 +78,18 @@ export const ui = {
 
     // INFO STRIP
     'info.location.label': 'Τοποθεσία',
-    'info.location.val': 'Κορρησία, Κέα',
+    'info.location.val': addr.line1El,
     'info.location.sub': 'Κυκλάδες, Ελλάδα',
     'info.hours.label': 'Ώρες',
-    'info.hours.val': '06:00 – 02:00',
-    'info.hours.sub': 'Καθημερινά',
+    'info.hours.val': hrs.display,
+    'info.hours.sub': hrs.noteEl,
     'info.res.label': 'Κρατήσεις',
     'info.res.sub': 'Τηλεφωνικά ή χωρίς κράτηση',
 
     // MENU PAGE
-    'menu.seo.title': 'Μενού — OIKOS Κέα | Brunch, Σούσι, Cocktails & Άλλα',
-    'menu.seo.desc':
-      'Το μενού του OIKOS — all day brunch, φρέσκο σούσι, craft cocktails, smoothie bowls και επιδόρπια στην Κορρησία, Κέα.',
-    'menu.eyebrow': 'Κέα, Κυκλάδες',
+    'menu.seo.title': `Μενού — ${brand} ${addr.cityEl} | Brunch, Σούσι, Cocktails & Άλλα`,
+    'menu.seo.desc': `Το μενού του ${brand} — all day brunch, φρέσκο σούσι, craft cocktails, smoothie bowls και επιδόρπια στην ${addr.areaEl}, ${addr.cityEl}.`,
+    'menu.eyebrow': `${addr.cityEl}, ${addr.regionEl}`,
     'menu.title': 'Το Μενού μας',
     'menu.subtitle': 'Από το πρωί μέχρι τα μεσάνυχτα — και τα πάντα ενδιάμεσα',
     'menu.disclaimer': [
@@ -86,18 +99,17 @@ export const ui = {
       'Απαγορεύεται η κατανάλωση οινοπνευματωδών ποτών από άτομα κάτω των 18 ετών.',
       'Τα εδέσματα με την ένδειξη (*) είναι κατεψυγμένα.',
       'Το λάδι που χρησιμοποιείται στις σαλάτες μας είναι αγνό παρθένο ελαιόλαδο. Τηγανίζουμε με ηλιέλαιο.',
-      'Αγορανομικός υπεύθυνος: Αλμπαντίδης Νικόλαος.',
+      `Αγορανομικός υπεύθυνος: ${site.legal.marketSupervisorEl}.`,
     ].join('\n'),
     'menu.note.eyebrow': 'Σημείωση',
     'menu.cta.title': 'Ελάτε να γευτείτε',
-    'menu.cta.subtitle': 'Ανοιχτοί καθημερινά 06:00 – 02:00',
-    'menu.cta.btn': 'Καλέστε μας: 22880 22507',
+    'menu.cta.subtitle': hrs.summaryEl,
+    'menu.cta.btn': `Καλέστε μας: ${phone}`,
 
     // ABOUT PAGE
-    'about.seo.title': 'Σχετικά — OIKOS Κέα | Η Ιστορία μας',
-    'about.seo.desc':
-      'Το OIKOS ιδρύθηκε το 2021 στην Κορρησία, Κέα. Μάθετε για τη φιλοσοφία, τον χώρο και τους ανθρώπους πίσω από το all day cuisine bar.',
-    'about.eyebrow': 'Ιδρ. 2021 · Κέα',
+    'about.seo.title': `Σχετικά — ${brand} ${addr.cityEl} | Η Ιστορία μας`,
+    'about.seo.desc': `Το ${brand} ιδρύθηκε το 2021 στην ${addr.areaEl}, ${addr.cityEl}. Μάθετε για τη φιλοσοφία, τον χώρο και τους ανθρώπους πίσω από το all day cuisine bar.`,
+    'about.eyebrow': `Ιδρ. 2021 · ${addr.cityEl}`,
     'about.title': 'Η Ιστορία μας',
     'about.subtitle': 'Ένας χώρος γεννημένος από αγάπη για καλό φαγητό και ζωή στο νησί',
     'about.who.eyebrow': 'Ποιοι είμαστε',
@@ -109,7 +121,7 @@ export const ui = {
     'about.stat1.label': 'Χρονιά ίδρυσης',
     'about.stat2.val': '20ω',
     'about.stat2.label': 'Ανοιχτοί καθημερινά',
-    'about.stat3.val': 'Κέα',
+    'about.stat3.val': addr.cityEl,
     'about.stat3.label': 'Το νησί μας',
     'about.phil.eyebrow': 'Φιλοσοφία μας',
     'about.phil.title1': 'Ποιότητα από το πρωί',
@@ -120,23 +132,21 @@ export const ui = {
       'Το μενού μας συνδυάζει κουζίνες σκόπιμα — brunch classics, ιαπωνικό σούσι, μεσογειακά κυρίως πιάτα και cocktails που αφηγούνται την ιστορία του Αιγαίου.',
     'about.space.eyebrow': 'Ο χώρος',
     'about.space.title': 'Σχεδιασμένος για να μείνεις',
-    'about.space.text':
-      'Ο χώρος του OIKOS συνδυάζει τη ζεστασιά της κυκλαδίτικης αρχιτεκτονικής με μια σύγχρονη, χαλαρή αισθητική. Τοξωτές πόρτες, ζεστό ξύλο και απαλός φωτισμός σε προσκαλούν να καθίσεις και να ξεχάσεις την ώρα. Διαθέτουμε εσωτερικό χώρο και βεράντα για τα ιδανικά βράδια της Κέας.',
+    'about.space.text': `Ο χώρος του ${brand} συνδυάζει τη ζεστασιά της κυκλαδίτικης αρχιτεκτονικής με μια σύγχρονη, χαλαρή αισθητική. Τοξωτές πόρτες, ζεστό ξύλο και απαλός φωτισμός σε προσκαλούν να καθίσεις και να ξεχάσεις την ώρα. Διαθέτουμε εσωτερικό χώρο και βεράντα για τα ιδανικά βράδια της Κέας.`,
     'about.cta.title': 'Ελάτε να μας βρείτε',
-    'about.cta.subtitle': 'Κορρησία, Κέα — Ανοιχτοί καθημερινά, 06:00 – 02:00',
+    'about.cta.subtitle': `${addr.line1El} — Ανοιχτοί καθημερινά, ${hrs.display}`,
     'about.cta.dir': 'Πού είμαστε',
     'about.cta.menu': 'Δείτε το μενού',
 
     // CONTACT PAGE
-    'contact.seo.title': 'Επικοινωνία & Πού μας Βρείτε — OIKOS Κέα',
-    'contact.seo.desc':
-      'Βρείτε το OIKOS στην Κορρησία, Κέα. Ώρες λειτουργίας, τηλέφωνο, διεύθυνση και χάρτης. Ανοιχτοί καθημερινά 06:00 – 02:00.',
-    'contact.eyebrow': 'Κορρησία · Κέα · Ελλάδα',
+    'contact.seo.title': `Επικοινωνία & Πού μας Βρείτε — ${brand} ${addr.cityEl}`,
+    'contact.seo.desc': `Βρείτε το ${brand} στην ${addr.areaEl}, ${addr.cityEl}. Ώρες λειτουργίας, τηλέφωνο, διεύθυνση και χάρτης. ${hrs.summaryEl}.`,
+    'contact.eyebrow': `${addr.areaEl} · ${addr.cityEl} · ${addr.countryEl}`,
     'contact.title': 'Βρείτε μας',
     'contact.subtitle': 'Εδώ κάθε μέρα — ελάτε όπως είστε',
     'contact.address.label': 'Διεύθυνση',
-    'contact.address.val': 'Κορρησία, Κέα',
-    'contact.address.sub': 'Κυκλάδες, Ελλάδα 84002',
+    'contact.address.val': addr.line1El,
+    'contact.address.sub': addr.line2El,
     'contact.phone.label': 'Τηλέφωνο',
     'contact.phone.sub': 'Καλέστε για κράτηση',
     'contact.email.label': 'Email',
@@ -150,16 +160,15 @@ export const ui = {
     'contact.hours.sat': 'Σάββατο',
     'contact.hours.sun': 'Κυριακή',
     'contact.here.label': 'Πώς να φτάσετε',
-    'contact.here.text':
-      'Το OIKOS βρίσκεται στην Κορρησία (Λιβάδι), το κεντρικό λιμάνι της Κέας. Από Αθήνα, πάρτε το ferry από τη Λαυρεωτική (περίπου 1 ώρα). Είμαστε λίγα βήματα από το λιμάνι — θα μας βρείτε εύκολα.',
+    'contact.here.text': `Το ${brand} βρίσκεται στην Κορρησία (Λιβάδι), το κεντρικό λιμάνι της Κέας. Από Αθήνα, πάρτε το ferry από τη Λαυρεωτική (περίπου 1 ώρα). Είμαστε λίγα βήματα από το λιμάνι — θα μας βρείτε εύκολα.`,
     'contact.cta.title': 'Τα λέμε σύντομα',
     'contact.cta.subtitle': 'Χωρίς κράτηση; Ελάτε ανεξάρτητα.',
-    'contact.cta.btn': 'Καλέστε: 22880 22507',
+    'contact.cta.btn': `Καλέστε: ${phone}`,
 
     // FOOTER
     'footer.nav': 'Πλοήγηση',
     'footer.find': 'Βρείτε μας',
-    'footer.copyright': 'OIKOS Κέα. Όλα τα δικαιώματα διατηρούνται.',
+    'footer.copyright': `${brand} ${addr.cityEl}. Όλα τα δικαιώματα διατηρούνται.`,
   },
 
   en: {
@@ -173,12 +182,11 @@ export const ui = {
     'a11y.skip': 'Skip to content',
 
     // HOME SEO
-    'home.seo.title': 'OIKOS — All Day Cuisine & Bar | Kéa, Cyclades',
-    'home.seo.desc':
-      'OIKOS is an all day cuisine bar in Korrisia, Kéa. Brunch, sushi, cocktails, smoothies and more. Open daily from morning to late night.',
+    'home.seo.title': `${brand} — All Day Cuisine & Bar | ${addr.cityEn}, ${addr.regionEn}`,
+    'home.seo.desc': `${brand} is an all day cuisine bar in ${addr.areaEn}, ${addr.cityEn}. Brunch, sushi, cocktails, smoothies and more. Open daily from morning to late night.`,
 
     // HERO
-    'hero.eyebrow': 'Korrisia · Kéa · Cyclades',
+    'hero.eyebrow': `${addr.areaEn} · ${addr.cityEn} · ${addr.regionEn}`,
     'hero.title1': 'Where the day',
     'hero.title2': 'unfolds',
     'hero.subtitle':
@@ -191,8 +199,7 @@ export const ui = {
     'home.about.eyebrow': 'Our story',
     'home.about.title1': 'A place to stay',
     'home.about.title2': 'a little longer',
-    'home.about.text':
-      'Born in 2021, OIKOS was created as a gathering place for islanders and travellers alike. We believe that good food, honest drinks, and the right atmosphere make every hour of the day worth savouring.',
+    'home.about.text': `Born in 2021, ${brand} was created as a gathering place for islanders and travellers alike. We believe that good food, honest drinks, and the right atmosphere make every hour of the day worth savouring.`,
     'home.about.cta': 'Our story',
 
     // SERVICES
@@ -225,19 +232,18 @@ export const ui = {
 
     // INFO STRIP
     'info.location.label': 'Location',
-    'info.location.val': 'Korrisia, Kéa',
+    'info.location.val': addr.line1En,
     'info.location.sub': 'Cyclades, Greece',
     'info.hours.label': 'Hours',
-    'info.hours.val': '06:00 – 02:00',
-    'info.hours.sub': 'Every day',
+    'info.hours.val': hrs.display,
+    'info.hours.sub': hrs.noteEn,
     'info.res.label': 'Reservations',
     'info.res.sub': 'Call or walk in',
 
     // MENU PAGE
-    'menu.seo.title': 'Menu — OIKOS Kéa | Brunch, Sushi, Cocktails & More',
-    'menu.seo.desc':
-      'Explore the OIKOS menu — all day brunch, fresh sushi, craft cocktails, smoothie bowls, and desserts in Korrisia, Kéa.',
-    'menu.eyebrow': 'Kéa, Cyclades',
+    'menu.seo.title': `Menu — ${brand} ${addr.cityEn} | Brunch, Sushi, Cocktails & More`,
+    'menu.seo.desc': `Explore the ${brand} menu — all day brunch, fresh sushi, craft cocktails, smoothie bowls, and desserts in ${addr.areaEn}, ${addr.cityEn}.`,
+    'menu.eyebrow': `${addr.cityEn}, ${addr.regionEn}`,
     'menu.title': 'Our Menu',
     'menu.subtitle': 'From morning to midnight — everything in between',
     'menu.disclaimer': [
@@ -247,22 +253,21 @@ export const ui = {
       'Persons under the age of 18 are prohibited from consuming alcoholic beverages.',
       'Dishes marked with (*) are frozen.',
       'The oil used in our salads is pure virgin olive oil. Sunflower seed oil is used for frying.',
-      'Market supervisor: Almpantidis Nikolaos.',
+      `Market supervisor: ${site.legal.marketSupervisorEn}.`,
     ].join('\n'),
     'menu.note.eyebrow': 'Note',
     'menu.cta.title': 'Come taste for yourself',
-    'menu.cta.subtitle': 'Open every day from 06:00 to 02:00',
-    'menu.cta.btn': 'Call us: 22880 22507',
+    'menu.cta.subtitle': hrs.summaryEn,
+    'menu.cta.btn': `Call us: ${phone}`,
 
     // ABOUT PAGE
-    'about.seo.title': 'About — OIKOS Kéa | Our Story & Philosophy',
-    'about.seo.desc':
-      'OIKOS was born in 2021 in Korrisia, Kéa. Learn about our philosophy, the space, and the people behind the all day cuisine bar.',
-    'about.eyebrow': 'Est. 2021 · Kéa',
+    'about.seo.title': `About — ${brand} ${addr.cityEn} | Our Story & Philosophy`,
+    'about.seo.desc': `${brand} was born in 2021 in ${addr.areaEn}, ${addr.cityEn}. Learn about our philosophy, the space, and the people behind the all day cuisine bar.`,
+    'about.eyebrow': `Est. 2021 · ${addr.cityEn}`,
     'about.title': 'Our Story',
     'about.subtitle': 'A place born from the love of good food and island life',
     'about.who.eyebrow': 'Who we are',
-    'about.who.title': 'OIKOS means home',
+    'about.who.title': `${brand} means home`,
     'about.who.text1':
       "In Greek, oikos means home — and that's exactly what we set out to create. Not just a restaurant, but a space where you feel at ease from your very first coffee to your last cocktail.",
     'about.who.text2':
@@ -270,7 +275,7 @@ export const ui = {
     'about.stat1.label': 'Year we opened',
     'about.stat2.val': '20h',
     'about.stat2.label': 'Open daily',
-    'about.stat3.val': 'Kéa',
+    'about.stat3.val': addr.cityEn,
     'about.stat3.label': 'Our home island',
     'about.phil.eyebrow': 'Our philosophy',
     'about.phil.title1': 'Quality from morning',
@@ -281,23 +286,21 @@ export const ui = {
       'Our menu spans cultures intentionally — brunch classics, Japanese-inspired sushi, Mediterranean mains, and cocktails that tell the story of the Aegean.',
     'about.space.eyebrow': 'The space',
     'about.space.title': 'Designed to linger',
-    'about.space.text':
-      'The OIKOS space blends the warmth of Cycladic stone architecture with a contemporary, unpretentious sensibility. Arched doorways, warm wood, and soft lighting invite you to sit down and forget the time. We have indoor seating and a terrace for when the Kéa evenings are at their best.',
+    'about.space.text': `The ${brand} space blends the warmth of Cycladic stone architecture with a contemporary, unpretentious sensibility. Arched doorways, warm wood, and soft lighting invite you to sit down and forget the time. We have indoor seating and a terrace for when the Kéa evenings are at their best.`,
     'about.cta.title': 'Come and see us',
-    'about.cta.subtitle': 'Korrisia, Kéa — open every day, 06:00 to 02:00',
+    'about.cta.subtitle': `${addr.line1En} — open every day, ${hrs.opens} to ${hrs.closes}`,
     'about.cta.dir': 'Get directions',
     'about.cta.menu': 'See the menu',
 
     // CONTACT PAGE
-    'contact.seo.title': 'Contact & Find Us — OIKOS Kéa',
-    'contact.seo.desc':
-      "Find OIKOS in Korrisia, Kéa. Opening hours, phone number, address and map. We're open every day from 06:00 to 02:00.",
-    'contact.eyebrow': 'Korrisia · Kéa · Greece',
+    'contact.seo.title': `Contact & Find Us — ${brand} ${addr.cityEn}`,
+    'contact.seo.desc': `Find ${brand} in ${addr.areaEn}, ${addr.cityEn}. Opening hours, phone number, address and map. We're open every day from ${hrs.opens} to ${hrs.closes}.`,
+    'contact.eyebrow': `${addr.areaEn} · ${addr.cityEn} · ${addr.countryEn}`,
     'contact.title': 'Find Us',
     'contact.subtitle': "We're here every day — come as you are",
     'contact.address.label': 'Address',
-    'contact.address.val': 'Korrisia, Kéa',
-    'contact.address.sub': 'Kikladhes, Greece 84002',
+    'contact.address.val': addr.line1En,
+    'contact.address.sub': addr.line2En,
     'contact.phone.label': 'Phone',
     'contact.phone.sub': 'Call to reserve a table',
     'contact.email.label': 'Email',
@@ -311,16 +314,15 @@ export const ui = {
     'contact.hours.sat': 'Saturday',
     'contact.hours.sun': 'Sunday',
     'contact.here.label': 'Getting here',
-    'contact.here.text':
-      "OIKOS is located in Korrisia (Livadi), the main port village of Kéa. From Athens, take the ferry from Lavrio (approx. 1 hour). We are a short walk from the port — you can't miss us.",
+    'contact.here.text': `${brand} is located in Korrisia (Livadi), the main port village of Kéa. From Athens, take the ferry from Lavrio (approx. 1 hour). We are a short walk from the port — you can't miss us.`,
     'contact.cta.title': 'See you soon',
     'contact.cta.subtitle': 'No booking? Walk-ins always welcome.',
-    'contact.cta.btn': 'Call: 22880 22507',
+    'contact.cta.btn': `Call: ${phone}`,
 
     // FOOTER
     'footer.nav': 'Navigate',
     'footer.find': 'Find us',
-    'footer.copyright': 'OIKOS Kéa. All rights reserved.',
+    'footer.copyright': `${brand} ${addr.cityEn}. All rights reserved.`,
   },
 } as const;
 
