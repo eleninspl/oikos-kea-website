@@ -6,10 +6,11 @@
  */
 import { createClient } from '@sanity/client';
 import { LexoRank } from 'lexorank';
+import { PROJECT_ID, DATASET } from './_env';
 
 const client = createClient({
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? 's7x6np2r',
-  dataset: process.env.SANITY_STUDIO_DATASET ?? 'production',
+  projectId: PROJECT_ID,
+  dataset: DATASET,
   apiVersion: '2022-09-09',
   token: process.env.SANITY_WRITE_TOKEN,
   useCdn: false,

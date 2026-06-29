@@ -7,13 +7,12 @@ import { readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { menuTabs } from '../../src/i18n/menuData';
 import type { Item } from '../../src/i18n/menuData';
+import { PROJECT_ID } from './_env';
 
 const token = JSON.parse(readFileSync(`${homedir()}/.config/sanity/config.json`, 'utf8')).authToken;
 
-const PROJECT = 's7x6np2r';
-
 async function query<T>(groq: string): Promise<T> {
-  const url = `https://${PROJECT}.api.sanity.io/v2021-06-07/data/query/production?query=${encodeURIComponent(groq)}`;
+  const url = `https://${PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/production?query=${encodeURIComponent(groq)}`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
   const json = await res.json();
   return json.result as T;

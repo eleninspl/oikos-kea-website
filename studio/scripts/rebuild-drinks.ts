@@ -3,10 +3,11 @@
  *   SANITY_WRITE_TOKEN=... npx tsx scripts/rebuild-drinks.ts  */
 import { createClient } from '@sanity/client';
 import { LexoRank } from 'lexorank';
+import { PROJECT_ID, DATASET } from './_env';
 
 const client = createClient({
-  projectId: 's7x6np2r',
-  dataset: 'production',
+  projectId: PROJECT_ID,
+  dataset: DATASET,
   apiVersion: '2022-09-09',
   token: process.env.SANITY_WRITE_TOKEN,
   useCdn: false,

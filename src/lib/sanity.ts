@@ -3,19 +3,25 @@ import type { MenuTab, Section } from '../i18n/menuData';
 import { menuTabs as seedMenu } from '../i18n/menuData';
 
 // ─── Sanity client ────────────────────────────────────────────────────────────
-const projectId = import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? 's7x6np2r';
-const dataset = import.meta.env?.PUBLIC_SANITY_DATASET ?? 'production';
+// projectId/dataset ΑΠΟΚΛΕΙΣΤΙΚΑ από env — κανένα hardcoded id. Όταν δεν έχει
+// οριστεί projectId (π.χ. φρέσκο clone του template πριν συνδεθεί το Sanity), δεν
+// φτιάχνουμε client και το getMenu πέφτει στα τοπικά seed δεδομένα (menuData).
+const projectId = import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? process.env.PUBLIC_SANITY_PROJECT_ID;
+const dataset =
+  import.meta.env?.PUBLIC_SANITY_DATASET ?? process.env.PUBLIC_SANITY_DATASET ?? 'production';
 
 // Read-only token — ΜΟΝΟ build-time (server-side)· δεν φτάνει ποτέ στον browser.
 const token = import.meta.env?.SANITY_READ_TOKEN ?? process.env.SANITY_READ_TOKEN;
 
-export const sanity = createClient({
-  projectId,
-  dataset,
-  apiVersion: '2024-01-01',
-  token,
-  useCdn: false, // build-time fetch· φρέσκα δεδομένα σε κάθε rebuild (webhook)
-});
+export const sanity = projectId
+  ? createClient({
+      projectId,
+      dataset,
+      apiVersion: '2024-01-01',
+      token,
+      useCdn: false, // build-time fetch· φρέσκα δεδομένα σε κάθε rebuild (webhook)
+    })
+  : null;
 
 // ─── GROQ ─────────────────────────────────────────────────────────────────────
 // Φέρνει τις καρτέλες (menu) ΚΑΙ τις κατηγορίες — όλα φτιαγμένα από τον ιδιοκτήτη
@@ -107,6 +113,10 @@ export function assembleMenu(data: RawData): MenuTab[] {
 // ─── fetch wrapper ────────────────────────────────────────────────────────────
 // Πέφτει στα τοπικά seed δεδομένα αν το Sanity είναι άδειο ή απρόσιτο.
 export async function getMenu(): Promise<MenuTab[]> {
+  if (!sanity) {
+    console.warn('[sanity] PUBLIC_SANITY_PROJECT_ID δεν ορίστηκε — fallback στα seed δεδομένα');
+    return seedMenu;
+  }
   try {
     const data = await sanity.fetch<RawData>(MENU_QUERY);
     if (data?.menus?.length && data?.categories?.length) {

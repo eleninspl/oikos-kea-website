@@ -82,11 +82,19 @@ const structure = (S: StructureBuilder, context: StructureResolverContext) =>
         .child(S.component(HelpGuide).title('Οδηγίες Χρήσης')),
     ]);
 
+// projectId ΑΠΟΚΛΕΙΣΤΙΚΑ από env — σαφές σφάλμα αν λείπει (αντί για σιωπηλή αποτυχία).
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
+if (!projectId) {
+  throw new Error(
+    'Λείπει το SANITY_STUDIO_PROJECT_ID. Όρισέ το στο studio/.env (δες studio/.env.example).',
+  );
+}
+
 export default defineConfig({
   name: 'oikos-kea',
   title: 'OIKOS Μενού',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  projectId,
   dataset: process.env.SANITY_STUDIO_DATASET ?? 'production',
 
   theme: oikosTheme,

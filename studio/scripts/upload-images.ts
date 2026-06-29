@@ -8,10 +8,11 @@
 import { createClient } from '@sanity/client';
 import { createReadStream } from 'fs';
 import { resolve, extname } from 'path';
+import { PROJECT_ID, DATASET } from './_env';
 
 const client = createClient({
-  projectId: 's7x6np2r',
-  dataset: 'production',
+  projectId: PROJECT_ID,
+  dataset: DATASET,
   apiVersion: '2024-01-01',
   token: process.env.SANITY_WRITE_TOKEN,
   useCdn: false,
@@ -33,7 +34,7 @@ const IMAGES_DIR = resolve(__dirname, '../../public/images/food');
 async function run() {
   if (!process.env.SANITY_WRITE_TOKEN) {
     console.error(
-      '❌  Λείπει το SANITY_WRITE_TOKEN.\n   Πάρτο από: https://sanity.io/manage/project/s7x6np2r → API → Tokens',
+      `❌  Λείπει το SANITY_WRITE_TOKEN.\n   Πάρτο από: https://sanity.io/manage/project/${PROJECT_ID} → API → Tokens`,
     );
     process.exit(1);
   }
