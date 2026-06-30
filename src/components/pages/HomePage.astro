@@ -2,6 +2,7 @@
 import { Picture, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBanner from '../CtaBanner.astro';
+import PressFeature from '../PressFeature.astro';
 import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 import { site } from '../../lib/site';
@@ -256,7 +257,7 @@ const heroPoster = await getImage({ src: heroPosterImg, width: 1080, format: 'we
   </section>
 
   <!-- Reviews -->
-  <section class="section section--dark">
+  <section class="section section--dark" style="padding-bottom:var(--space-16);">
     <div class="container">
       <div class="container--narrow">
         <p class="eyebrow">{t('reviews.eyebrow')}</p>
@@ -303,6 +304,10 @@ const heroPoster = await getImage({ src: heroPosterImg, width: 1080, format: 'we
           </p>
           <span class="review-card__author">Petros Isaias · {t('reviews.guide')}</span>
         </div>
+      </div>
+
+      <div class="reviews-press">
+        <PressFeature lang={lang} />
       </div>
     </div>
   </section>
@@ -623,6 +628,11 @@ const heroPoster = await getImage({ src: heroPosterImg, width: 1080, format: 'we
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-gold);
+  }
+
+  /* ─── Press feature (below reviews) ─── */
+  .reviews-press {
+    margin-top: var(--space-12);
   }
 
   /* ─── Google rating badge ─── */
