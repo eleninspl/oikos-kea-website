@@ -1,24 +1,21 @@
 import { createClient } from '@sanity/client';
 import type { MenuTab, Section } from '../i18n/menuData';
 import { menuTabs as seedMenu } from '../i18n/menuData';
+import { env } from './env';
 
 // ─── Sanity client ────────────────────────────────────────────────────────────
-// projectId/dataset ΑΠΟΚΛΕΙΣΤΙΚΑ από env — κανένα hardcoded id. Όταν δεν έχει
-// οριστεί projectId (π.χ. φρέσκο clone του template πριν συνδεθεί το Sanity), δεν
-// φτιάχνουμε client και το getMenu πέφτει στα τοπικά seed δεδομένα (menuData).
-const projectId = import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? process.env.PUBLIC_SANITY_PROJECT_ID;
-const dataset =
-  import.meta.env?.PUBLIC_SANITY_DATASET ?? process.env.PUBLIC_SANITY_DATASET ?? 'production';
-
+// projectId/dataset ΑΠΟΚΛΕΙΣΤΙΚΑ από env (μέσω src/lib/env.ts) — κανένα hardcoded
+// id. Όταν δεν έχει οριστεί projectId (π.χ. φρέσκο clone του template πριν συνδεθεί
+// το Sanity), δεν φτιάχνουμε client και το getMenu πέφτει στα τοπικά seed δεδομένα.
 // Read-only token — ΜΟΝΟ build-time (server-side)· δεν φτάνει ποτέ στον browser.
-const token = import.meta.env?.SANITY_READ_TOKEN ?? process.env.SANITY_READ_TOKEN;
+const { projectId, dataset, readToken } = env.sanity;
 
 export const sanity = projectId
   ? createClient({
       projectId,
       dataset,
       apiVersion: '2024-01-01',
-      token,
+      token: readToken,
       useCdn: false, // build-time fetch· φρέσκα δεδομένα σε κάθε rebuild (webhook)
     })
   : null;

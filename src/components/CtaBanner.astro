@@ -15,3 +15,49 @@ const { title, subtitle } = Astro.props;
     <slot />
   </div>
 </section>
+
+<!-- is:global: τα .cta-actions / .btn--dark / .btn--outline έρχονται από slotted
+     περιεχόμενο της γονικής σελίδας, οπότε δεν θα τα έπιανε scoped style. -->
+<style is:global>
+  /* ─── CTA banner ─── */
+  .cta-banner {
+    background-color: var(--color-gold);
+    padding-block: var(--space-16);
+    text-align: center;
+  }
+
+  .cta-banner .section-title {
+    color: var(--color-dark);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-banner p {
+    color: rgb(from var(--brand-ink) r g b / 0.7);
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-8);
+  }
+
+  .cta-banner .btn--dark {
+    background-color: var(--color-dark);
+    color: var(--color-cream);
+  }
+  .cta-banner .btn--dark:hover {
+    background-color: var(--color-mid);
+  }
+  .cta-banner .btn--outline {
+    border-color: var(--color-dark);
+    color: var(--color-dark);
+  }
+  .cta-banner .btn--outline:hover {
+    background-color: var(--color-dark);
+    color: var(--color-cream);
+  }
+
+  /* Κεντραρισμένη σειρά κουμπιών (CTA με δύο επιλογές) */
+  .cta-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

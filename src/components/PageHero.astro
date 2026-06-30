@@ -13,3 +13,27 @@ const { eyebrow, title, subtitle } = Astro.props;
   <h1 class="page-hero__title">{title}</h1>
   <p class="page-hero__sub">{subtitle}</p>
 </div>
+
+<style>
+  /* ─── Page hero (inner pages) ─── */
+  .page-hero {
+    background-color: var(--color-dark);
+    padding-block: var(--space-32) var(--space-20);
+    text-align: center;
+    color: var(--text-light);
+  }
+
+  .page-hero__title {
+    font-size: clamp(var(--text-4xl), 6vw, 5rem);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-4);
+  }
+
+  .page-hero__sub {
+    font-size: var(--text-lg);
+    color: rgb(from var(--brand-cream) r g b / 0.65);
+    font-weight: 300;
+  }
+</style>
