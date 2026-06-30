@@ -24,6 +24,10 @@ export const menu = defineType({
     },
   },
   orderings: [orderRankOrdering],
+  fieldsets: [
+    { name: 'labels', title: ' ', options: { columns: 2 } },
+    { name: 'notes', title: ' ', options: { columns: 2 } },
+  ],
   fields: [
     // Κρυφό πεδίο που κρατά τη σειρά από το drag & drop
     orderRankField({ type: 'menu' }),
@@ -40,6 +44,7 @@ export const menu = defineType({
       title: 'Όνομα (ΕΛ)',
       type: 'string',
       group: 'basic',
+      fieldset: 'labels',
       validation: (r) => r.required(),
     }),
     defineField({
@@ -47,6 +52,7 @@ export const menu = defineType({
       title: 'Name (EN)',
       type: 'string',
       group: 'basic',
+      fieldset: 'labels',
       components: { input: TranslateInput },
       validation: (r) => r.required(),
     }),
@@ -63,6 +69,7 @@ export const menu = defineType({
       title: 'Σημείωση (ΕΛ)',
       type: 'string',
       group: 'basic',
+      fieldset: 'notes',
       description:
         'Προαιρετικό κείμενο κάτω από τον τίτλο της καρτέλας (π.χ. «Σερβίρεται 08.30–15.00»).',
     }),
@@ -71,6 +78,7 @@ export const menu = defineType({
       title: 'Note (EN)',
       type: 'string',
       group: 'basic',
+      fieldset: 'notes',
       components: { input: TranslateInput },
     }),
     defineField({

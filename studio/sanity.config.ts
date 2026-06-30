@@ -13,6 +13,7 @@ import { schemaTypes } from './schemas';
 import { oikosTheme } from './theme';
 import { Logo } from './components/Logo';
 import { HelpGuide } from './components/HelpGuide';
+import { compactUiPlugin } from './plugins/compact-ui';
 
 // ─── Sidebar structure ────────────────────────────────────────────────────────
 // Κύριος δρόμος «Το Μενού μου»: καρτέλα → κατηγορία → προϊόντα (drag & drop).
@@ -104,7 +105,7 @@ export default defineConfig({
     },
   },
 
-  plugins: [structureTool({ structure })],
+  plugins: [structureTool({ structure }), compactUiPlugin()],
 
   schema: {
     types: schemaTypes,

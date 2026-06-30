@@ -23,6 +23,10 @@ export const category = defineType({
     },
   },
   orderings: [orderRankOrdering],
+  fieldsets: [
+    { name: 'titles', title: ' ', options: { columns: 2 } },
+    { name: 'notes', title: ' ', options: { columns: 2 } },
+  ],
   fields: [
     orderRankField({ type: 'category' }),
     defineField({
@@ -39,6 +43,7 @@ export const category = defineType({
       title: 'Όνομα Κατηγορίας (ΕΛ)',
       type: 'string',
       group: 'content',
+      fieldset: 'titles',
       validation: (r) => r.required(),
     }),
     defineField({
@@ -46,6 +51,7 @@ export const category = defineType({
       title: 'Category Name (EN)',
       type: 'string',
       group: 'content',
+      fieldset: 'titles',
       components: { input: TranslateInput },
       validation: (r) => r.required(),
     }),
@@ -54,6 +60,7 @@ export const category = defineType({
       title: 'Σημείωση (ΕΛ)',
       type: 'string',
       group: 'content',
+      fieldset: 'notes',
       description: 'Προαιρετικό κείμενο κάτω από τον τίτλο (π.χ. «όλα τα milkshakes €6,50»).',
     }),
     defineField({
@@ -61,6 +68,7 @@ export const category = defineType({
       title: 'Note (EN)',
       type: 'string',
       group: 'content',
+      fieldset: 'notes',
       components: { input: TranslateInput },
     }),
     defineField({
