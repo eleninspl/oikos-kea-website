@@ -29,14 +29,14 @@ export const ui = {
 
     // HOME SEO
     'home.seo.title': `${brand} — All Day Cuisine & Bar | ${addr.cityEl}, ${addr.regionEl}`,
-    'home.seo.desc': `Το ${brand} είναι το all day cuisine bar στην ${addr.areaEl}, ${addr.cityEl}. Brunch, σούσι, cocktails, smoothies και πολλά άλλα. Ανοιχτοί καθημερινά από το πρωί μέχρι αργά.`,
+    'home.seo.desc': `Το ${brand} είναι το all day cuisine bar στην ${addr.areaEl}, ${addr.cityEl}. Brunch, sushi, cocktails, smoothies και πολλά άλλα. Ανοιχτοί καθημερινά από το πρωί μέχρι αργά.`,
 
     // HERO
     'hero.eyebrow': `${addr.areaEl} · ${addr.cityEl} · ${addr.regionEl}`,
     'hero.title1': 'Εκεί που η μέρα',
     'hero.title2': 'ξεδιπλώνεται',
     'hero.subtitle':
-      'All day cuisine & bar — brunch, σούσι, cocktails και πολλά άλλα, στην καρδιά της Κέας.',
+      'All day cuisine & bar — brunch, sushi, cocktails και πολλά άλλα, στην καρδιά της Κέας.',
     'hero.cta1': 'Δείτε το Μενού',
     'hero.cta2': 'Βρείτε μας',
     'hero.scroll': 'Κάτω',
@@ -66,7 +66,7 @@ export const ui = {
     // SERVICES
     'svc.brunch.title': 'Brunch',
     'svc.brunch.desc': 'Αυγά, granola, avocado toast.',
-    'svc.sushi.title': 'Σούσι',
+    'svc.sushi.title': 'Sushi',
     'svc.sushi.desc': 'Φρέσκα rolls με premium υλικά.',
     'svc.lunch.title': 'Μεσημέρι & Βράδυ',
     'svc.lunch.desc': 'Μεσογειακές γεύσεις, μοντέρνα ματιά.',
@@ -102,8 +102,8 @@ export const ui = {
     'info.res.sub': 'Τηλεφωνικά ή χωρίς κράτηση',
 
     // MENU PAGE
-    'menu.seo.title': `Μενού — ${brand} ${addr.cityEl} | Brunch, Σούσι, Cocktails & Άλλα`,
-    'menu.seo.desc': `Το μενού του ${brand} — all day brunch, φρέσκο σούσι, craft cocktails, smoothie bowls και επιδόρπια στην ${addr.areaEl}, ${addr.cityEl}.`,
+    'menu.seo.title': `Μενού — ${brand} ${addr.cityEl} | Brunch, Sushi, Cocktails & Άλλα`,
+    'menu.seo.desc': `Το μενού του ${brand} — all day brunch, φρέσκο sushi, craft cocktails, smoothie bowls και επιδόρπια στην ${addr.areaEl}, ${addr.cityEl}.`,
     'menu.eyebrow': `${addr.cityEl}, ${addr.regionEl}`,
     'menu.title': 'Το Μενού μας',
     'menu.subtitle': 'Από το πρωί μέχρι τα μεσάνυχτα — και τα πάντα ενδιάμεσα',
@@ -142,9 +142,9 @@ export const ui = {
     'about.phil.title1': 'Ποιότητα από το πρωί',
     'about.phil.title2': 'μέχρι τα μεσάνυχτα',
     'about.phil.text1':
-      'Brunch στις 10 ή σούσι τα μεσάνυχτα — κάθε πιάτο παίρνει την ίδια προσοχή. Τοπικά υλικά, πάθος στο μαγείρεμα, πάντα.',
+      'Brunch στις 10 ή sushi τα μεσάνυχτα — κάθε πιάτο παίρνει την ίδια προσοχή. Τοπικά υλικά, πάθος στο μαγείρεμα, πάντα.',
     'about.phil.text2':
-      'Brunch classics, ιαπωνικό σούσι, μεσογειακά κυρίως, cocktails του Αιγαίου — σκόπιμα διαφορετικά.',
+      'Brunch classics, ιαπωνικό sushi, μεσογειακά κυρίως, cocktails του Αιγαίου — σκόπιμα διαφορετικά.',
     'about.kitchen.eyebrow': 'Η κουζίνα μας',
     'about.kitchen.title': 'Μαγειρεύουμε με πάθος',
     'about.kitchen.text1':
