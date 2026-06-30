@@ -229,3 +229,276 @@ const tabImageFallback: Record<string, string> = {
     if (e.key === 'Escape') closeLightbox();
   });
 </script>
+
+<style>
+  /* ─── Menu page — drill-down: πλέγμα μεγάλων κουμπιών ⇄ οθόνη κατηγορίας ─── */
+  .menu-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Κάρτα-κουμπί: φωτό αριστερά + τίτλος δίπλα */
+  .menu-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: left;
+    padding: var(--space-3);
+    background: transparent;
+    border: 1px solid rgb(from var(--brand-ink) r g b / 0.18);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.1s ease;
+  }
+  .menu-tab-img {
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-cream-alt);
+  }
+  .menu-tab-label {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--text-dark);
+    line-height: 1.2;
+  }
+  .menu-tab-btn:hover {
+    border-color: var(--color-gold);
+    background-color: rgb(from var(--brand-accent) r g b / 0.12);
+  }
+  .menu-tab-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* «Πίσω» κουμπί — μόνο στην οθόνη λεπτομέρειας */
+  .menu-back {
+    display: none;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-10);
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--text-dark);
+    background: transparent;
+    border: 1px solid rgb(from var(--brand-ink) r g b / 0.18);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .menu-back:hover {
+    border-color: var(--color-gold);
+    background-color: rgb(from var(--brand-accent) r g b / 0.12);
+  }
+
+  .menu-panel-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--text-dark);
+  }
+
+  .menu-panel-title:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .menu-panel-note {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-10);
+  }
+
+  .menu-panel {
+    display: none;
+  }
+
+  /* Εναλλαγή όψεων μέσω data-view στο .menu-tabs (το JS ορίζει data-view/.active) */
+  .menu-tabs[data-view='detail'] .menu-nav {
+    display: none;
+  }
+  .menu-tabs[data-view='detail'] .menu-back {
+    display: inline-flex;
+  }
+  .menu-tabs[data-view='detail'] .menu-panel.active {
+    display: block;
+  }
+  .menu-tabs[data-view='grid'] .menu-disclaimer {
+    display: none;
+  }
+
+  /* ─── Menu page — sections ─── */
+  .menu-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .menu-section-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-bottom: var(--space-6);
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: default;
+    color: inherit;
+  }
+
+  .menu-section-line {
+    flex: 1;
+    height: 1px;
+    background-color: rgb(from var(--brand-ink) r g b / 0.1);
+  }
+
+  /* Σημείωση κατηγορίας (π.χ. «όλα τα milkshakes €6,50») — κάτω από τον τίτλο */
+  .menu-section-note {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: calc(-1 * var(--space-2));
+    margin-bottom: var(--space-6);
+  }
+
+  .menu-category {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-subsection {
+    margin-bottom: var(--space-10);
+  }
+
+  .menu-subsection-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px dashed rgb(from var(--brand-ink) r g b / 0.15);
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-12);
+    row-gap: 0;
+  }
+
+  .menu-disclaimer {
+    margin-top: var(--space-8);
+    padding-block: var(--space-8);
+    border-top: 1px solid rgb(from var(--brand-ink) r g b / 0.1);
+    max-width: 52rem;
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    line-height: 1.7;
+  }
+  /* Κάθε γραμμή της σημείωσης = bullet */
+  .menu-disclaimer p:last-child {
+    white-space: pre-line;
+  }
+
+  /* ─── Menu page — mobile ─── */
+  @media (max-width: 768px) {
+    .menu-section {
+      margin-bottom: var(--space-10);
+    }
+
+    .menu-section-header {
+      margin-bottom: var(--space-4);
+    }
+
+    .menu-section-header .menu-category {
+      font-size: var(--text-2xl);
+      white-space: normal;
+      line-height: 1.15;
+    }
+
+    .menu-section-line {
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .menu-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .menu-nav {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    .menu-tab-btn {
+      min-height: 90px;
+      font-size: var(--text-base);
+      padding: var(--space-4) var(--space-3);
+    }
+
+    .menu-category {
+      font-size: var(--text-2xl);
+    }
+  }
+</style>
+
+<!-- is:global: το lightbox δημιουργείται από JS και προστίθεται στο <body>,
+     εκτός του scope του component — οπότε χρειάζεται global styles. -->
+<style is:global>
+  /* ── Image lightbox ── */
+  .img-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(20, 18, 15, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .img-lightbox.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .img-lightbox__img {
+    max-width: min(680px, 92vw);
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    transform: scale(0.92);
+    transition: transform 0.25s ease;
+  }
+
+  .img-lightbox.is-open .img-lightbox__img {
+    transform: scale(1);
+  }
+</style>

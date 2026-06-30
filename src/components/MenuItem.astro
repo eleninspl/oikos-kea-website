@@ -89,8 +89,146 @@ const soldOut = lang === 'el' ? 'Εξαντλήθηκε' : 'Sold out';
     </div>
     {
       item.image && (
-        <img class="menu-item__img" src={item.image} alt="" loading="lazy" width="80" height="80" />
+        <img
+          class="menu-item__img"
+          src={item.image}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          width="80"
+          height="80"
+        />
       )
     }
   </div>
 </div>
+
+<style>
+  /* ─── Menu item (μία γραμμή προϊόντος) ─── */
+  .menu-item {
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid rgb(from var(--brand-ink) r g b / 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+
+  .menu-item__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .menu-item__name {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .menu-item__info {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .menu-item__desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-top: var(--space-1);
+    line-height: 1.55;
+  }
+
+  .menu-item__desc-line {
+    display: block;
+  }
+
+  .menu-item__price-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .menu-item__price {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-gold-dim);
+    white-space: nowrap;
+  }
+
+  .menu-item__price-label {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.85em;
+  }
+
+  /* Σημείωση τιμής (π.χ. «τιμή ημέρας») — κάτω από την τιμή */
+  .menu-item__price-note {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .menu-item--unavailable {
+    opacity: 0.5;
+  }
+
+  /* Δεξιά στήλη: τιμή + εικόνα */
+  .menu-item__side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  /* Φωτό προϊόντος (Sanity/external ή τοπικό fallback — μένει <img>) */
+  .menu-item__img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    display: block;
+    cursor: zoom-in;
+  }
+
+  /* Ετικέτες (vegan, spicy…) */
+  .menu-item__label {
+    display: inline-block;
+    margin-left: var(--space-2);
+    padding: 1px 8px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    background: rgb(from var(--brand-accent) r g b / 0.22);
+    border-radius: var(--radius-full);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .menu-item__label--out {
+    background: rgb(from var(--brand-accent) r g b / 0.25);
+    color: #8a5a1f;
+  }
+
+  /* Έξτρα προσθήκες */
+  .menu-item__extra {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  /* Αλλεργιογόνα */
+  .menu-item__allergens {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: var(--space-1);
+    font-style: italic;
+  }
+</style>
