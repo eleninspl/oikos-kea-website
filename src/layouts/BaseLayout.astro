@@ -1,5 +1,10 @@
 ---
 import '../styles/global.css';
+// Self-hosted fonts (woff2, same-origin) — κανένα render-blocking 3rd-party,
+// κανένα fonts.googleapis/gstatic στο CSP. font-display: swap ενσωματωμένο.
+import '@fontsource-variable/inter';
+import '@fontsource-variable/playfair-display';
+import '@fontsource-variable/playfair-display/wght-italic.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { getAlternateUrl, useTranslations } from '../i18n/utils';
@@ -117,28 +122,8 @@ const jsonLD = {
     <meta name="twitter:image" content={ogImageURL} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    <!-- Fonts: preconnect, μετά μη-render-blocking load (preload → onload swap σε
-         stylesheet). Το @import αφαιρέθηκε από το global.css ώστε να μην μπλοκάρει
-         το First Contentful Paint. Άλλαξε γραμματοσειρά εδώ + στα --font-* tokens. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
-      />
-    </noscript>
+    <!-- Fonts: self-hosted μέσω @fontsource-variable (import στο frontmatter του
+         BaseLayout). Άλλαξε γραμματοσειρά εκεί + στα --font-* tokens στο global.css. -->
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -146,8 +131,8 @@ const jsonLD = {
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
     <link rel="apple-touch-icon" href="/icons/favicon-180.png" />
 
-    <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+    <!-- JSON-LD (data block, όχι εκτελέσιμο script) -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
 
     <ClientRouter />
   </head>

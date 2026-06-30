@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../PageHero.astro';
 import CtaBanner from '../CtaBanner.astro';
@@ -7,6 +8,14 @@ import { getMenu } from '../../lib/sanity';
 import MenuItem from '../MenuItem.astro';
 import type { Lang } from '../../i18n/utils';
 import { site } from '../../lib/site';
+import risottoImg from '../../assets/images/food/risotto.jpg';
+import cocktailImg from '../../assets/images/drinks/cocktail.jpg';
+
+// Δύο tab fallbacks μετακινήθηκαν στο src/assets → βελτιστοποιημένα thumbnails.
+const [risottoThumb, cocktailThumb] = await Promise.all([
+  getImage({ src: risottoImg, width: 176, format: 'webp' }),
+  getImage({ src: cocktailImg, width: 176, format: 'webp' }),
+]);
 
 interface Props {
   lang: Lang;
@@ -22,8 +31,8 @@ const tabImageFallback: Record<string, string> = {
   coffee: '/images/drinks/smoothies.webp',
   brunch: '/images/food/brunch.jpg',
   sushi: '/images/food/sushi.jpg',
-  cocktails: '/images/drinks/cocktail.jpg',
-  'lunch-dinner': '/images/food/risotto.jpg',
+  cocktails: cocktailThumb.src,
+  'lunch-dinner': risottoThumb.src,
   spirits: '/images/drinks/beer.jpg',
   wines: '/images/drinks/wine.jpg',
 };

@@ -1,7 +1,18 @@
+import { getImage } from 'astro:assets';
 import { createClient } from '@sanity/client';
 import type { MenuTab, Section } from '../i18n/menuData';
 import { menuTabs as seedMenu } from '../i18n/menuData';
 import { env } from './env';
+import hamachiImg from '../assets/images/food/hamachi-jalapeno.jpg';
+import spicyMaguroImg from '../assets/images/food/spicy-maguro.webp';
+import donburiImg from '../assets/images/food/donburi.webp';
+
+// Τρία local fallbacks μετακινήθηκαν στο src/assets → βελτιστοποιημένα thumbnails.
+const [hamachiThumb, spicyThumb, donburiThumb] = await Promise.all([
+  getImage({ src: hamachiImg, width: 160, format: 'webp' }),
+  getImage({ src: spicyMaguroImg, width: 160, format: 'webp' }),
+  getImage({ src: donburiImg, width: 160, format: 'webp' }),
+]);
 
 // ─── Sanity client ────────────────────────────────────────────────────────────
 // projectId/dataset ΑΠΟΚΛΕΙΣΤΙΚΑ από env (μέσω src/lib/env.ts) — κανένα hardcoded
@@ -60,10 +71,10 @@ type RawData = { menus: RawMenu[]; categories: RawCategory[] };
 const localItemImages: Record<string, string> = {
   kani: '/images/food/kani.jpg',
   kyuri: '/images/food/kyuri.webp',
-  'spicy maguro': '/images/food/spicy-maguro.webp',
-  hamachi: '/images/food/hamachi-jalapeno.jpg',
+  'spicy maguro': spicyThumb.src,
+  hamachi: hamachiThumb.src,
   vegetarian: '/images/food/vegetarian.webp',
-  chirashi: '/images/food/donburi.webp',
+  chirashi: donburiThumb.src,
   'chicken rigatoni': '/images/food/rigatoni-chicken.jpg',
 };
 
@@ -107,12 +118,26 @@ export function assembleMenu(data: RawData): MenuTab[] {
     .filter((tab) => tab.sections.length > 0);
 }
 
+// Εφαρμόζει τα τοπικά (βελτιστοποιημένα) fallback images στα seed δεδομένα — ώστε
+// τα seed items χωρίς δικό τους image να δείχνουν το αντίστοιχο local thumbnail.
+const seedWithImages: MenuTab[] = seedMenu.map((tab) => ({
+  ...tab,
+  sections: tab.sections.map((s) => ({
+    ...s,
+    items: s.items?.map(applyLocalImage),
+    subsections: s.subsections?.map((sub) => ({
+      ...sub,
+      items: sub.items.map(applyLocalImage),
+    })),
+  })),
+}));
+
 // ─── fetch wrapper ────────────────────────────────────────────────────────────
 // Πέφτει στα τοπικά seed δεδομένα αν το Sanity είναι άδειο ή απρόσιτο.
 export async function getMenu(): Promise<MenuTab[]> {
   if (!sanity) {
     console.warn('[sanity] PUBLIC_SANITY_PROJECT_ID δεν ορίστηκε — fallback στα seed δεδομένα');
-    return seedMenu;
+    return seedWithImages;
   }
   try {
     const data = await sanity.fetch<RawData>(MENU_QUERY);
@@ -126,5 +151,5 @@ export async function getMenu(): Promise<MenuTab[]> {
   } catch (err) {
     console.warn('[sanity] αποτυχία fetch — fallback στα seed δεδομένα:', (err as Error).message);
   }
-  return seedMenu;
+  return seedWithImages;
 }

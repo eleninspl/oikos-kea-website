@@ -51,7 +51,8 @@ export const ui = {
     // EVENTS SECTION
     'home.events.eyebrow': 'Εκδηλώσεις',
     'home.events.title': 'Αναλαμβάνουμε\nιδιωτικές εκδηλώσεις',
-    'home.events.text': 'Γενέθλια, εταιρικά γεύματα, οικογενειακές στιγμές — αναλαμβάνουμε κάθε λεπτομέρεια.',
+    'home.events.text':
+      'Γενέθλια, εταιρικά γεύματα, οικογενειακές στιγμές — αναλαμβάνουμε κάθε λεπτομέρεια.',
     'home.events.cta': 'Επικοινωνήστε μαζί μας',
 
     // BAR SECTION
@@ -131,8 +132,7 @@ export const ui = {
     'about.who.title': 'Καλώς ήρθατε στον οίκο μας',
     'about.who.text1':
       'Στο λιμανάκι της Κορρησίας — όχι απλά εστιατόριο, αλλά ένας τόπος όπου νιώθεις άνετα από τον πρώτο καφέ μέχρι το τελευταίο cocktail.',
-    'about.who.text2':
-      'Από το 2021 — γιατί κάθε ώρα της ημέρας αξίζει να τη ζεις καλά.',
+    'about.who.text2': 'Από το 2021 — γιατί κάθε ώρα της ημέρας αξίζει να τη ζεις καλά.',
     'about.stat1.label': 'Χρονιά ίδρυσης',
     'about.stat2.val': '20ω',
     'about.stat2.label': 'Ανοιχτοί καθημερινά',
@@ -147,8 +147,7 @@ export const ui = {
       'Brunch classics, ιαπωνικό sushi, μεσογειακά κυρίως, cocktails του Αιγαίου — σκόπιμα διαφορετικά.',
     'about.kitchen.eyebrow': 'Η κουζίνα μας',
     'about.kitchen.title': 'Μαγειρεύουμε με πάθος',
-    'about.kitchen.text1':
-      'Μαγειρεύουμε από την αρχή, κάθε μέρα — με τοπικά υλικά και μεράκι.',
+    'about.kitchen.text1': 'Μαγειρεύουμε από την αρχή, κάθε μέρα — με τοπικά υλικά και μεράκι.',
     'about.kitchen.text2':
       'Δουλεύουμε με εποχιακά υλικά, προτιμάμε τους τοπικούς παραγωγούς, και δεν κόβουμε γωνίες. Αυτό το βλέπεις στο πιάτο.',
     'about.space.eyebrow': 'Ο χώρος',
@@ -226,7 +225,8 @@ export const ui = {
     // EVENTS SECTION
     'home.events.eyebrow': 'Private events',
     'home.events.title': 'We host\nprivate events',
-    'home.events.text': 'Birthdays, corporate dinners, family gatherings — every detail taken care of.',
+    'home.events.text':
+      'Birthdays, corporate dinners, family gatherings — every detail taken care of.',
     'home.events.cta': 'Get in touch',
 
     // BAR SECTION
@@ -322,10 +322,9 @@ export const ui = {
       'Brunch classics, Japanese sushi, Mediterranean mains, Aegean cocktails — different by design.',
     'about.kitchen.eyebrow': 'Our kitchen',
     'about.kitchen.title': 'Cooked with passion',
-    'about.kitchen.text1':
-      'Cooked from scratch, every day — local ingredients, real care.',
+    'about.kitchen.text1': 'Cooked from scratch, every day — local ingredients, real care.',
     'about.kitchen.text2':
-      'We work with seasonal produce, favour local suppliers, and don\'t cut corners. You taste it in every plate.',
+      "We work with seasonal produce, favour local suppliers, and don't cut corners. You taste it in every plate.",
     'about.space.eyebrow': 'The space',
     'about.space.title': 'Designed to linger',
     'about.space.text': `The ${brand} space blends the warmth of Cycladic stone architecture with a contemporary, unpretentious sensibility. Arched doorways, warm wood, and soft lighting invite you to sit down and forget the time. We have indoor seating and a terrace for when the Kéa evenings are at their best.`,
