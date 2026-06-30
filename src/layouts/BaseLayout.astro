@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import { getAlternateUrl, useTranslations } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
 import { site } from '../lib/site';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -123,6 +124,8 @@ const jsonLD = {
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
+
+    <ClientRouter />
   </head>
   <body>
     <a href="#main" class="skip-link">{t('a11y.skip')}</a>
@@ -133,14 +136,12 @@ const jsonLD = {
     <Footer lang={lang} />
 
     <script>
-      const nav = document.querySelector('.nav');
-      const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
-      const mobileMenu = document.querySelector<HTMLElement>('.nav__mobile');
-
       let scrolled = false;
+
       window.addEventListener(
         'scroll',
         () => {
+          const nav = document.querySelector('.nav');
           const isScrolled = window.scrollY > 20;
           if (isScrolled !== scrolled) {
             scrolled = isScrolled;
@@ -150,27 +151,36 @@ const jsonLD = {
         { passive: true },
       );
 
-      function setMenu(open: boolean) {
-        mobileMenu?.classList.toggle('open', open);
-        document.body.style.overflow = open ? 'hidden' : '';
-        burger?.setAttribute('aria-expanded', String(open));
+      function initNav() {
+        const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
+        const mobileMenu = document.querySelector<HTMLElement>('.nav__mobile');
+
+        function setMenu(open: boolean) {
+          mobileMenu?.classList.toggle('open', open);
+          document.body.style.overflow = open ? 'hidden' : '';
+          burger?.setAttribute('aria-expanded', String(open));
+        }
+
+        burger?.addEventListener('click', () => {
+          const open = !mobileMenu?.classList.contains('open');
+          setMenu(open);
+          if (open) mobileMenu?.querySelector<HTMLElement>('a')?.focus();
+        });
+
+        mobileMenu?.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => setMenu(false));
+        });
       }
 
-      burger?.addEventListener('click', () => {
-        const open = !mobileMenu?.classList.contains('open');
-        setMenu(open);
-        // Σε άνοιγμα, μετέφερε το focus στον πρώτο σύνδεσμο του overlay.
-        if (open) mobileMenu?.querySelector<HTMLElement>('a')?.focus();
-      });
+      document.addEventListener('astro:page-load', initNav);
 
-      mobileMenu?.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => setMenu(false));
-      });
-
-      // Escape κλείνει το μενού και επιστρέφει το focus στο burger.
       document.addEventListener('keydown', (e) => {
+        const mobileMenu = document.querySelector<HTMLElement>('.nav__mobile');
+        const burger = document.querySelector<HTMLButtonElement>('.nav__burger');
         if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
-          setMenu(false);
+          mobileMenu.classList.remove('open');
+          document.body.style.overflow = '';
+          burger?.setAttribute('aria-expanded', 'false');
           burger?.focus();
         }
       });

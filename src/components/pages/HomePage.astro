@@ -38,6 +38,7 @@ const base = langBase(lang);
   <!-- About strip -->
   <section class="about-strip">
     <div class="about-strip__image">
+      <!-- TODO: replace src with harbor/sea photo of Korrisia when available -->
       <img
         src="/images/brand/sign.jpg"
         alt="The OIKOS sign on a marble wall with guests in the foreground"
@@ -62,8 +63,8 @@ const base = langBase(lang);
       <div class="service-card">
         <div class="service-card__media">
           <img
-            src="/images/food/brunch.jpg"
-            alt="Poached eggs with halloumi and salad at OIKOS"
+            src="/images/pancakes-berries-coffee.jpg"
+            alt="Pancakes with strawberries, blueberries and a latte at OIKOS"
             loading="lazy"
             decoding="async"
           />
@@ -76,8 +77,8 @@ const base = langBase(lang);
       <div class="service-card">
         <div class="service-card__media">
           <img
-            src="/images/food/sushi.jpg"
-            alt="Freshly prepared sushi rolls at OIKOS"
+            src="/images/sushi-rolls-cocktail.jpg"
+            alt="Sushi rolls with a cocktail at OIKOS"
             loading="lazy"
             decoding="async"
           />
@@ -113,6 +114,48 @@ const base = langBase(lang);
         <div class="service-card__body">
           <h3 class="service-card__title">Cocktails</h3>
           <p class="service-card__desc">{t('svc.cocktails.desc')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section class="section section--dark section--centered">
+    <div class="container--narrow">
+      <p class="eyebrow">{t('home.events.eyebrow')}</p>
+      <div class="divider divider--centered"></div>
+      <h2 class="section-title" style="margin-bottom:var(--space-6);">
+        {t('home.events.title').split('\n')[0]}<br />
+        <em>{t('home.events.title').split('\n')[1]}</em>
+      </h2>
+      <p class="body-text" style="margin-bottom:var(--space-8); max-width:520px; margin-inline:auto;">
+        {t('home.events.text')}
+      </p>
+      <a href={base + '/contact'} class="btn btn--gold">{t('home.events.cta')}</a>
+    </div>
+  </section>
+
+  <!-- Bar -->
+  <section class="section section--cream-alt">
+    <div class="container">
+      <div class="about-content about-content--reverse about-content--side-mobile">
+        <div>
+          <p class="eyebrow">{t('home.bar.eyebrow')}</p>
+          <div class="divider"></div>
+          <h2 class="section-title" style="margin-bottom:var(--space-6);">
+            {t('home.bar.title').split('\n').map((line, i) => i === 0 ? line : <><br /><em>{line}</em></>)}
+          </h2>
+          <p class="body-text">{t('home.bar.text')}</p>
+        </div>
+        <div style="overflow:hidden; border-radius:var(--radius-md);">
+          <img
+            src="/images/bartender-cocktail-mint.jpg"
+            alt="Bartender preparing a cocktail with crushed ice and mint at OIKOS"
+            class="bar-img"
+            style="width:100%; height:500px; object-fit:cover; object-position:center 30%; display:block;"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
@@ -170,31 +213,31 @@ const base = langBase(lang);
     </div>
   </section>
 
-  <!-- Gallery -->
-  <section class="section section--cream">
-    <div class="container--narrow" style="margin-bottom: var(--space-12);">
-      <p class="eyebrow">{t('gallery.eyebrow')}</p>
-      <div class="divider divider--centered"></div>
-      <h2 class="section-title">
-        {t('gallery.title1')}<br />{t('gallery.title2')}
+  <!-- Ambiance -->
+  <section style="position:relative; min-height:480px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+    <img
+      src="/images/reserved-table-night.jpg"
+      alt="A reserved table at OIKOS at night"
+      style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;"
+      loading="lazy"
+      decoding="async"
+    />
+    <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35);"></div>
+    <div style="position:relative; text-align:center; color:#fff; padding:var(--space-16) var(--space-8); max-width:600px;">
+      <h2 class="section-title" style="color:#fff; margin-bottom:var(--space-4);">
+        {t('home.ambiance.title')}
       </h2>
-    </div>
-    <div class="container">
-      <div class="gallery-mosaic">
-        <div class="gallery-mosaic__item gallery-mosaic__item--placeholder"></div>
-        <div class="gallery-mosaic__item gallery-mosaic__item--placeholder"></div>
-        <div class="gallery-mosaic__item gallery-mosaic__item--placeholder"></div>
-        <div class="gallery-mosaic__item gallery-mosaic__item--placeholder"></div>
-        <div class="gallery-mosaic__item gallery-mosaic__item--placeholder"></div>
-      </div>
+      <p style="font-size:var(--text-sm); letter-spacing:0.12em; text-transform:uppercase; opacity:0.75; margin-bottom:var(--space-8);">
+        {t('home.ambiance.sub')}
+      </p>
+      <a href={`tel:${site.contact.phoneTel}`} class="btn btn--outline-light">{t('cta.call')}</a>
     </div>
   </section>
 
   <!-- CTA -->
   <CtaBanner title={t('cta.title')} subtitle={t('cta.subtitle')}>
     <div class="cta-actions">
-      <a href={`tel:${site.contact.phoneTel}`} class="btn btn--dark">{t('cta.call')}</a>
-      <a href={base + '/menu'} class="btn btn--outline">{t('cta.menu')}</a>
+      <a href={base + '/menu'} class="btn btn--dark">{t('cta.menu')}</a>
     </div>
   </CtaBanner>
 

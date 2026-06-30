@@ -92,32 +92,31 @@ const isActive = (page: string) => {
 </div>
 
 <script>
-  // ── Διατήρηση θέσης scroll & ενεργής καρτέλας μενού κατά την αλλαγή γλώσσας ──
-  // Η αλλαγή γλώσσας οδηγεί σε άλλο URL (full page load) που μηδενίζει το scroll.
-  // Αποθηκεύουμε τη θέση πριν φύγουμε και την επαναφέρουμε στη νέα σελίδα.
-  const KEY = 'oikosLangSwitch';
+  let savedScroll: number | null = null;
 
-  document.querySelectorAll<HTMLAnchorElement>('.nav__lang').forEach((link) => {
-    link.addEventListener('click', () => {
-      // Μετάφερε την ανοιχτή κατηγορία μενού (hash) στη νέα γλώσσα
-      if (location.hash) {
-        const url = new URL(link.href, location.origin);
-        url.hash = location.hash;
-        link.href = url.toString();
-      }
-      // Κράτα τη θέση scroll για σελίδες χωρίς hash (αρχική, σχετικά, κ.λπ.)
-      sessionStorage.setItem(KEY, JSON.stringify({ y: window.scrollY, hash: location.hash }));
-    });
+  // Πριν το swap: αποθήκευσε scroll αν πατήθηκε το lang button
+  document.addEventListener('astro:before-preparation', (e: any) => {
+    const from = new URL(e.from);
+    const to = new URL(e.to);
+    // Είναι αλλαγή γλώσσας αν το path αλλάζει μεταξύ /en/... και /...
+    const isLangSwitch =
+      (from.pathname.startsWith('/en') && !to.pathname.startsWith('/en')) ||
+      (!from.pathname.startsWith('/en') && to.pathname.startsWith('/en'));
+    if (isLangSwitch && !location.hash) {
+      savedScroll = window.scrollY;
+      e.scroll = 'preserve'; // πες στο Astro να μην κάνει scroll
+    }
   });
 
-  const raw = sessionStorage.getItem(KEY);
-  if (raw) {
-    sessionStorage.removeItem(KEY);
-    try {
-      const { y } = JSON.parse(raw) as { y: number };
-      // Αν είμαστε σε λεπτομέρεια μενού (hash), το MenuPage κάνει το scroll·
-      // αλλιώς επανέφερε τη θέση scroll όπως ήταν πριν την αλλαγή γλώσσας.
-      if (!location.hash) requestAnimationFrame(() => window.scrollTo(0, y));
-    } catch {}
-  }
+  // Μετά το swap: επανέφερε scroll
+  document.addEventListener('astro:after-swap', () => {
+    if (savedScroll !== null) {
+      window.scrollTo(0, savedScroll);
+      savedScroll = null;
+    }
+    // Μετάφερε hash στη νέα γλώσσα (για μενού)
+    if (location.hash) {
+      document.querySelector(location.hash)?.scrollIntoView();
+    }
+  });
 </script>
