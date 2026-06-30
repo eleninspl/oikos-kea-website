@@ -4,7 +4,7 @@ import PageHero from '../PageHero.astro';
 import CtaBanner from '../CtaBanner.astro';
 import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
-import { site } from '../../lib/site';
+import { mapsDirectionsUrl } from '../../lib/site';
 
 interface Props {
   lang: Lang;
@@ -112,11 +112,8 @@ const base = langBase(lang);
   <!-- CTA -->
   <CtaBanner title={t('about.cta.title')} subtitle={t('about.cta.subtitle')}>
     <div class="cta-actions">
-      <a
-        href={site.social.googleMaps}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn--dark">{t('about.cta.dir')}</a
+      <a href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer" class="btn btn--dark"
+        >{t('about.cta.dir')}</a
       >
       <a href={base + '/menu'} class="btn btn--outline">{t('about.cta.menu')}</a>
     </div>
