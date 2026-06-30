@@ -60,6 +60,10 @@ export const menuItem = defineType({
     { name: 'settings', title: 'Ρυθμίσεις', icon: CogIcon },
   ],
   orderings: [orderRankOrdering],
+  fieldsets: [
+    { name: 'names', title: ' ', options: { columns: 2 } },
+    { name: 'descs', title: ' ', options: { columns: 2 } },
+  ],
   fields: [
     orderRankField({ type: 'menuItem' }),
 
@@ -69,6 +73,7 @@ export const menuItem = defineType({
       title: 'Όνομα (ΕΛ)',
       type: 'string',
       group: 'content',
+      fieldset: 'names',
       validation: (r) => r.required(),
     }),
     defineField({
@@ -76,6 +81,7 @@ export const menuItem = defineType({
       title: 'Name (EN)',
       type: 'string',
       group: 'content',
+      fieldset: 'names',
       components: { input: TranslateInput },
       validation: (r) => r.required(),
     }),
@@ -94,6 +100,7 @@ export const menuItem = defineType({
       type: 'text',
       rows: 2,
       group: 'content',
+      fieldset: 'descs',
     }),
     defineField({
       name: 'descEn',
@@ -101,6 +108,7 @@ export const menuItem = defineType({
       type: 'text',
       rows: 2,
       group: 'content',
+      fieldset: 'descs',
       components: { input: TranslateInput },
     }),
 
