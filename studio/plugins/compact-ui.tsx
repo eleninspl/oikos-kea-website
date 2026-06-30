@@ -4,11 +4,6 @@ import type { LayoutProps } from 'sanity';
 const css = `
   /* ── Compact OIKOS Studio ── */
 
-  /* Hide the "All fields" tab — we have proper groups */
-  [data-testid="field-group-tabs"] button:first-of-type {
-    display: none !important;
-  }
-
   /* Shrink the large document heading inside the form body */
   [data-testid="document-panel-scroller"] [data-ui="Heading"] {
     font-size: 1.15rem !important;
