@@ -4,18 +4,26 @@ import type { LayoutProps } from 'sanity';
 const css = `
   /* ── Compact OIKOS Studio ── */
 
-  /* Shrink the huge document preview title */
-  [data-testid="document-panel-document-title"] {
-    padding-top: 10px !important;
-    padding-bottom: 2px !important;
-    min-height: unset !important;
+  /* Hide the "All fields" tab — we have proper groups */
+  [data-testid="field-group-tabs"] button:first-of-type {
+    display: none !important;
   }
-  [data-testid="document-panel-document-title"] [data-ui="Heading"] {
-    font-size: 1.05rem !important;
+
+  /* Shrink the large document heading inside the form body */
+  [data-testid="document-panel-scroller"] [data-ui="Heading"] {
+    font-size: 1.15rem !important;
     line-height: 1.3 !important;
   }
 
-  /* Tighter gap between form fields in the document panel */
+  /* Reduce the "Προϊόν" sub-label above the heading */
+  [data-testid="document-panel-scroller"] [data-ui="Text"][data-size="1"] {
+    font-size: 0.7rem !important;
+    opacity: 0.55 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  /* Tighter gap between form fields */
   [data-testid="document-panel-scroller"] [data-ui="Stack"] {
     gap: 10px !important;
   }
@@ -25,13 +33,13 @@ const css = `
     gap: 3px !important;
   }
 
-  /* Reduce top/bottom padding of the form scroll area */
+  /* Reduce top padding of the form scroll area */
   [data-testid="document-panel-scroller"] > div:first-child {
-    padding-top: 12px !important;
+    padding-top: 10px !important;
     padding-bottom: 24px !important;
   }
 
-  /* Tighter field-group tabs row (Βασικά | Τιμές | ...) */
+  /* Tighter field-group tabs row */
   [data-testid="field-group-tabs"] {
     margin-bottom: 4px !important;
   }
@@ -39,18 +47,12 @@ const css = `
     gap: 2px !important;
   }
 
-  /* Collapse any extra padding in the form column */
-  [data-testid="document-panel-form"] > [data-ui="Box"] {
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-  }
-
   /* Textarea: less height by default */
   [data-ui="TextArea"] {
     min-height: 52px !important;
   }
 
-  /* Sidebar pane list items — slightly tighter */
+  /* Sidebar pane list items — tighter */
   [data-ui="PaneContent"] [data-ui="Stack"] {
     gap: 0 !important;
   }

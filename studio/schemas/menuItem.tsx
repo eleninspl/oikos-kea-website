@@ -86,15 +86,6 @@ export const menuItem = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: 'image',
-      title: 'Φωτογραφία',
-      type: 'image',
-      group: 'content',
-      options: { hotspot: true },
-      fields: [{ name: 'alt', title: 'Περιγραφή εικόνας (alt)', type: 'string' }],
-      description: 'Προαιρετική φωτογραφία του προϊόντος.',
-    }),
-    defineField({
       name: 'descEl',
       title: 'Περιγραφή / Υλικά (ΕΛ)',
       type: 'text',
@@ -110,6 +101,15 @@ export const menuItem = defineType({
       group: 'content',
       fieldset: 'descs',
       components: { input: TranslateInput },
+    }),
+    defineField({
+      name: 'image',
+      title: 'Φωτογραφία',
+      type: 'image',
+      group: 'content',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', title: 'Περιγραφή εικόνας (alt)', type: 'string' }],
+      description: 'Προαιρετική φωτογραφία του προϊόντος.',
     }),
 
     // ── Τιμές ──
@@ -152,7 +152,7 @@ export const menuItem = defineType({
       name: 'priceNote',
       title: 'Σημείωση τιμής',
       type: 'string',
-      group: 'pricing',
+      group: 'settings',
       description: 'Προαιρετικό (π.χ. «τιμή ημέρας»).',
     }),
 
