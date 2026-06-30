@@ -149,6 +149,8 @@ export const ui = {
     'about.kitchen.title': 'Μαγειρεύουμε με πάθος',
     'about.kitchen.text1':
       'Μαγειρεύουμε από την αρχή, κάθε μέρα — με τοπικά υλικά και μεράκι.',
+    'about.kitchen.text2':
+      'Δουλεύουμε με εποχιακά υλικά, προτιμάμε τους τοπικούς παραγωγούς, και δεν κόβουμε γωνίες. Αυτό το βλέπεις στο πιάτο.',
     'about.space.eyebrow': 'Ο χώρος',
     'about.space.title': 'Σχεδιασμένος για να μείνεις',
     'about.space.text': `Ο χώρος του ${brand} συνδυάζει τη ζεστασιά της κυκλαδίτικης αρχιτεκτονικής με μια σύγχρονη, χαλαρή αισθητική. Τοξωτές πόρτες, ζεστό ξύλο και απαλός φωτισμός σε προσκαλούν να καθίσεις και να ξεχάσεις την ώρα. Διαθέτουμε εσωτερικό χώρο και βεράντα για τα ιδανικά βράδια της Κέας.`,
@@ -322,6 +324,8 @@ export const ui = {
     'about.kitchen.title': 'Cooked with passion',
     'about.kitchen.text1':
       'Cooked from scratch, every day — local ingredients, real care.',
+    'about.kitchen.text2':
+      'We work with seasonal produce, favour local suppliers, and don\'t cut corners. You taste it in every plate.',
     'about.space.eyebrow': 'The space',
     'about.space.title': 'Designed to linger',
     'about.space.text': `The ${brand} space blends the warmth of Cycladic stone architecture with a contemporary, unpretentious sensibility. Arched doorways, warm wood, and soft lighting invite you to sit down and forget the time. We have indoor seating and a terrace for when the Kéa evenings are at their best.`,
