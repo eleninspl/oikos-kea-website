@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../PageHero.astro';
 import CtaBanner from '../CtaBanner.astro';
@@ -38,8 +38,10 @@ const base = langBase(lang);
           </p>
         </div>
         <div style="overflow:hidden; border-radius:var(--radius-md);">
-          <Image
+          <Picture
             src={signImg}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpeg"
             alt="The OIKOS sign on a marble wall with guests at the entrance"
             widths={[640, 960, 1280]}
             sizes="(max-width: 900px) 100vw, 50vw"
@@ -106,8 +108,10 @@ const base = langBase(lang);
     <div class="container">
       <div class="split">
         <div style="overflow:hidden; border-radius:var(--radius-md);">
-          <Image
+          <Picture
             src={chefsImg}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpeg"
             alt="Two chefs in the OIKOS kitchen"
             widths={[640, 960, 1280]}
             sizes="(max-width: 900px) 100vw, 50vw"

@@ -87,8 +87,8 @@ export const site = {
   web: {
     siteUrl: 'https://oikoskea.gr', // πρέπει να ταυτίζεται με astro.config.mjs `site`
     defaultOgImage: '/images/brand/og-image.jpg',
-    ogImageWidth: 1206,
-    ogImageHeight: 1548,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
   },
 
   // ── Νομικά ─────────────────────────────────────────────────────────────────

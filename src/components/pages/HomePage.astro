@@ -1,14 +1,23 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBanner from '../CtaBanner.astro';
 import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 import { site } from '../../lib/site';
+import heroPosterImg from '../../assets/images/brand/hero-poster.jpg';
 import signImg from '../../assets/images/brand/sign.jpg';
 import sushiRollsImg from '../../assets/images/sushi-rolls-cocktail.jpg';
 import bartenderImg from '../../assets/images/bartender-cocktail-mint.jpg';
 import reservedTableImg from '../../assets/images/reserved-table-night.jpg';
+import pancakesImg from '../../assets/images/pancakes-berries-coffee.jpg';
+import risottoImg from '../../assets/images/food/risotto.jpg';
+import cocktailImg from '../../assets/images/drinks/cocktail.jpg';
+import hamachiImg from '../../assets/images/food/hamachi-jalapeno.jpg';
+import pastaImg from '../../assets/images/pasta-tagliatelle-table.jpg';
+import aburiImg from '../../assets/images/aburi-nigiri-rose-wine.jpg';
+import spicyMaguroImg from '../../assets/images/food/spicy-maguro.webp';
+import donburiImg from '../../assets/images/food/donburi.webp';
 
 interface Props {
   lang: Lang;
@@ -16,6 +25,20 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const base = langBase(lang);
+
+// Marquee (διακοσμητικό· ο container είναι aria-hidden). Διπλασιασμένο για loop.
+const marqueeBase = [
+  { src: hamachiImg, alt: 'Hamachi jalapeño sushi at OIKOS' },
+  { src: pastaImg, alt: 'Tagliatelle on the table at OIKOS' },
+  { src: aburiImg, alt: 'Aburi nigiri with rosé wine at OIKOS' },
+  { src: pancakesImg, alt: 'Pancakes with berries and coffee at OIKOS' },
+  { src: spicyMaguroImg, alt: 'Spicy maguro sushi at OIKOS' },
+  { src: donburiImg, alt: 'Donburi bowl at OIKOS' },
+];
+const marquee = [...marqueeBase, ...marqueeBase];
+
+// Poster του hero video = το LCP (γρήγορη εικόνα αντί να περιμένουμε το video).
+const heroPoster = await getImage({ src: heroPosterImg, width: 1080, format: 'webp' });
 ---
 
 <BaseLayout title={t('home.seo.title')} description={t('home.seo.desc')} lang={lang}>
@@ -24,7 +47,7 @@ const base = langBase(lang);
     <video
       class="hero__bg"
       src="/images/brand/hero.mp4"
-      autoplay
+      poster={heroPoster.src}
       muted
       loop
       playsinline
@@ -51,8 +74,10 @@ const base = langBase(lang);
   <section class="about-strip">
     <div class="about-strip__image">
       <!-- TODO: replace src with harbor/sea photo of Korrisia when available -->
-      <Image
+      <Picture
         src={signImg}
+        formats={['avif', 'webp']}
+        fallbackFormat="jpeg"
         alt="The OIKOS sign on a marble wall with guests in the foreground"
         widths={[640, 960, 1280]}
         sizes="(max-width: 900px) 100vw, 50vw"
@@ -75,11 +100,14 @@ const base = langBase(lang);
     <div class="services">
       <div class="service-card">
         <div class="service-card__media">
-          <img
-            src="/images/pancakes-berries-coffee.jpg"
+          <Picture
+            src={pancakesImg}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpeg"
             alt="Pancakes with strawberries, blueberries and a latte at OIKOS"
+            widths={[480, 768, 1067]}
+            sizes="(max-width: 900px) 50vw, 25vw"
             loading="lazy"
-            decoding="async"
           />
         </div>
         <div class="service-card__body">
@@ -89,8 +117,10 @@ const base = langBase(lang);
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <Image
+          <Picture
             src={sushiRollsImg}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpeg"
             alt="Sushi rolls with a cocktail at OIKOS"
             widths={[480, 768, 1067]}
             sizes="(max-width: 900px) 50vw, 25vw"
@@ -104,11 +134,14 @@ const base = langBase(lang);
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img
-            src="/images/food/risotto.jpg"
+          <Picture
+            src={risottoImg}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpeg"
             alt="Risotto dish at OIKOS"
+            widths={[480, 768, 1067]}
+            sizes="(max-width: 900px) 50vw, 25vw"
             loading="lazy"
-            decoding="async"
           />
         </div>
         <div class="service-card__body">
@@ -118,11 +151,14 @@ const base = langBase(lang);
       </div>
       <div class="service-card">
         <div class="service-card__media">
-          <img
-            src="/images/drinks/cocktail.jpg"
+          <Picture
+            src={cocktailImg}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpeg"
             alt="Craft cocktail with bitters at the OIKOS bar"
+            widths={[480, 768, 1067]}
+            sizes="(max-width: 900px) 50vw, 25vw"
             loading="lazy"
-            decoding="async"
           />
         </div>
         <div class="service-card__body">
@@ -180,8 +216,10 @@ const base = langBase(lang);
           <p class="body-text">{t('home.bar.text')}</p>
         </div>
         <div style="overflow:hidden; border-radius:var(--radius-md);">
-          <Image
+          <Picture
             src={bartenderImg}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpeg"
             alt="Bartender preparing a cocktail with crushed ice and mint at OIKOS"
             class="bar-img"
             widths={[640, 960, 1067]}
@@ -199,41 +237,17 @@ const base = langBase(lang);
     <div class="food-marquee" aria-hidden="true">
       <div class="food-marquee__track">
         {
-          [
-            { src: '/images/food/hamachi-jalapeno.jpg', alt: 'Hamachi jalapeño sushi at OIKOS' },
-            {
-              src: '/images/pasta-tagliatelle-table.jpg',
-              alt: 'Tagliatelle on the table at OIKOS',
-            },
-            {
-              src: '/images/aburi-nigiri-rose-wine.jpg',
-              alt: 'Aburi nigiri with rosé wine at OIKOS',
-            },
-            {
-              src: '/images/pancakes-berries-coffee.jpg',
-              alt: 'Pancakes with berries and coffee at OIKOS',
-            },
-            { src: '/images/food/spicy-maguro.webp', alt: 'Spicy maguro sushi at OIKOS' },
-            { src: '/images/food/donburi.webp', alt: 'Donburi bowl at OIKOS' },
-            // duplicated for seamless loop
-            { src: '/images/food/hamachi-jalapeno.jpg', alt: 'Hamachi jalapeño sushi at OIKOS' },
-            {
-              src: '/images/pasta-tagliatelle-table.jpg',
-              alt: 'Tagliatelle on the table at OIKOS',
-            },
-            {
-              src: '/images/aburi-nigiri-rose-wine.jpg',
-              alt: 'Aburi nigiri with rosé wine at OIKOS',
-            },
-            {
-              src: '/images/pancakes-berries-coffee.jpg',
-              alt: 'Pancakes with berries and coffee at OIKOS',
-            },
-            { src: '/images/food/spicy-maguro.webp', alt: 'Spicy maguro sushi at OIKOS' },
-            { src: '/images/food/donburi.webp', alt: 'Donburi bowl at OIKOS' },
-          ].map(({ src, alt }) => (
+          marquee.map(({ src, alt }) => (
             <div class="food-marquee__item">
-              <img src={src} alt={alt} loading="lazy" decoding="async" />
+              <Picture
+                src={src}
+                formats={['avif', 'webp']}
+                fallbackFormat="jpeg"
+                alt={alt}
+                widths={[200, 260, 360, 520]}
+                sizes="(max-width: 640px) 180px, 260px"
+                loading="lazy"
+              />
             </div>
           ))
         }
@@ -297,8 +311,10 @@ const base = langBase(lang);
   <section
     style="position:relative; min-height:480px; display:flex; align-items:center; justify-content:center; overflow:hidden;"
   >
-    <Image
+    <Picture
       src={reservedTableImg}
+      formats={['avif', 'webp']}
+      fallbackFormat="jpeg"
       alt="A reserved table at OIKOS at night"
       widths={[640, 1024, 1600]}
       sizes="100vw"
@@ -357,6 +373,18 @@ const base = langBase(lang);
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Παίξε το hero video ΜΟΝΟ αν ο χρήστης δεν έχει ζητήσει reduced motion.
+  // Διαφορετικά μένει στο poster (στατική εικόνα) — a11y + δεν κατεβαίνει το video.
+  function playHero() {
+    const v = document.querySelector('.hero__bg');
+    if (v instanceof HTMLVideoElement && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.play().catch(() => {});
+    }
+  }
+  document.addEventListener('astro:page-load', playHero);
+</script>
 
 <style>
   /* ─── Hero ─── */
@@ -597,39 +625,6 @@ const base = langBase(lang);
     color: var(--color-gold);
   }
 
-  /* ─── Gallery mosaic ─── */
-  .gallery-mosaic {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 280px);
-    gap: var(--space-2);
-  }
-
-  .gallery-mosaic__item {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .gallery-mosaic__item:first-child {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .gallery-mosaic__item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-  }
-
-  .gallery-mosaic__item:hover img {
-    transform: scale(1.05);
-  }
-
-  .gallery-mosaic__item--placeholder {
-    background-color: var(--color-mid);
-  }
-
   /* ─── Google rating badge ─── */
   .google-rating {
     display: inline-flex;
@@ -761,16 +756,6 @@ const base = langBase(lang);
     .reviews-grid {
       grid-template-columns: 1fr;
     }
-
-    .gallery-mosaic {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(3, 220px);
-    }
-
-    .gallery-mosaic__item:first-child {
-      grid-column: span 2;
-      grid-row: span 1;
-    }
   }
 
   @media (max-width: 640px) {
@@ -825,15 +810,6 @@ const base = langBase(lang);
     }
     .service-card:nth-child(even) .service-card__body {
       order: 2;
-    }
-
-    .gallery-mosaic {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(4, 160px);
-    }
-
-    .gallery-mosaic__item:first-child {
-      grid-column: span 2;
     }
 
     .hero__actions {
