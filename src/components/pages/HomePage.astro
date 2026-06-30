@@ -161,6 +161,33 @@ const base = langBase(lang);
     </div>
   </section>
 
+  <!-- Food marquee -->
+  <section class="food-marquee-section">
+    <div class="food-marquee" aria-hidden="true">
+      <div class="food-marquee__track">
+        {[
+          { src: '/images/food/hamachi-jalapeno.jpg',      alt: 'Hamachi jalapeño sushi at OIKOS' },
+          { src: '/images/pasta-tagliatelle-table.jpg',    alt: 'Tagliatelle on the table at OIKOS' },
+          { src: '/images/aburi-nigiri-rose-wine.jpg',     alt: 'Aburi nigiri with rosé wine at OIKOS' },
+          { src: '/images/pancakes-berries-coffee.jpg',    alt: 'Pancakes with berries and coffee at OIKOS' },
+          { src: '/images/food/spicy-maguro.webp',         alt: 'Spicy maguro sushi at OIKOS' },
+          { src: '/images/food/donburi.webp',              alt: 'Donburi bowl at OIKOS' },
+          // duplicated for seamless loop
+          { src: '/images/food/hamachi-jalapeno.jpg',      alt: 'Hamachi jalapeño sushi at OIKOS' },
+          { src: '/images/pasta-tagliatelle-table.jpg',    alt: 'Tagliatelle on the table at OIKOS' },
+          { src: '/images/aburi-nigiri-rose-wine.jpg',     alt: 'Aburi nigiri with rosé wine at OIKOS' },
+          { src: '/images/pancakes-berries-coffee.jpg',    alt: 'Pancakes with berries and coffee at OIKOS' },
+          { src: '/images/food/spicy-maguro.webp',         alt: 'Spicy maguro sushi at OIKOS' },
+          { src: '/images/food/donburi.webp',              alt: 'Donburi bowl at OIKOS' },
+        ].map(({ src, alt }) => (
+          <div class="food-marquee__item">
+            <img src={src} alt={alt} loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Reviews -->
   <section class="section section--dark">
     <div class="container">
