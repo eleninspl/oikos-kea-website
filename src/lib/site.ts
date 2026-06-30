@@ -83,6 +83,17 @@ export const site = {
     googleRating: { value: '4.7', count: '330' }, // αστέρια & πλήθος κριτικών
   },
 
+  // ── Τύπος / αναφορές (press) ───────────────────────────────────────────────
+  // Δημοσιεύσεις/αναφορές σε ΜΜΕ. Πρόσθεσε νέα entries στην αρχή του πίνακα.
+  press: [
+    {
+      outlet: 'Athinorama',
+      url: 'https://www.athinorama.gr/restaurants/3074400/oikos-kea-gastronomiki-empeiria-dipla-sto-limani-tis-keas/',
+      titleEl: 'Γαστρονομική εμπειρία δίπλα στο λιμάνι της Κέας',
+      titleEn: 'A gastronomic experience by the harbour of Kéa',
+    },
+  ],
+
   // ── Web ────────────────────────────────────────────────────────────────────
   web: {
     siteUrl: 'https://oikoskea.gr', // πρέπει να ταυτίζεται με astro.config.mjs `site`

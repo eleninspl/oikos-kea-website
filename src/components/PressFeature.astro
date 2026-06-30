@@ -1,0 +1,106 @@
+---
+// Αναφορά στον Τύπο — επαναχρησιμοποιήσιμη κάρτα (About + Αρχική).
+// Το λογότυπο «αθηνόραμα» μπαίνει inline ώστε να χρωματίζεται με currentColor
+// στο αυθεντικό κόκκινο της μάρκας. Τα δεδομένα έρχονται από site.press.
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/utils';
+import { site } from '../lib/site';
+import athinoramaLogo from '../assets/brand/athinorama-logo.svg?raw';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const press = site.press[0];
+const pressTitle = lang === 'el' ? press.titleEl : press.titleEn;
+---
+
+<div class="press">
+  <p class="eyebrow">{t('about.press.eyebrow')}</p>
+  <div class="divider divider--centered"></div>
+  <a
+    class="press__card"
+    href={press.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${press.outlet} — ${pressTitle}`}
+  >
+    <span class="press__logo" set:html={athinoramaLogo} />
+    <blockquote class="press__quote">
+      <span class="press__mark" aria-hidden="true">“</span>{pressTitle}
+    </blockquote>
+    <span class="press__link">
+      {t('about.press.read')}
+      <span aria-hidden="true">↗</span>
+    </span>
+  </a>
+</div>
+
+<style>
+  /* Αυθεντικό κόκκινο Athinorama (από το app icon τους) */
+  .press {
+    --athinorama-red: #eb564d;
+  }
+
+  .press__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: clamp(var(--space-8), 5vw, var(--space-12)) var(--space-8);
+    border: 1px solid rgb(from var(--brand-cream) r g b / 0.14);
+    border-radius: var(--radius-md);
+    background: rgb(from var(--brand-cream) r g b / 0.03);
+    text-decoration: none;
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .press__card:hover {
+    transform: translateY(-4px);
+    border-color: rgb(from var(--athinorama-red) r g b / 0.55);
+    background: rgb(from var(--athinorama-red) r g b / 0.06);
+    box-shadow: 0 14px 34px rgb(from var(--athinorama-red) r g b / 0.14);
+  }
+
+  /* Το επίσημο wordmark «αθηνόραμα» (currentColor → κόκκινο μάρκας) */
+  .press__logo :global(svg) {
+    width: clamp(180px, 32vw, 280px);
+    height: auto;
+    display: block;
+    color: var(--athinorama-red);
+  }
+
+  .press__quote {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: clamp(var(--text-lg), 2.4vw, var(--text-2xl));
+    line-height: 1.4;
+    color: var(--brand-cream);
+    margin: 0;
+  }
+
+  .press__mark {
+    color: var(--athinorama-red);
+    margin-right: 0.1em;
+  }
+
+  .press__link {
+    color: var(--color-gold);
+    font-size: var(--text-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .press__card:hover .press__link {
+    border-bottom-color: var(--color-gold);
+  }
+</style>

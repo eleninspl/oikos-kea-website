@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../PageHero.astro';
 import CtaBanner from '../CtaBanner.astro';
+import PressFeature from '../PressFeature.astro';
 import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
 import { mapsDirectionsUrl } from '../../lib/site';
@@ -133,6 +134,13 @@ const base = langBase(lang);
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Press / Στον Τύπο -->
+  <section class="section section--dark section--centered">
+    <div class="container">
+      <PressFeature lang={lang} />
     </div>
   </section>
 
