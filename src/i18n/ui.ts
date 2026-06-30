@@ -45,18 +45,33 @@ export const ui = {
     'home.about.eyebrow': 'Η ιστορία μας',
     'home.about.title1': 'Ένα μέρος για να μείνεις',
     'home.about.title2': 'λίγο παραπάνω',
-    'home.about.text': `Γεννημένο το 2021, το ${brand} δημιουργήθηκε ως χώρος συνάντησης για ντόπιους και ταξιδιώτες. Πιστεύουμε ότι η καλή κουζίνα, τα τίμια ποτά και η σωστή ατμόσφαιρα κάνουν κάθε ώρα της ημέρας αξέχαστη.`,
+    'home.about.text': `Ένας χώρος για ντόπιους και ταξιδιώτες — καλή κουζίνα, τίμια ποτά, σωστή ατμόσφαιρα.`,
     'home.about.cta': 'Η ιστορία μας',
+
+    // EVENTS SECTION
+    'home.events.eyebrow': 'Εκδηλώσεις',
+    'home.events.title': 'Αναλαμβάνουμε\nιδιωτικές εκδηλώσεις',
+    'home.events.text': 'Γενέθλια, εταιρικά γεύματα, οικογενειακές στιγμές — αναλαμβάνουμε κάθε λεπτομέρεια.',
+    'home.events.cta': 'Επικοινωνήστε μαζί μας',
+
+    // BAR SECTION
+    'home.bar.eyebrow': 'Το bar μας',
+    'home.bar.title': 'Από το πρώτο καφέ\nμέχρι το τελευταίο cocktail',
+    'home.bar.text': 'Κάθε ποτό φτιάχνεται με την ίδια φροντίδα που δίνουμε στο φαγητό.',
+
+    // AMBIANCE SECTION
+    'home.ambiance.title': 'Ένα τραπέζι σε περιμένει',
+    'home.ambiance.sub': 'Κρατήστε θέση για απόψε',
 
     // SERVICES
     'svc.brunch.title': 'Brunch',
-    'svc.brunch.desc': 'Αυγά, granola bowls, avocado toast — από το πρωί στο νησί.',
+    'svc.brunch.desc': 'Αυγά, granola, avocado toast.',
     'svc.sushi.title': 'Σούσι',
-    'svc.sushi.desc': 'Φρέσκα rolls με premium υλικά, κάθε μέρα.',
-    'svc.lunch.title': 'Μεσημεριανό & Δείπνο',
-    'svc.lunch.desc': 'Μεσογειακές γεύσεις με μοντέρνα ματιά.',
+    'svc.sushi.desc': 'Φρέσκα rolls με premium υλικά.',
+    'svc.lunch.title': 'Μεσημέρι & Βράδυ',
+    'svc.lunch.desc': 'Μεσογειακές γεύσεις, μοντέρνα ματιά.',
     'svc.cocktails.title': 'Cocktails',
-    'svc.cocktails.desc': 'House cocktails, φυσικά κρασιά, smoothies — από το μεσημέρι αργά.',
+    'svc.cocktails.desc': 'House cocktails, κρασιά & smoothies.',
 
     // REVIEWS
     'reviews.eyebrow': 'Τι λένε οι επισκέπτες',
@@ -115,9 +130,9 @@ export const ui = {
     'about.who.eyebrow': 'Ποιοι είμαστε',
     'about.who.title': 'Καλώς ήρθατε στον οίκο μας',
     'about.who.text1':
-      'Εδώ στο λιμανάκι της Κορρησίας, σας υποδεχόμαστε με την ζεστασιά που αξίζει κάθε επισκέπτης. Όχι απλά ένα εστιατόριο — ένας τόπος όπου νιώθεις άνετα από τον πρώτο πρωινό καφέ μέχρι το τελευταίο βραδινό cocktail.',
+      'Στο λιμανάκι της Κορρησίας — όχι απλά εστιατόριο, αλλά ένας τόπος όπου νιώθεις άνετα από τον πρώτο καφέ μέχρι το τελευταίο cocktail.',
     'about.who.text2':
-      'Από το 2021, στεκόμαστε δίπλα σας με αγάπη για την καλή κουζίνα και ακόμα μεγαλύτερη αγάπη για την παρέα. Γιατί κάθε ώρα της ημέρας αξίζει να τη ζεις καλά.',
+      'Από το 2021 — γιατί κάθε ώρα της ημέρας αξίζει να τη ζεις καλά.',
     'about.stat1.label': 'Χρονιά ίδρυσης',
     'about.stat2.val': '20ω',
     'about.stat2.label': 'Ανοιχτοί καθημερινά',
@@ -127,9 +142,13 @@ export const ui = {
     'about.phil.title1': 'Ποιότητα από το πρωί',
     'about.phil.title2': 'μέχρι τα μεσάνυχτα',
     'about.phil.text1':
-      'Δεν πιστεύουμε στα μισά μέτρα. Είτε είναι brunch στις 10 το πρωί είτε σούσι τα μεσάνυχτα, κάθε πιάτο παίρνει την ίδια προσοχή. Στηριζόμαστε στα τοπικά προϊόντα όπου μπορούμε και μαγειρεύουμε με πάθος πάντα.',
+      'Brunch στις 10 ή σούσι τα μεσάνυχτα — κάθε πιάτο παίρνει την ίδια προσοχή. Τοπικά υλικά, πάθος στο μαγείρεμα, πάντα.',
     'about.phil.text2':
-      'Το μενού μας συνδυάζει κουζίνες σκόπιμα — brunch classics, ιαπωνικό σούσι, μεσογειακά κυρίως πιάτα και cocktails που αφηγούνται την ιστορία του Αιγαίου.',
+      'Brunch classics, ιαπωνικό σούσι, μεσογειακά κυρίως, cocktails του Αιγαίου — σκόπιμα διαφορετικά.',
+    'about.kitchen.eyebrow': 'Η κουζίνα μας',
+    'about.kitchen.title': 'Μαγειρεύουμε με πάθος',
+    'about.kitchen.text1':
+      'Μαγειρεύουμε από την αρχή, κάθε μέρα — με τοπικά υλικά και μεράκι.',
     'about.space.eyebrow': 'Ο χώρος',
     'about.space.title': 'Σχεδιασμένος για να μείνεις',
     'about.space.text': `Ο χώρος του ${brand} συνδυάζει τη ζεστασιά της κυκλαδίτικης αρχιτεκτονικής με μια σύγχρονη, χαλαρή αισθητική. Τοξωτές πόρτες, ζεστό ξύλο και απαλός φωτισμός σε προσκαλούν να καθίσεις και να ξεχάσεις την ώρα. Διαθέτουμε εσωτερικό χώρο και βεράντα για τα ιδανικά βράδια της Κέας.`,
@@ -160,7 +179,7 @@ export const ui = {
     'contact.hours.sat': 'Σάββατο',
     'contact.hours.sun': 'Κυριακή',
     'contact.here.label': 'Πώς να φτάσετε',
-    'contact.here.text': `Το ${brand} βρίσκεται στην Κορρησία (Λιβάδι), το κεντρικό λιμάνι της Κέας. Από Αθήνα, πάρτε το ferry από τη Λαυρεωτική (περίπου 1 ώρα). Είμαστε λίγα βήματα από το λιμάνι — θα μας βρείτε εύκολα.`,
+    'contact.here.text': `Στην Κορρησία (Λιβάδι), το κεντρικό λιμάνι της Κέας. Ferry από Λαυρεωτική (~1 ώρα) — λίγα βήματα από το λιμάνι.`,
     'contact.cta.title': 'Τα λέμε σύντομα',
     'contact.cta.subtitle': 'Χωρίς κράτηση; Ελάτε ανεξάρτητα.',
     'contact.cta.btn': `Καλέστε: ${phone}`,
@@ -199,8 +218,23 @@ export const ui = {
     'home.about.eyebrow': 'Our story',
     'home.about.title1': 'A place to stay',
     'home.about.title2': 'a little longer',
-    'home.about.text': `Born in 2021, ${brand} was created as a gathering place for islanders and travellers alike. We believe that good food, honest drinks, and the right atmosphere make every hour of the day worth savouring.`,
+    'home.about.text': `A gathering place for islanders and travellers — good food, honest drinks, the right atmosphere.`,
     'home.about.cta': 'Our story',
+
+    // EVENTS SECTION
+    'home.events.eyebrow': 'Private events',
+    'home.events.title': 'We host\nprivate events',
+    'home.events.text': 'Birthdays, corporate dinners, family gatherings — every detail taken care of.',
+    'home.events.cta': 'Get in touch',
+
+    // BAR SECTION
+    'home.bar.eyebrow': 'The bar',
+    'home.bar.title': 'From the first coffee\nto the last cocktail',
+    'home.bar.text': 'Every drink made with the same care we put into the food.',
+
+    // AMBIANCE SECTION
+    'home.ambiance.title': 'A table is waiting for you',
+    'home.ambiance.sub': 'Reserve your spot for tonight',
 
     // SERVICES
     'svc.brunch.title': 'Brunch',
@@ -269,9 +303,9 @@ export const ui = {
     'about.who.eyebrow': 'Who we are',
     'about.who.title': `${brand} means home`,
     'about.who.text1':
-      "In Greek, oikos means home — and that's exactly what we set out to create. Not just a restaurant, but a space where you feel at ease from your very first coffee to your last cocktail.",
+      "Oikos means home in Greek — and that's what we set out to build. Not just a restaurant, but a space where you feel at ease from your first coffee to your last cocktail.",
     'about.who.text2':
-      'We opened in 2021 in the harbour village of Korrisia on the island of Kéa, with a simple belief: that every hour of the day deserves a great meal and good company.',
+      'Opened in 2021 in the harbour of Korrisia, Kéa. Because every hour of the day deserves good food and good company.',
     'about.stat1.label': 'Year we opened',
     'about.stat2.val': '20h',
     'about.stat2.label': 'Open daily',
@@ -281,9 +315,13 @@ export const ui = {
     'about.phil.title1': 'Quality from morning',
     'about.phil.title2': 'to midnight',
     'about.phil.text1':
-      "We don't believe in half measures. Whether it's a brunch omelette at 10am or a sushi platter at midnight, every dish gets the same attention. We source locally where we can, and cook with intention always.",
+      'Brunch at 10am or sushi at midnight — every dish gets the same attention. Local ingredients, cooked with intention.',
     'about.phil.text2':
-      'Our menu spans cultures intentionally — brunch classics, Japanese-inspired sushi, Mediterranean mains, and cocktails that tell the story of the Aegean.',
+      'Brunch classics, Japanese sushi, Mediterranean mains, Aegean cocktails — different by design.',
+    'about.kitchen.eyebrow': 'Our kitchen',
+    'about.kitchen.title': 'Cooked with passion',
+    'about.kitchen.text1':
+      'Cooked from scratch, every day — local ingredients, real care.',
     'about.space.eyebrow': 'The space',
     'about.space.title': 'Designed to linger',
     'about.space.text': `The ${brand} space blends the warmth of Cycladic stone architecture with a contemporary, unpretentious sensibility. Arched doorways, warm wood, and soft lighting invite you to sit down and forget the time. We have indoor seating and a terrace for when the Kéa evenings are at their best.`,
@@ -314,7 +352,7 @@ export const ui = {
     'contact.hours.sat': 'Saturday',
     'contact.hours.sun': 'Sunday',
     'contact.here.label': 'Getting here',
-    'contact.here.text': `${brand} is located in Korrisia (Livadi), the main port village of Kéa. From Athens, take the ferry from Lavrio (approx. 1 hour). We are a short walk from the port — you can't miss us.`,
+    'contact.here.text': `In Korrisia (Livadi), Kéa's main port. Ferry from Lavrio, Athens (approx. 1 hour) — steps from the dock.`,
     'contact.cta.title': 'See you soon',
     'contact.cta.subtitle': 'No booking? Walk-ins always welcome.',
     'contact.cta.btn': `Call: ${phone}`,

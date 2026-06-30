@@ -74,7 +74,8 @@ export const site = {
     instagram: 'https://www.instagram.com/oikos_kea/',
     instagramHandle: '@oikos_kea',
     facebook: null as string | null, // δεν υπάρχει — βάλε URL αν αποκτηθεί
-    googleMaps: 'https://share.google/Yw4cgwG7pkaVCz3eY', // σύνδεσμος «οδηγίες»
+    // Καρτέλα επιχείρησης στον χάρτη (cid = το place id από το embed iframe).
+    googleMaps: 'https://maps.google.com/?cid=11763207553191996331',
     // src του ενσωματωμένου χάρτη (iframe) στη σελίδα Επικοινωνίας
     googleMapsEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3158.5179546424097!2d24.309501777345556!3d37.660535472014416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a2193279dfe6a1%3A0xa33f4ef20b336bab!2zzp_Ouc66zr_PgiDOms61zrE!5e0!3m2!1sen!2sgr!4v1782665897124!5m2!1sen!2sgr',
@@ -98,3 +99,7 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
+
+// URL «οδηγιών» Google Maps — παράγωγο από το geo (όχι hardcoded διπλότυπο).
+// Για το κουμπί «Πού είμαστε / Get directions»: ανοίγει κατευθείαν οδηγίες.
+export const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${site.geo.lat},${site.geo.lng}`;

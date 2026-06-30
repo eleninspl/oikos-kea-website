@@ -4,7 +4,7 @@ import PageHero from '../PageHero.astro';
 import CtaBanner from '../CtaBanner.astro';
 import { useTranslations, langBase } from '../../i18n/utils';
 import type { Lang } from '../../i18n/utils';
-import { site } from '../../lib/site';
+import { mapsDirectionsUrl } from '../../lib/site';
 
 interface Props {
   lang: Lang;
@@ -97,26 +97,38 @@ const base = langBase(lang);
     </div>
   </section>
 
-  <!-- The space -->
+  <!-- Our kitchen -->
   <section class="section section--cream">
-    <div class="container--narrow">
-      <p class="eyebrow">{t('about.space.eyebrow')}</p>
-      <div class="divider divider--centered"></div>
-      <h2 class="section-title" style="margin-bottom:var(--space-6);">{t('about.space.title')}</h2>
-      <p class="body-text">
-        {t('about.space.text')}
-      </p>
+    <div class="container">
+      <div class="about-content">
+        <div style="overflow:hidden; border-radius:var(--radius-md);">
+          <img
+            src="/images/chefs-kitchen-bw.jpg"
+            alt="Two chefs in the OIKOS kitchen"
+            style="width:100%; height:auto; display:block;"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div>
+          <p class="eyebrow">{t('about.kitchen.eyebrow')}</p>
+          <div class="divider"></div>
+          <h2 class="section-title" style="margin-bottom:var(--space-6);">
+            {t('about.kitchen.title')}
+          </h2>
+          <p class="body-text">
+            {t('about.kitchen.text1')}
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- CTA -->
   <CtaBanner title={t('about.cta.title')} subtitle={t('about.cta.subtitle')}>
     <div class="cta-actions">
-      <a
-        href={site.social.googleMaps}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn--dark">{t('about.cta.dir')}</a
+      <a href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer" class="btn btn--dark"
+        >{t('about.cta.dir')}</a
       >
       <a href={base + '/menu'} class="btn btn--outline">{t('about.cta.menu')}</a>
     </div>
